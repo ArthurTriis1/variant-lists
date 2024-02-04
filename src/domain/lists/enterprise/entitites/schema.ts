@@ -11,4 +11,8 @@ export class Schema extends Entity<SchemaProps> {
 	static create(props: SchemaProps, id?: UniqueEntityID) {
 		return new Schema(props, id);
 	}
+
+	get data() {
+		return this.props.data;
+	}
 }

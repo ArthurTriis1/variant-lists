@@ -20,6 +20,6 @@ describe("Comment on List", () => {
 			schemaId: "1",
 		});
 
-		expect(inMemoryListRepository.items[0]).toEqual(response?.list);
+		expect(inMemoryListRepository.lists[0]).toEqual(response?.list);
 	});
 });

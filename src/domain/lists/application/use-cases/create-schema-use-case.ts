@@ -24,7 +24,7 @@ export class CreateSchemaUseCase {
 		creatorId,
 		data,
 	}: CreateSchemaRequest): Promise<CreateSchemaResponse | null> {
-		const jsonSchemaIsValid = await this.validator.validate(data);
+		const jsonSchemaIsValid = await this.validator.validateJsonSchema(data);
 
 		if (!jsonSchemaIsValid) {
 			return null;

@@ -12,4 +12,8 @@ export class List extends Entity<ListProps> {
 	static create(props: ListProps, id?: UniqueEntityID) {
 		return new List(props, id);
 	}
+
+	get schemaId() {
+		return this.props.schemaId;
+	}
 }

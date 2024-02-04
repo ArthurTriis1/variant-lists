@@ -2,9 +2,15 @@ import { SchemaRepository } from "@src/domain/lists/application/repositories/sch
 import { Schema } from "@src/domain/lists/enterprise/entitites/schema";
 
 export class InMemorySchemaRepository implements SchemaRepository {
-	public items: Schema[] = [];
+	public schemas: Schema[] = [];
 
 	async create(schema: Schema) {
-		this.items.push(schema);
+		this.schemas.push(schema);
+	}
+
+	async findById(id: string): Promise<Schema | null> {
+		return (
+			this.schemas.find((schema) => schema.id.toString() === id) ?? null
+		);
 	}
 }

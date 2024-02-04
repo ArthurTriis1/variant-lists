@@ -31,7 +31,7 @@ describe("Comment on Schema", () => {
 			},
 		});
 
-		expect(inMemorySchemaRepository.items[0]).toEqual(response?.schema);
+		expect(inMemorySchemaRepository.schemas[0]).toEqual(response?.schema);
 	});
 
 	it("should thorws error for invalid schema Schema", async () => {
