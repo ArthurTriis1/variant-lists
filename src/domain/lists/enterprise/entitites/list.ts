@@ -16,4 +16,8 @@ export class List extends Entity<ListProps> {
 	get schemaId() {
 		return this.props.schemaId;
 	}
+
+	set schemaId(value: UniqueEntityID) {
+		this.props.schemaId = value;
+	}
 }

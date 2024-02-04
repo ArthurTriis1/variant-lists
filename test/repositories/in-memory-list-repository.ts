@@ -11,4 +11,10 @@ export class InMemoryListRepository implements ListRepository {
 	async findById(id: string): Promise<List | null> {
 		return this.lists.find((list) => list.id.toString() === id) ?? null;
 	}
+
+	async save(list: List) {
+		const itemIndex = this.lists.findIndex((item) => item.id === list.id);
+
+		this.lists[itemIndex] = list;
+	}
 }

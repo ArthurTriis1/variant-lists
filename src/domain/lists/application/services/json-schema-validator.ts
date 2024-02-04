@@ -3,12 +3,17 @@ import { Validator } from "./validator";
 
 export class JsonSchemaValidator implements Validator {
 	async validateJsonSchema(value: Record<string, unknown>): Promise<boolean> {
+		if (Object.entries(value).length === 0) {
+			return false;
+		}
+
 		const ajv = new Ajv();
 
 		let isValidSchema: ValidateFunction;
 
 		try {
 			isValidSchema = ajv.compile(value);
+
 			return !!isValidSchema;
 		} catch {
 			return false;
