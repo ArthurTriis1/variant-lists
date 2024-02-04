@@ -1,6 +1,7 @@
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 import { Schema } from "../../enterprise/entitites/schema";
 import { SchemaRepository } from "../repositories/schema-repository";
+import { Validator } from "../services/validator";
 
 interface CreateSchemaRequest {
 	title: string;
@@ -13,13 +14,22 @@ interface CreateSchemaResponse {
 }
 
 export class CreateSchemaUseCase {
-	constructor(private schemaRepository: SchemaRepository) {}
+	constructor(
+		private schemaRepository: SchemaRepository,
+		private validator: Validator,
+	) {}
 
 	async execute({
 		title,
 		creatorId,
 		data,
-	}: CreateSchemaRequest): Promise<CreateSchemaResponse> {
+	}: CreateSchemaRequest): Promise<CreateSchemaResponse | null> {
+		const jsonSchemaIsValid = await this.validator.validate(data);
+
+		if (!jsonSchemaIsValid) {
+			return null;
+		}
+
 		const schema = Schema.create({
 			title,
 			creatorId: new UniqueEntityID(creatorId),

@@ -1,24 +1,55 @@
 import { InMemorySchemaRepository } from "test/repositories/in-memory-schema-repository";
 import { CreateSchemaUseCase } from "./create-schema-use-case";
+import { JsonSchemaValidator } from "../services/json-schema-validator";
 
 let inMemorySchemaRepository: InMemorySchemaRepository;
+let jsonSchemaValidator: JsonSchemaValidator;
 
 let sut: CreateSchemaUseCase;
 
 describe("Comment on Schema", () => {
 	beforeEach(() => {
 		inMemorySchemaRepository = new InMemorySchemaRepository();
+		jsonSchemaValidator = new JsonSchemaValidator();
 
-		sut = new CreateSchemaUseCase(inMemorySchemaRepository);
+		sut = new CreateSchemaUseCase(
+			inMemorySchemaRepository,
+			jsonSchemaValidator,
+		);
 	});
 
 	it("should create Schema", async () => {
-		const { schema } = await sut.execute({
+		const response = await sut.execute({
 			title: "Primeiro esquema",
 			creatorId: "1",
-			data: {},
+			data: {
+				type: "object",
+				properties: {
+					name: { type: "string" },
+					age: { type: "number" },
+				},
+			},
 		});
 
-		expect(inMemorySchemaRepository.items[0]).toEqual(schema);
+		expect(inMemorySchemaRepository.items[0]).toEqual(response?.schema);
+	});
+
+	it("should thorws error for invalid schema Schema", async () => {
+		expect(
+			async () =>
+				await sut.execute({
+					title: "Primeiro esquema",
+					creatorId: "1",
+					data: {
+						type: "object",
+						properties: {
+							name: { type: "string" },
+							age: { type: "number" },
+						},
+						invalidProperty:
+							"This is not allowed in a valid JSON Schema",
+					},
+				}),
+		).rejects.toThrow();
 	});
 });
