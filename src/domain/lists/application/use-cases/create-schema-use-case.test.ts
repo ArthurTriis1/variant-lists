@@ -1,6 +1,7 @@
 import { InMemorySchemaRepository } from "test/repositories/in-memory-schema-repository";
 import { CreateSchemaUseCase } from "./create-schema-use-case";
 import { JsonSchemaValidator } from "../services/json-schema-validator";
+import { NotValidSchemaError } from "@src/core/errors/errors/not-valid-schema-error";
 
 let inMemorySchemaRepository: InMemorySchemaRepository;
 let jsonSchemaValidator: JsonSchemaValidator;
@@ -50,6 +51,6 @@ describe("Comment on Schema", () => {
 							"This is not allowed in a valid JSON Schema",
 					},
 				}),
-		).rejects.toThrow();
+		).rejects.toBeInstanceOf(NotValidSchemaError);
 	});
 });

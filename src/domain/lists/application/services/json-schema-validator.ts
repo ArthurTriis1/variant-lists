@@ -1,13 +1,18 @@
-import Ajv from "ajv";
+import Ajv, { ValidateFunction } from "ajv";
 import { Validator } from "./validator";
 
 export class JsonSchemaValidator implements Validator {
 	async validateJsonSchema(value: Record<string, unknown>): Promise<boolean> {
 		const ajv = new Ajv();
 
-		const isValidSchema = ajv.compile(value);
+		let isValidSchema: ValidateFunction;
 
-		return !!isValidSchema;
+		try {
+			isValidSchema = ajv.compile(value);
+			return !!isValidSchema;
+		} catch {
+			return false;
+		}
 	}
 
 	async validateByJsonSchema(
@@ -17,10 +22,6 @@ export class JsonSchemaValidator implements Validator {
 		const ajv = new Ajv();
 
 		const validate = ajv.compile(schema);
-		const valid = validate(value);
-
-		console.log("VALid", valid);
-
-		return valid;
+		return validate(value);
 	}
 }

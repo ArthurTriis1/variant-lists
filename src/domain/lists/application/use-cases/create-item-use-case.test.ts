@@ -4,8 +4,8 @@ import { InMemorySchemaRepository } from "test/repositories/in-memory-schema-rep
 import { InMemoryListRepository } from "test/repositories/in-memory-list-repository";
 import { makeSchema } from "test/factories/make-schema";
 import { makeList } from "test/factories/make-list";
-import { InvalidSchemaError } from "@src/core/errors/errors/invalid-schema-error";
 import { JsonSchemaValidator } from "../services/json-schema-validator";
+import { ItemMismatchSchema } from "@src/core/errors/errors/item-mismatch-schema-error";
 
 let inMemoryItemRepository: InMemoryItemRepository;
 let inMemorySchemaRepository: InMemorySchemaRepository;
@@ -78,6 +78,6 @@ describe("Comment on Item", () => {
 						error: "show error",
 					},
 				}),
-		).rejects.toBeInstanceOf(InvalidSchemaError);
+		).rejects.toBeInstanceOf(ItemMismatchSchema);
 	});
 });

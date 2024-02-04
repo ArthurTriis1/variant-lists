@@ -2,6 +2,7 @@ import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 import { Schema } from "../../enterprise/entitites/schema";
 import { SchemaRepository } from "../repositories/schema-repository";
 import { Validator } from "../services/validator";
+import { NotValidSchemaError } from "@src/core/errors/errors/not-valid-schema-error";
 
 interface CreateSchemaRequest {
 	title: string;
@@ -27,7 +28,7 @@ export class CreateSchemaUseCase {
 		const jsonSchemaIsValid = await this.validator.validateJsonSchema(data);
 
 		if (!jsonSchemaIsValid) {
-			return null;
+			throw new NotValidSchemaError();
 		}
 
 		const schema = Schema.create({

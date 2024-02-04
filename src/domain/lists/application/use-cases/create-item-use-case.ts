@@ -5,8 +5,8 @@ import { SchemaRepository } from "../repositories/schema-repository";
 import { ListRepository } from "../repositories/list-repository";
 import { Validator } from "../services/validator";
 import { ListNotFoundError } from "@src/core/errors/errors/list-not-found-error";
-import { SchemaNotFoundError } from "@src/core/errors/errors/schema-not-found-error copy";
-import { InvalidSchemaError } from "@src/core/errors/errors/invalid-schema-error";
+import { SchemaNotFoundError } from "@src/core/errors/errors/schema-not-found-error";
+import { ItemMismatchSchema } from "@src/core/errors/errors/item-mismatch-schema-error";
 
 interface CreateItemRequest {
 	title: string;
@@ -57,7 +57,7 @@ export class CreateItemUseCase {
 		);
 
 		if (!isValid) {
-			throw new InvalidSchemaError();
+			throw new ItemMismatchSchema();
 		}
 
 		const item = Item.create({
