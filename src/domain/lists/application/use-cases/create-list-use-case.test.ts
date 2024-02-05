@@ -5,7 +5,7 @@ let inMemoryListRepository: InMemoryListRepository;
 
 let sut: CreateListUseCase;
 
-describe("Comment on List", () => {
+describe("Create List", () => {
 	beforeEach(() => {
 		inMemoryListRepository = new InMemoryListRepository();
 

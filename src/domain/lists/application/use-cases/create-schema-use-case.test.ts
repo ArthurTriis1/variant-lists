@@ -8,7 +8,7 @@ let jsonSchemaValidator: JsonSchemaValidator;
 
 let sut: CreateSchemaUseCase;
 
-describe("Comment on Schema", () => {
+describe("Create Schema", () => {
 	beforeEach(() => {
 		inMemorySchemaRepository = new InMemorySchemaRepository();
 		jsonSchemaValidator = new JsonSchemaValidator();

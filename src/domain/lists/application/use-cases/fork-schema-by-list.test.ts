@@ -14,7 +14,7 @@ let jsonSchemaValidator: JsonSchemaValidator;
 
 let sut: ForkSchemaByListUseCase;
 
-describe("Comment on Item", () => {
+describe("Fork Schema", () => {
 	beforeEach(() => {
 		inMemorySchemaRepository = new InMemorySchemaRepository();
 		inMemoryListRepository = new InMemoryListRepository();
