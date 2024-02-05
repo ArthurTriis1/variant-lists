@@ -13,6 +13,7 @@ export function makeSchema(
 		{
 			creatorId: new UniqueEntityID(),
 			title: faker.lorem.text(),
+			description: faker.lorem.paragraph(),
 			data: {
 				type: "object",
 				properties: {

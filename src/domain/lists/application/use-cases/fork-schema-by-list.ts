@@ -47,10 +47,13 @@ export class ForkSchemaByListUseCase {
 			throw new ListNotFoundError();
 		}
 
+		const { title, description } = baseSchema;
+
 		const schema = Schema.create({
 			creatorId: new UniqueEntityID(creatorId),
-			title: baseSchema.title,
 			data: data,
+			title,
+			description,
 		});
 
 		await this.schemaRepository.create(schema);

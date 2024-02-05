@@ -22,6 +22,7 @@ describe("Create Schema", () => {
 	it("should create Schema", async () => {
 		const response = await sut.execute({
 			title: "Primeiro esquema",
+			description: "",
 			creatorId: "1",
 			data: {
 				type: "object",
@@ -40,6 +41,7 @@ describe("Create Schema", () => {
 			async () =>
 				await sut.execute({
 					title: "Primeiro esquema",
+					description: "",
 					creatorId: "1",
 					data: {
 						type: "object",

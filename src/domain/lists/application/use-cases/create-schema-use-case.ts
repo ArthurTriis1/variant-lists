@@ -6,6 +6,7 @@ import { NotValidSchemaError } from "@src/core/errors/errors/not-valid-schema-er
 
 interface CreateSchemaRequest {
 	title: string;
+	description: string;
 	creatorId: string;
 	data: Record<string, unknown>;
 }
@@ -21,9 +22,9 @@ export class CreateSchemaUseCase {
 	) {}
 
 	async execute({
-		title,
 		creatorId,
 		data,
+		...props
 	}: CreateSchemaRequest): Promise<CreateSchemaResponse | null> {
 		const jsonSchemaIsValid = await this.validator.validateJsonSchema(data);
 
@@ -32,7 +33,7 @@ export class CreateSchemaUseCase {
 		}
 
 		const schema = Schema.create({
-			title,
+			...props,
 			creatorId: new UniqueEntityID(creatorId),
 			data,
 		});
