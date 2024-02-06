@@ -35,4 +35,8 @@ export class List extends Entity<ListProps> {
 	get slug() {
 		return this.props.slug;
 	}
+
+	get creatorId() {
+		return this.props.creatorId;
+	}
 }
