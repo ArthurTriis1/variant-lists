@@ -7,4 +7,8 @@ export class InMemoryItemRepository implements ItemRepository {
 	async create(item: Item) {
 		this.items.push(item);
 	}
+
+	async findBySlug(slug: string): Promise<Item | null> {
+		return this.items.find((item) => item.slug.value === slug) ?? null;
+	}
 }

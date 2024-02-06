@@ -12,6 +12,10 @@ export class InMemoryListRepository implements ListRepository {
 		return this.lists.find((list) => list.id.toString() === id) ?? null;
 	}
 
+	async findBySlug(slug: string): Promise<List | null> {
+		return this.lists.find((list) => list.slug.value === slug) ?? null;
+	}
+
 	async save(list: List) {
 		const itemIndex = this.lists.findIndex((item) => item.id === list.id);
 

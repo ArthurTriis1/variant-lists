@@ -14,6 +14,12 @@ export class InMemorySchemaRepository implements SchemaRepository {
 		);
 	}
 
+	async findBySlug(slug: string): Promise<Schema | null> {
+		return (
+			this.schemas.find((schema) => schema.slug.value === slug) ?? null
+		);
+	}
+
 	async save(schema: Schema) {
 		const itemIndex = this.schemas.findIndex(
 			(schema) => schema.id === schema.id,

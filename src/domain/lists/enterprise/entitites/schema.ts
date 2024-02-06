@@ -1,8 +1,11 @@
 import { Entity } from "@src/core/entities/entity";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
+import { Slug } from "./value-objects/slug";
+import { Optional } from "@src/core/types/optional";
 
 export type SchemaProps = {
 	title: string;
+	slug: Slug;
 	description: string;
 	creatorId: UniqueEntityID;
 	data: Record<string, unknown>;
@@ -11,12 +14,16 @@ export type SchemaProps = {
 
 export class Schema extends Entity<SchemaProps> {
 	static create(
-		props: Omit<SchemaProps, "lastUpdateSchemaDate">,
+		props: Optional<SchemaProps, "lastUpdateSchemaDate" | "slug">,
 		id?: UniqueEntityID,
 	) {
+		const { lastUpdateSchemaDate, slug, title } = props;
+
 		const newProps: SchemaProps = {
 			...props,
-			lastUpdateSchemaDate: new Date(),
+			title,
+			slug: slug ?? Slug.createFromText(title),
+			lastUpdateSchemaDate: lastUpdateSchemaDate ?? new Date(),
 		};
 
 		return new Schema(newProps, id);
@@ -57,5 +64,9 @@ export class Schema extends Entity<SchemaProps> {
 
 	get lastUpdateSchemaDate() {
 		return this.props.lastUpdateSchemaDate;
+	}
+
+	get slug() {
+		return this.props.slug;
 	}
 }
