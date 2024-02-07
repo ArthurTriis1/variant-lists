@@ -21,4 +21,16 @@ export class InMemoryItemRepository implements ItemRepository {
 			.filter((list) => list.listId.toValue() === listId)
 			.slice((page - 1) * 20, page * 20);
 	}
+
+	async findAllByListId(listId: string): Promise<Item[]> {
+		return this.items.filter((list) => list.listId.toValue() === listId);
+	}
+
+	async save(item: Item): Promise<void> {
+		const itemIndex = this.items.findIndex(
+			(foundItem) => foundItem.id === item.id,
+		);
+
+		this.items[itemIndex] = item;
+	}
 }

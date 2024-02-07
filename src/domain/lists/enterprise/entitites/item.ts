@@ -43,4 +43,24 @@ export class Item extends Entity<ItemProps> {
 	get listId() {
 		return this.props.listId;
 	}
+
+	get lastValidationDate() {
+		return this.props.lastValidationDate;
+	}
+
+	set lastValidationDate(value: Date) {
+		this.props.lastValidationDate = value;
+	}
+
+	get data() {
+		return this.props.data;
+	}
+
+	get isValid() {
+		return this.props.isValid;
+	}
+
+	set isValid(value: boolean) {
+		this.props.isValid = value;
+	}
 }
