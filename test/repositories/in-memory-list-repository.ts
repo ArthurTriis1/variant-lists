@@ -21,4 +21,10 @@ export class InMemoryListRepository implements ListRepository {
 
 		this.lists[itemIndex] = list;
 	}
+
+	async findManyByCreatorId(creatorId: string): Promise<List[]> {
+		return this.lists.filter(
+			(list) => list.creatorId.toString() === creatorId,
+		);
+	}
 }

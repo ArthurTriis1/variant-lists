@@ -27,4 +27,10 @@ export class InMemorySchemaRepository implements SchemaRepository {
 
 		this.schemas[itemIndex] = schema;
 	}
+
+	async findManyByCreatorId(creatorId: string): Promise<Schema[]> {
+		return this.schemas.filter(
+			(schema) => schema.creatorId.toString() === creatorId,
+		);
+	}
 }

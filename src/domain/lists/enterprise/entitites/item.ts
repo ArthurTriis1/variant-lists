@@ -39,4 +39,8 @@ export class Item extends Entity<ItemProps> {
 	get creatorId() {
 		return this.props.creatorId;
 	}
+
+	get listId() {
+		return this.props.listId;
+	}
 }

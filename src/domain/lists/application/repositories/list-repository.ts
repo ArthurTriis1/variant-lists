@@ -5,4 +5,5 @@ export interface ListRepository {
 	findById(id: string): Promise<List | null>;
 	findBySlug(slug: string): Promise<List | null>;
 	save(list: List): Promise<void>;
+	findManyByCreatorId(creatorId: string): Promise<List[]>;
 }
