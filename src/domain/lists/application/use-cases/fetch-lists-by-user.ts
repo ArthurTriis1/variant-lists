@@ -1,5 +1,5 @@
-import { List } from "../../enterprise/entitites/list";
-import { ListRepository } from "../repositories/list-repository";
+import { List } from "@src/domain/lists/enterprise/entitites/list";
+import { ListRepository } from "@src/domain/lists/application/repositories/list-repository";
 
 interface FetchListsByUserRequest {
 	creatorId: string;

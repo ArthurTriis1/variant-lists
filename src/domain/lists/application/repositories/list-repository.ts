@@ -1,4 +1,4 @@
-import { List } from "../../enterprise/entitites/list";
+import { List } from "@src/domain/lists/enterprise/entitites/list";
 
 export interface ListRepository {
 	create(list: List): Promise<void>;

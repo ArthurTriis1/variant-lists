@@ -1,4 +1,4 @@
-import { UniqueEntityID } from "./uinique-entity-id";
+import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 
 export abstract class Entity<Props = unknown> {
 	private _id: UniqueEntityID;

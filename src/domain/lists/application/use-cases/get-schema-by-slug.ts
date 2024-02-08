@@ -1,7 +1,7 @@
-import { SchemaNotFoundError } from "@src/core/errors/errors/schema-not-found-error";
-import { Schema } from "../../enterprise/entitites/schema";
-import { SchemaRepository } from "../repositories/schema-repository";
-import { NotAllowedError } from "@src/core/errors/errors/not-allowed-error";
+import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
+import { Schema } from "@src/domain/lists/enterprise/entitites/schema";
+import { SchemaRepository } from "@src/domain/lists/application/repositories/schema-repository";
+import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 
 interface GetSchemaBySlugRequest {
 	slug: string;

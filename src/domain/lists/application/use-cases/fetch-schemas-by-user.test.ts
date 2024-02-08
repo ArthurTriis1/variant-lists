@@ -1,6 +1,6 @@
-import { InMemorySchemaRepository } from "test/repositories/in-memory-schema-repository";
-import { makeSchema } from "test/factories/make-schema";
-import { FetchSchemasByUserUseCase } from "./fetch-schemas-by-user";
+import { InMemorySchemaRepository } from "@test/repositories/in-memory-schema-repository";
+import { makeSchema } from "@test/factories/make-schema";
+import { FetchSchemasByUserUseCase } from "@src/domain/lists/application/use-cases/fetch-schemas-by-user";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 
 let inMemorySchemaRepository: InMemorySchemaRepository;

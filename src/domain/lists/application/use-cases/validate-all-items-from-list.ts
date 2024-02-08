@@ -1,10 +1,10 @@
-import { ItemRepository } from "../repositories/item-repository";
-import { SchemaRepository } from "../repositories/schema-repository";
-import { ListRepository } from "../repositories/list-repository";
-import { Validator } from "../services/validator";
-import { ListNotFoundError } from "@src/core/errors/errors/list-not-found-error";
-import { NotAllowedError } from "@src/core/errors/errors/not-allowed-error";
-import { SchemaNotFoundError } from "@src/core/errors/errors/schema-not-found-error";
+import { ItemRepository } from "@src/domain/lists/application/repositories/item-repository";
+import { SchemaRepository } from "@src/domain/lists/application/repositories/schema-repository";
+import { ListRepository } from "@src/domain/lists/application/repositories/list-repository";
+import { Validator } from "@src/domain/lists/application/services/validator";
+import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
+import { NotAllowedError } from "@src/core/errors/not-allowed-error";
+import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
 
 interface ValidateAllItemsFromListRequest {
 	creatorId: string;

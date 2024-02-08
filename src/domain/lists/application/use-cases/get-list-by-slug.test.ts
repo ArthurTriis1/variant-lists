@@ -1,9 +1,9 @@
-import { makeList } from "test/factories/make-list";
-import { InMemoryListRepository } from "test/repositories/in-memory-list-repository";
-import { GetListBySlugUseCase } from "./get-list-by-slug";
-import { ListNotFoundError } from "@src/core/errors/errors/list-not-found-error";
+import { makeList } from "@test/factories/make-list";
+import { InMemoryListRepository } from "@test/repositories/in-memory-list-repository";
+import { GetListBySlugUseCase } from "@src/domain/lists/application/use-cases/get-list-by-slug";
+import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
-import { NotAllowedError } from "@src/core/errors/errors/not-allowed-error";
+import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 
 let sut: GetListBySlugUseCase;
 

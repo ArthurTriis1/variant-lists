@@ -1,9 +1,9 @@
-import { makeItem } from "test/factories/make-item";
-import { InMemoryItemRepository } from "test/repositories/in-memory-item-repository";
-import { GetItemBySlugUseCase } from "./get-item-by-slug";
-import { ItemNotFoundError } from "@src/core/errors/errors/item-not-found-error";
+import { makeItem } from "@test/factories/make-item";
+import { InMemoryItemRepository } from "@test/repositories/in-memory-item-repository";
+import { GetItemBySlugUseCase } from "@src/domain/lists/application/use-cases/get-item-by-slug";
+import { ItemNotFoundError } from "@src/core/errors/item-not-found-error";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
-import { NotAllowedError } from "@src/core/errors/errors/not-allowed-error";
+import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 
 let sut: GetItemBySlugUseCase;
 

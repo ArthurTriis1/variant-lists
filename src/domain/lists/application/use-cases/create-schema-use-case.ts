@@ -1,8 +1,8 @@
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
-import { Schema } from "../../enterprise/entitites/schema";
-import { SchemaRepository } from "../repositories/schema-repository";
-import { Validator } from "../services/validator";
-import { NotValidSchemaError } from "@src/core/errors/errors/not-valid-schema-error";
+import { Schema } from "@src/domain/lists/enterprise/entitites/schema";
+import { SchemaRepository } from "@src/domain/lists/application/repositories/schema-repository";
+import { Validator } from "@src/domain/lists/application/services/validator";
+import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";
 
 interface CreateSchemaRequest {
 	title: string;

@@ -1,7 +1,7 @@
-import { ListNotFoundError } from "@src/core/errors/errors/list-not-found-error";
-import { List } from "../../enterprise/entitites/list";
-import { ListRepository } from "../repositories/list-repository";
-import { NotAllowedError } from "@src/core/errors/errors/not-allowed-error";
+import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
+import { List } from "@src/domain/lists/enterprise/entitites/list";
+import { ListRepository } from "@src/domain/lists/application/repositories/list-repository";
+import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 
 interface GetListBySlugRequest {
 	slug: string;

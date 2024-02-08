@@ -1,15 +1,15 @@
-import { makeSchema } from "test/factories/make-schema";
-import { InMemorySchemaRepository } from "test/repositories/in-memory-schema-repository";
+import { makeSchema } from "@test/factories/make-schema";
+import { InMemorySchemaRepository } from "@test/repositories/in-memory-schema-repository";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
-import { ValidateAllItemsFromListUseCase } from "./validate-all-items-from-list";
-import { InMemoryItemRepository } from "test/repositories/in-memory-item-repository";
-import { InMemoryListRepository } from "test/repositories/in-memory-list-repository";
-import { JsonSchemaValidator } from "../services/json-schema-validator";
-import { makeList } from "test/factories/make-list";
-import { makeItem } from "test/factories/make-item";
-import { ListNotFoundError } from "@src/core/errors/errors/list-not-found-error";
-import { NotAllowedError } from "@src/core/errors/errors/not-allowed-error";
-import { SchemaNotFoundError } from "@src/core/errors/errors/schema-not-found-error";
+import { ValidateAllItemsFromListUseCase } from "@src/domain/lists/application/use-cases/validate-all-items-from-list";
+import { InMemoryItemRepository } from "@test/repositories/in-memory-item-repository";
+import { InMemoryListRepository } from "@test/repositories/in-memory-list-repository";
+import { JsonSchemaValidator } from "@src/domain/lists/application/services/json-schema-validator";
+import { makeList } from "@test/factories/make-list";
+import { makeItem } from "@test/factories/make-item";
+import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
+import { NotAllowedError } from "@src/core/errors/not-allowed-error";
+import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
 
 let sut: ValidateAllItemsFromListUseCase;
 

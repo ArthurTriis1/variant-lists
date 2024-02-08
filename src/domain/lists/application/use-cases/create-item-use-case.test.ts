@@ -1,11 +1,11 @@
-import { InMemoryItemRepository } from "test/repositories/in-memory-item-repository";
-import { CreateItemUseCase } from "./create-item-use-case";
-import { InMemorySchemaRepository } from "test/repositories/in-memory-schema-repository";
-import { InMemoryListRepository } from "test/repositories/in-memory-list-repository";
-import { makeSchema } from "test/factories/make-schema";
-import { makeList } from "test/factories/make-list";
-import { JsonSchemaValidator } from "../services/json-schema-validator";
-import { ItemMismatchSchema } from "@src/core/errors/errors/item-mismatch-schema-error";
+import { InMemoryItemRepository } from "@test/repositories/in-memory-item-repository";
+import { CreateItemUseCase } from "@src/domain/lists/application/use-cases/create-item-use-case";
+import { InMemorySchemaRepository } from "@test/repositories/in-memory-schema-repository";
+import { InMemoryListRepository } from "@test/repositories/in-memory-list-repository";
+import { makeSchema } from "@test/factories/make-schema";
+import { makeList } from "@test/factories/make-list";
+import { JsonSchemaValidator } from "@src/domain/lists/application/services/json-schema-validator";
+import { ItemMismatchSchema } from "@src/core/errors/item-mismatch-schema-error";
 
 let inMemoryItemRepository: InMemoryItemRepository;
 let inMemorySchemaRepository: InMemorySchemaRepository;

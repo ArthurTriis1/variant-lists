@@ -1,7 +1,7 @@
-import { NotAllowedError } from "@src/core/errors/errors/not-allowed-error";
-import { Item } from "../../enterprise/entitites/item";
-import { ItemRepository } from "../repositories/item-repository";
-import { ItemNotFoundError } from "@src/core/errors/errors/item-not-found-error";
+import { NotAllowedError } from "@src/core/errors/not-allowed-error";
+import { Item } from "@src/domain/lists/enterprise/entitites/item";
+import { ItemRepository } from "@src/domain/lists/application/repositories/item-repository";
+import { ItemNotFoundError } from "@src/core/errors/item-not-found-error";
 
 interface GetItemBySlugRequest {
 	slug: string;

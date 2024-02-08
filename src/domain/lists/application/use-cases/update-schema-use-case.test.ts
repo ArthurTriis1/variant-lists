@@ -1,10 +1,10 @@
-import { makeSchema } from "test/factories/make-schema";
-import { InMemorySchemaRepository } from "test/repositories/in-memory-schema-repository";
-import { UpdateSchemaUseCase } from "./update-schema-use-case";
-import { JsonSchemaValidator } from "../services/json-schema-validator";
-import { SchemaNotFoundError } from "@src/core/errors/errors/schema-not-found-error";
-import { NotValidSchemaError } from "@src/core/errors/errors/not-valid-schema-error";
-import { NotAllowedError } from "@src/core/errors/errors/not-allowed-error";
+import { makeSchema } from "@test/factories/make-schema";
+import { InMemorySchemaRepository } from "@test/repositories/in-memory-schema-repository";
+import { UpdateSchemaUseCase } from "@src/domain/lists/application/use-cases/update-schema-use-case";
+import { JsonSchemaValidator } from "@src/domain/lists/application/services/json-schema-validator";
+import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
+import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";
+import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 
 let sut: UpdateSchemaUseCase;
 

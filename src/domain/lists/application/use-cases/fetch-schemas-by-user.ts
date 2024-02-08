@@ -1,5 +1,5 @@
-import { Schema } from "../../enterprise/entitites/schema";
-import { SchemaRepository } from "../repositories/schema-repository";
+import { Schema } from "@src/domain/lists/enterprise/entitites/schema";
+import { SchemaRepository } from "@src/domain/lists/application/repositories/schema-repository";
 
 interface FetchSchemasByUserRequest {
 	creatorId: string;

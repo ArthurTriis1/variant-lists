@@ -1,4 +1,4 @@
-import { JsonSchemaValidator } from "./json-schema-validator";
+import { JsonSchemaValidator } from "@src/domain/lists/application/services/json-schema-validator";
 
 describe("Json Schema Validator", () => {
 	it("Should return false to a invalid schema", async () => {

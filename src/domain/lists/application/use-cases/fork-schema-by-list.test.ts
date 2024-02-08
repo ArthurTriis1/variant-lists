@@ -1,12 +1,12 @@
-import { InMemorySchemaRepository } from "test/repositories/in-memory-schema-repository";
-import { InMemoryListRepository } from "test/repositories/in-memory-list-repository";
-import { makeSchema } from "test/factories/make-schema";
-import { JsonSchemaValidator } from "../services/json-schema-validator";
-import { ForkSchemaByListUseCase } from "./fork-schema-by-list";
-import { makeList } from "test/factories/make-list";
-import { NotValidSchemaError } from "@src/core/errors/errors/not-valid-schema-error";
-import { SchemaNotFoundError } from "@src/core/errors/errors/schema-not-found-error";
-import { ListNotFoundError } from "@src/core/errors/errors/list-not-found-error";
+import { InMemorySchemaRepository } from "@test/repositories/in-memory-schema-repository";
+import { InMemoryListRepository } from "@test/repositories/in-memory-list-repository";
+import { makeSchema } from "@test/factories/make-schema";
+import { JsonSchemaValidator } from "@src/domain/lists/application/services/json-schema-validator";
+import { ForkSchemaByListUseCase } from "@src/domain/lists/application/use-cases/fork-schema-by-list";
+import { makeList } from "@test/factories/make-list";
+import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";
+import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
+import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
 
 let inMemorySchemaRepository: InMemorySchemaRepository;
 let inMemoryListRepository: InMemoryListRepository;

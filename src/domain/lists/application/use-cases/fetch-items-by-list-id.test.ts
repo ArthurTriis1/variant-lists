@@ -1,7 +1,7 @@
-import { InMemoryItemRepository } from "test/repositories/in-memory-item-repository";
-import { makeItem } from "test/factories/make-item";
+import { InMemoryItemRepository } from "@test/repositories/in-memory-item-repository";
+import { makeItem } from "@test/factories/make-item";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
-import { FetchItemsByListIdUseCase } from "./fetch-items-by-list-id";
+import { FetchItemsByListIdUseCase } from "@src/domain/lists/application/use-cases/fetch-items-by-list-id";
 
 let inMemoryItemRepository: InMemoryItemRepository;
 

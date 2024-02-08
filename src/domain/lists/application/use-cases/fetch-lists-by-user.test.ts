@@ -1,6 +1,6 @@
-import { InMemoryListRepository } from "test/repositories/in-memory-list-repository";
-import { makeList } from "test/factories/make-list";
-import { FetchListsByUserUseCase } from "./fetch-lists-by-user";
+import { InMemoryListRepository } from "@test/repositories/in-memory-list-repository";
+import { makeList } from "@test/factories/make-list";
+import { FetchListsByUserUseCase } from "@src/domain/lists/application/use-cases/fetch-lists-by-user";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 
 let inMemoryListRepository: InMemoryListRepository;

@@ -1,5 +1,5 @@
-import { InMemoryListRepository } from "test/repositories/in-memory-list-repository";
-import { CreateListUseCase } from "./create-list-use-case";
+import { InMemoryListRepository } from "@test/repositories/in-memory-list-repository";
+import { CreateListUseCase } from "@src/domain/lists/application/use-cases/create-list-use-case";
 
 let inMemoryListRepository: InMemoryListRepository;
 

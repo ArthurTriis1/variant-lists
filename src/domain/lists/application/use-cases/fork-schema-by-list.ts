@@ -1,11 +1,11 @@
-import { SchemaRepository } from "../repositories/schema-repository";
-import { ListRepository } from "../repositories/list-repository";
-import { Validator } from "../services/validator";
-import { Schema } from "../../enterprise/entitites/schema";
-import { SchemaNotFoundError } from "@src/core/errors/errors/schema-not-found-error";
+import { SchemaRepository } from "@src/domain/lists/application/repositories/schema-repository";
+import { ListRepository } from "@src/domain/lists/application/repositories/list-repository";
+import { Validator } from "@src/domain/lists/application/services/validator";
+import { Schema } from "@src/domain/lists/enterprise/entitites/schema";
+import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
-import { NotValidSchemaError } from "@src/core/errors/errors/not-valid-schema-error";
-import { ListNotFoundError } from "@src/core/errors/errors/list-not-found-error";
+import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";
+import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
 
 interface ForkSchemaByListRequest {
 	listId: string;

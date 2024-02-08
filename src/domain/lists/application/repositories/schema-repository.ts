@@ -1,4 +1,4 @@
-import { Schema } from "../../enterprise/entitites/schema";
+import { Schema } from "@src/domain/lists/enterprise/entitites/schema";
 
 export interface SchemaRepository {
 	create(schema: Schema): Promise<void>;

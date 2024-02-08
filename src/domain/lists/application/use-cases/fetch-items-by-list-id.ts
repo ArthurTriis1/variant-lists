@@ -1,5 +1,5 @@
-import { Item } from "../../enterprise/entitites/item";
-import { ItemRepository } from "../repositories/item-repository";
+import { Item } from "@src/domain/lists/enterprise/entitites/item";
+import { ItemRepository } from "@src/domain/lists/application/repositories/item-repository";
 
 interface FetchItemsByListIdRequest {
 	listId: string;

@@ -1,5 +1,5 @@
 import Ajv, { ValidateFunction } from "ajv";
-import { Validator } from "./validator";
+import { Validator } from "@src/domain/lists/application/services/validator";
 
 export class JsonSchemaValidator implements Validator {
 	async validateJsonSchema(value: Record<string, unknown>): Promise<boolean> {

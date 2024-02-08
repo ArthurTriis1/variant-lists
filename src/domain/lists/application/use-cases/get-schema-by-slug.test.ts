@@ -1,9 +1,9 @@
-import { makeSchema } from "test/factories/make-schema";
-import { InMemorySchemaRepository } from "test/repositories/in-memory-schema-repository";
-import { GetSchemaBySlugUseCase } from "./get-schema-by-slug";
-import { SchemaNotFoundError } from "@src/core/errors/errors/schema-not-found-error";
+import { makeSchema } from "@test/factories/make-schema";
+import { InMemorySchemaRepository } from "@test/repositories/in-memory-schema-repository";
+import { GetSchemaBySlugUseCase } from "@src/domain/lists/application/use-cases/get-schema-by-slug";
+import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
-import { NotAllowedError } from "@src/core/errors/errors/not-allowed-error";
+import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 
 let sut: GetSchemaBySlugUseCase;
 

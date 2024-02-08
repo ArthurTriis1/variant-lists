@@ -1,6 +1,6 @@
 import { Entity } from "@src/core/entities/entity";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
-import { Slug } from "./value-objects/slug";
+import { Slug } from "@src/domain/lists/enterprise/entitites/value-objects/slug";
 import { Optional } from "@src/core/types/optional";
 
 export type SchemaProps = {

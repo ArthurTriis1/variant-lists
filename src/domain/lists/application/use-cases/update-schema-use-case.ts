@@ -1,8 +1,8 @@
-import { NotValidSchemaError } from "@src/core/errors/errors/not-valid-schema-error";
-import { SchemaRepository } from "../repositories/schema-repository";
-import { Validator } from "../services/validator";
-import { SchemaNotFoundError } from "@src/core/errors/errors/schema-not-found-error";
-import { NotAllowedError } from "@src/core/errors/errors/not-allowed-error";
+import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";
+import { SchemaRepository } from "@src/domain/lists/application/repositories/schema-repository";
+import { Validator } from "@src/domain/lists/application/services/validator";
+import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
+import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 
 interface UpdateSchemaRequest {
 	title?: string;

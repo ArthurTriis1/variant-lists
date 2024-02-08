@@ -1,7 +1,7 @@
-import { InMemorySchemaRepository } from "test/repositories/in-memory-schema-repository";
-import { CreateSchemaUseCase } from "./create-schema-use-case";
-import { JsonSchemaValidator } from "../services/json-schema-validator";
-import { NotValidSchemaError } from "@src/core/errors/errors/not-valid-schema-error";
+import { InMemorySchemaRepository } from "@test/repositories/in-memory-schema-repository";
+import { CreateSchemaUseCase } from "@src/domain/lists/application/use-cases/create-schema-use-case";
+import { JsonSchemaValidator } from "@src/domain/lists/application/services/json-schema-validator";
+import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";
 
 let inMemorySchemaRepository: InMemorySchemaRepository;
 let jsonSchemaValidator: JsonSchemaValidator;

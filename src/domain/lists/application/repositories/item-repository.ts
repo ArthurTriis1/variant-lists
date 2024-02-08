@@ -1,5 +1,5 @@
 import { PaginationParams } from "@src/core/types/PaginationParams";
-import { Item } from "../../enterprise/entitites/item";
+import { Item } from "@src/domain/lists/enterprise/entitites/item";
 
 export interface ItemRepository {
 	create(item: Item): Promise<void>;
