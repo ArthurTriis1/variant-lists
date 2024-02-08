@@ -1,6 +1,6 @@
 import { PaginationParams } from "@src/core/types/PaginationParams";
 import { ItemRepository } from "@src/domain/lists/application/repositories/item-repository";
-import { Item } from "@src/domain/lists/enterprise/entitites/item";
+import { Item } from "@src/domain/lists/enterprise/entities/item";
 
 export class InMemoryItemRepository implements ItemRepository {
 	public items: Item[] = [];

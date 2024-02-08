@@ -1,5 +1,5 @@
 import { ListRepository } from "@src/domain/lists/application/repositories/list-repository";
-import { List } from "@src/domain/lists/enterprise/entitites/list";
+import { List } from "@src/domain/lists/enterprise/entities/list";
 
 export class InMemoryListRepository implements ListRepository {
 	public lists: List[] = [];

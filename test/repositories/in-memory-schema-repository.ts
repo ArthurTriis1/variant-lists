@@ -1,5 +1,5 @@
 import { SchemaRepository } from "@src/domain/lists/application/repositories/schema-repository";
-import { Schema } from "@src/domain/lists/enterprise/entitites/schema";
+import { Schema } from "@src/domain/lists/enterprise/entities/schema";
 
 export class InMemorySchemaRepository implements SchemaRepository {
 	public schemas: Schema[] = [];

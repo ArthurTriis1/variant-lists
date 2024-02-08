@@ -1,5 +1,5 @@
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
-import { Schema } from "@src/domain/lists/enterprise/entitites/schema";
+import { Schema } from "@src/domain/lists/enterprise/entities/schema";
 import { SchemaRepository } from "@src/domain/lists/application/repositories/schema-repository";
 import { Validator } from "@src/domain/lists/application/services/validator";
 import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";

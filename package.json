@@ -1,12 +1,14 @@
 {
-  "name": "variant-lists",
+  "name": "@variant-lists/domain",
   "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "typings": "./dist/index.d.ts",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "tsx watch ./index.ts",
-    "build": "tsup ./index.ts",
-    "serve": "node dist/index.js",
+    "build": "tsup src/index.ts --format esm,cjs --dts",
     "test": "vitest run",
     "test:watch": "vitest"
   },

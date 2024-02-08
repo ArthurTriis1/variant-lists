@@ -1,7 +1,7 @@
 import { Optional } from "@src/core/types/optional";
 import { Entity } from "@src/core/entities/entity";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
-import { Slug } from "@src/domain/lists/enterprise/entitites/value-objects/slug";
+import { Slug } from "@src/domain/lists/enterprise/entities/value-objects/slug";
 
 export type ListProps = {
 	title: string;

@@ -1,5 +1,5 @@
 import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
-import { List } from "@src/domain/lists/enterprise/entitites/list";
+import { List } from "@src/domain/lists/enterprise/entities/list";
 import { ListRepository } from "@src/domain/lists/application/repositories/list-repository";
 import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 

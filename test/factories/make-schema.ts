@@ -3,7 +3,7 @@ import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 import {
 	Schema,
 	SchemaProps,
-} from "@src/domain/lists/enterprise/entitites/schema";
+} from "@src/domain/lists/enterprise/entities/schema";
 
 export function makeSchema(
 	override: Partial<SchemaProps> = {},

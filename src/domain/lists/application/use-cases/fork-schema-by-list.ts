@@ -1,7 +1,7 @@
 import { SchemaRepository } from "@src/domain/lists/application/repositories/schema-repository";
 import { ListRepository } from "@src/domain/lists/application/repositories/list-repository";
 import { Validator } from "@src/domain/lists/application/services/validator";
-import { Schema } from "@src/domain/lists/enterprise/entitites/schema";
+import { Schema } from "@src/domain/lists/enterprise/entities/schema";
 import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";

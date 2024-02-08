@@ -1,5 +1,5 @@
 import { NotAllowedError } from "@src/core/errors/not-allowed-error";
-import { Item } from "@src/domain/lists/enterprise/entitites/item";
+import { Item } from "@src/domain/lists/enterprise/entities/item";
 import { ItemRepository } from "@src/domain/lists/application/repositories/item-repository";
 import { ItemNotFoundError } from "@src/core/errors/item-not-found-error";
 

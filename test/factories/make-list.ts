@@ -1,6 +1,6 @@
 import { faker } from "@faker-js/faker";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
-import { List, ListProps } from "@src/domain/lists/enterprise/entitites/list";
+import { List, ListProps } from "@src/domain/lists/enterprise/entities/list";
 
 export function makeList(
 	override: Partial<ListProps> = {},

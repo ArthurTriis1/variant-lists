@@ -1,4 +1,4 @@
-import { Schema } from "@src/domain/lists/enterprise/entitites/schema";
+import { Schema } from "@src/domain/lists/enterprise/entities/schema";
 import { SchemaRepository } from "@src/domain/lists/application/repositories/schema-repository";
 
 interface FetchSchemasByUserRequest {
