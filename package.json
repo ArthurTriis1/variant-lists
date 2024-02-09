@@ -9,5 +9,8 @@
 		"build": "turbo run build",
 		"test": "turbo run test",
 		"test:watch": "turbo run test:watch"
+	},
+	"devDependencies": {
+		"@variant-lists/tsconfig": "workspace:*"
 	}
 }

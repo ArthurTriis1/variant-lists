@@ -11,6 +11,6 @@ export class User extends Entity<UserProps> {
 	}
 
 	static log() {
-		console.log("Hello");
+		return "USER";
 	}
 }

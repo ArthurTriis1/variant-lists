@@ -1,23 +1,17 @@
 {
-  "name": "@variant-lists/domain",
+  "name": "@variant-lists/server",
   "version": "1.0.0",
-  "type": "module",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "typings": "./dist/index.d.ts",
-  "description": "",
   "scripts": {
-    "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
-    "build": "tsup src/index.ts --format esm,cjs --dts",
-    "test": "vitest run",
-    "test:watch": "vitest"
+    "dev": "tsx watch ./index.ts",
+    "build": "tsup ./index.ts",
+    "serve": "node dist/index.js"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "dependencies": {
+    "@variant-lists/domain": "workspace:*",
+    "fastify": "^4.26.0"
+  },
   "devDependencies": {
-    "@faker-js/faker": "^8.4.0",
-    "@types/node": "^20.11.16",
+    "@types/node": "^20.11.17",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@variant-lists/tsconfig": "workspace:*",
     "eslint": "^8.56.0",
@@ -32,11 +26,6 @@
     "prettier": "^3.2.4",
     "tsup": "^8.0.1",
     "tsx": "^4.7.0",
-    "typescript": "^5.3.3",
-    "vite-tsconfig-paths": "^4.3.1",
-    "vitest": "^1.2.2"
-  },
-  "dependencies": {
-    "ajv": "^8.12.0"
+    "typescript": "^5.3.3"
   }
 }

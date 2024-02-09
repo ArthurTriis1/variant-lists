@@ -5,8 +5,10 @@
             "cache": false
         },
       "build": {
-        "outputs": ["dist/**"]
+        "outputs": ["dist/**"],
+		"dependsOn": ["^build"]
       },
+	  "serve": {},
       "test": {},
       "test:watch": {},
       "lint": {}
