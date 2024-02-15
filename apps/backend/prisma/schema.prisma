@@ -1,0 +1,82 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String   @id @default(uuid())
+  name     String
+  email    String   @unique
+  password String
+  items    Item[]
+  schemas   Schema[]
+  lists     List[]
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  @@map("users")
+}
+
+model Schema {
+  id                   String   @id @default(uuid())
+  title                String
+  slug                 String   @unique
+  description          String
+  data                 Json
+  lastUpdateSchemaDate DateTime @map("last_update_schema_date")
+  lists      List[]
+
+  creator   User   @relation(fields: [creatorId], references: [id])
+  creatorId String @map("creator_id")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  @@map("schemas")
+}
+
+model List {
+  id          String @id @default(uuid())
+  title       String
+  slug        String @unique
+  description String
+  items      Item[]
+
+  creator   User   @relation(fields: [creatorId], references: [id])
+  creatorId String @map("creator_id")
+
+  schema Schema @relation(fields: [schemaId], references: [id])
+  schemaId  String
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  @@map("lists")
+}
+
+model Item {
+  id                 String    @id @default(uuid())
+  title              String
+  slug               String    @unique
+  description        String
+  imageUrl           String?   @map("image_url")
+  lastValidationDate DateTime? @map("last_validation_date")
+  isValid            Boolean?  @map("is_valid")
+  data               Json
+
+  creator   User   @relation(fields: [creatorId], references: [id])
+  creatorId String @map("creator_id")
+
+  list List @relation(fields: [listId], references: [id])
+  listId    String @map("list_id")
+
+  createdAt DateTime  @default(now()) @map("created_at")
+  updatedAt DateTime? @updatedAt @map("updated_at")
+
+  @@map("items")
+}

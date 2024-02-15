@@ -3,3 +3,9 @@ dist
 .turbo
 .yarnrc.yml
 .yarn
+
+# Postgres
+data
+
+# Env
+.env

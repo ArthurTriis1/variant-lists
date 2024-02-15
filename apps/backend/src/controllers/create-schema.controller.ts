@@ -1,4 +1,4 @@
-import { createSchemaUseCaseFactory } from "@src/factories/create-schema-use-case-factory";
+import CreateSchemaBuilder from "@src/builders/create-schema-use-case-builder";
 import { FastifyInstance } from "fastify";
 import z from "zod";
 
@@ -13,9 +13,10 @@ export const createItemController = async (app: FastifyInstance) => {
 	app.post("/item", async (request, reply) => {
 		const body = bodyValidate.parse(request.body);
 
-		const createSchemaUseCase = createSchemaUseCaseFactory();
+		const schemaBuilder = new CreateSchemaBuilder();
+		const createSchema = schemaBuilder.build();
 
-		const schemaResponse = await createSchemaUseCase.execute(body);
+		const schemaResponse = await createSchema.execute(body);
 
 		reply.send(schemaResponse);
 	});

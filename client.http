@@ -1,0 +1,22 @@
+@baseUrl = http://localhost:3000
+
+# @name create_item
+POST {{baseUrl}}/item
+Content-Type: application/json
+
+{
+	"title": "hello2",
+	"description": "",
+	"creatorId": "1",
+	"data": {
+		"type": "object",
+		"properties": {
+			"name": {
+				"type": "string"
+			},
+			"age": {
+				"type": "number"
+			}
+		}
+	}
+}

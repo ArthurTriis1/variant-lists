@@ -7,8 +7,8 @@
   "typings": "./dist/index.d.ts",
   "description": "",
   "scripts": {
-    "dev": "tsup src/index.ts --format esm,cjs --dts --watch",
-    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "dev": "tsup index.ts --format esm,cjs --dts --watch",
+    "build": "tsup index.ts --format esm,cjs --dts",
     "test": "vitest run",
     "test:watch": "vitest"
   },
