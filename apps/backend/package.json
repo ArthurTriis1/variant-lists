@@ -1,17 +1,21 @@
 {
-  "name": "@variant-lists/server",
+  "name": "@variant-lists/backend",
   "version": "1.0.0",
   "scripts": {
     "dev": "tsx watch ./index.ts",
     "build": "tsup ./index.ts",
-    "serve": "node dist/index.js"
+    "serve": "node dist/index.js",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "@variant-lists/domain": "workspace:*",
-    "fastify": "^4.26.0"
+    "fastify": "^4.26.0",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20.11.17",
+    "@types/supertest": "^6.0.2",
     "@typescript-eslint/eslint-plugin": "^6.4.0",
     "@variant-lists/tsconfig": "workspace:*",
     "eslint": "^8.56.0",
@@ -24,8 +28,11 @@
     "eslint-plugin-prettier": "^5.1.3",
     "eslint-plugin-promise": "^6.0.0",
     "prettier": "^3.2.4",
+    "supertest": "^6.3.4",
     "tsup": "^8.0.1",
     "tsx": "^4.7.0",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "vite-tsconfig-paths": "^4.3.1",
+    "vitest": "^1.2.2"
   }
 }
