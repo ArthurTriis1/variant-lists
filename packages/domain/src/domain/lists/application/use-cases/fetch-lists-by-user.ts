@@ -9,7 +9,7 @@ interface FetchListsByUserResponse {
 	lists: List[];
 }
 
-export class FetchListsByUserUseCase {
+export class FetchListsByUser {
 	constructor(private listRepository: ListRepository) {}
 
 	async execute({

@@ -16,7 +16,7 @@ interface ForkSchemaByListRequest {
 
 interface ForkSchemaByListResponse {}
 
-export class ForkSchemaByListUseCase {
+export class ForkSchemaByList {
 	constructor(
 		private schemaRepository: SchemaRepository,
 		private listRepository: ListRepository,

@@ -1,11 +1,11 @@
 import { makeItem } from "@test/factories/make-item";
 import { InMemoryItemRepository } from "@test/repositories/in-memory-item-repository";
-import { GetItemBySlugUseCase } from "@src/domain/lists/application/use-cases/get-item-by-slug";
+import { GetItemBySlug } from "@src/domain/lists/application/use-cases/get-item-by-slug";
 import { ItemNotFoundError } from "@src/core/errors/item-not-found-error";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 
-let sut: GetItemBySlugUseCase;
+let sut: GetItemBySlug;
 
 let inMemoryItemRepository: InMemoryItemRepository;
 
@@ -13,7 +13,7 @@ describe("Get Item by slug", () => {
 	beforeEach(() => {
 		inMemoryItemRepository = new InMemoryItemRepository();
 
-		sut = new GetItemBySlugUseCase(inMemoryItemRepository);
+		sut = new GetItemBySlug(inMemoryItemRepository);
 	});
 
 	it("should return item", async () => {

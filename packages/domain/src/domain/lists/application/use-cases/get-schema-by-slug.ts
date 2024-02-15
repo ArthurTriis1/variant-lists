@@ -12,7 +12,7 @@ interface GetSchemaBySlugResponse {
 	schema: Schema;
 }
 
-export class GetSchemaBySlugUseCase {
+export class GetSchemaBySlug {
 	constructor(private schemaRepository: SchemaRepository) {}
 
 	async execute({

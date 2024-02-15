@@ -21,7 +21,7 @@ interface CreateItemResponse {
 	item: Item;
 }
 
-export class CreateItemUseCase {
+export class CreateItem {
 	constructor(
 		private itemRepository: ItemRepository,
 		private schemaRepository: SchemaRepository,

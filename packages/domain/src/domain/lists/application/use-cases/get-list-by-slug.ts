@@ -12,7 +12,7 @@ interface GetListBySlugResponse {
 	list: List;
 }
 
-export class GetListBySlugUseCase {
+export class GetListBySlug {
 	constructor(private listRepository: ListRepository) {}
 
 	async execute({

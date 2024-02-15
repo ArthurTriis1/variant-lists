@@ -13,7 +13,7 @@ interface ValidateAllItemsFromListRequest {
 
 interface ValidateAllItemsFromListResponse {}
 
-export class ValidateAllItemsFromListUseCase {
+export class ValidateAllItemsFromList {
 	constructor(
 		private itemRepository: ItemRepository,
 		private schemaRepository: SchemaRepository,

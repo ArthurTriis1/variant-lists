@@ -1,11 +1,11 @@
 import { makeList } from "@test/factories/make-list";
 import { InMemoryListRepository } from "@test/repositories/in-memory-list-repository";
-import { GetListBySlugUseCase } from "@src/domain/lists/application/use-cases/get-list-by-slug";
+import { GetListBySlug } from "@src/domain/lists/application/use-cases/get-list-by-slug";
 import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 
-let sut: GetListBySlugUseCase;
+let sut: GetListBySlug;
 
 let inMemoryListRepository: InMemoryListRepository;
 
@@ -13,7 +13,7 @@ describe("Get List by slug", () => {
 	beforeEach(() => {
 		inMemoryListRepository = new InMemoryListRepository();
 
-		sut = new GetListBySlugUseCase(inMemoryListRepository);
+		sut = new GetListBySlug(inMemoryListRepository);
 	});
 
 	it("should return list", async () => {

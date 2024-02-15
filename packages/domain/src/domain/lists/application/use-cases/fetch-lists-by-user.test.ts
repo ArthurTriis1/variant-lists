@@ -1,17 +1,17 @@
 import { InMemoryListRepository } from "@test/repositories/in-memory-list-repository";
 import { makeList } from "@test/factories/make-list";
-import { FetchListsByUserUseCase } from "@src/domain/lists/application/use-cases/fetch-lists-by-user";
+import { FetchListsByUser } from "@src/domain/lists/application/use-cases/fetch-lists-by-user";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 
 let inMemoryListRepository: InMemoryListRepository;
 
-let sut: FetchListsByUserUseCase;
+let sut: FetchListsByUser;
 
 describe("Fetch Lists", () => {
 	beforeEach(() => {
 		inMemoryListRepository = new InMemoryListRepository();
 
-		sut = new FetchListsByUserUseCase(inMemoryListRepository);
+		sut = new FetchListsByUser(inMemoryListRepository);
 	});
 
 	it("Should list all lists", async () => {

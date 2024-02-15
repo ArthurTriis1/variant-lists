@@ -1,22 +1,19 @@
 import { InMemorySchemaRepository } from "@test/repositories/in-memory-schema-repository";
-import { CreateSchemaUseCase } from "@src/domain/lists/application/use-cases/create-schema-use-case";
+import { CreateSchema } from "@src/domain/lists/application/use-cases/create-schema";
 import { JsonSchemaValidator } from "@src/domain/lists/application/services/json-schema-validator";
 import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";
 
 let inMemorySchemaRepository: InMemorySchemaRepository;
 let jsonSchemaValidator: JsonSchemaValidator;
 
-let sut: CreateSchemaUseCase;
+let sut: CreateSchema;
 
 describe("Create Schema", () => {
 	beforeEach(() => {
 		inMemorySchemaRepository = new InMemorySchemaRepository();
 		jsonSchemaValidator = new JsonSchemaValidator();
 
-		sut = new CreateSchemaUseCase(
-			inMemorySchemaRepository,
-			jsonSchemaValidator,
-		);
+		sut = new CreateSchema(inMemorySchemaRepository, jsonSchemaValidator);
 	});
 
 	it("should create Schema", async () => {

@@ -1,5 +1,5 @@
 import { InMemoryItemRepository } from "@test/repositories/in-memory-item-repository";
-import { CreateItemUseCase } from "@src/domain/lists/application/use-cases/create-item-use-case";
+import { CreateItem } from "@src/domain/lists/application/use-cases/create-item";
 import { InMemorySchemaRepository } from "@test/repositories/in-memory-schema-repository";
 import { InMemoryListRepository } from "@test/repositories/in-memory-list-repository";
 import { makeSchema } from "@test/factories/make-schema";
@@ -12,7 +12,7 @@ let inMemorySchemaRepository: InMemorySchemaRepository;
 let inMemoryListRepository: InMemoryListRepository;
 let jsonSchemaValidator: JsonSchemaValidator;
 
-let sut: CreateItemUseCase;
+let sut: CreateItem;
 
 describe("Create Item", () => {
 	beforeEach(() => {
@@ -21,7 +21,7 @@ describe("Create Item", () => {
 		inMemoryListRepository = new InMemoryListRepository();
 		jsonSchemaValidator = new JsonSchemaValidator();
 
-		sut = new CreateItemUseCase(
+		sut = new CreateItem(
 			inMemoryItemRepository,
 			inMemorySchemaRepository,
 			inMemoryListRepository,

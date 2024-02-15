@@ -12,7 +12,7 @@ interface GetItemBySlugResponse {
 	item: Item;
 }
 
-export class GetItemBySlugUseCase {
+export class GetItemBySlug {
 	constructor(private itemRepository: ItemRepository) {}
 
 	async execute({

@@ -1,17 +1,17 @@
 import { InMemoryItemRepository } from "@test/repositories/in-memory-item-repository";
 import { makeItem } from "@test/factories/make-item";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
-import { FetchItemsByListIdUseCase } from "@src/domain/lists/application/use-cases/fetch-items-by-list-id";
+import { FetchItemsByListId } from "@src/domain/lists/application/use-cases/fetch-items-by-list-id";
 
 let inMemoryItemRepository: InMemoryItemRepository;
 
-let sut: FetchItemsByListIdUseCase;
+let sut: FetchItemsByListId;
 
 describe("Fetch Items", () => {
 	beforeEach(() => {
 		inMemoryItemRepository = new InMemoryItemRepository();
 
-		sut = new FetchItemsByListIdUseCase(inMemoryItemRepository);
+		sut = new FetchItemsByListId(inMemoryItemRepository);
 	});
 
 	it("Should return all items", async () => {

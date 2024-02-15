@@ -2,7 +2,7 @@ import { InMemorySchemaRepository } from "@test/repositories/in-memory-schema-re
 import { InMemoryListRepository } from "@test/repositories/in-memory-list-repository";
 import { makeSchema } from "@test/factories/make-schema";
 import { JsonSchemaValidator } from "@src/domain/lists/application/services/json-schema-validator";
-import { ForkSchemaByListUseCase } from "@src/domain/lists/application/use-cases/fork-schema-by-list";
+import { ForkSchemaByList } from "@src/domain/lists/application/use-cases/fork-schema-by-list";
 import { makeList } from "@test/factories/make-list";
 import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";
 import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
@@ -12,7 +12,7 @@ let inMemorySchemaRepository: InMemorySchemaRepository;
 let inMemoryListRepository: InMemoryListRepository;
 let jsonSchemaValidator: JsonSchemaValidator;
 
-let sut: ForkSchemaByListUseCase;
+let sut: ForkSchemaByList;
 
 describe("Fork Schema", () => {
 	beforeEach(() => {
@@ -20,7 +20,7 @@ describe("Fork Schema", () => {
 		inMemoryListRepository = new InMemoryListRepository();
 		jsonSchemaValidator = new JsonSchemaValidator();
 
-		sut = new ForkSchemaByListUseCase(
+		sut = new ForkSchemaByList(
 			inMemorySchemaRepository,
 			inMemoryListRepository,
 			jsonSchemaValidator,

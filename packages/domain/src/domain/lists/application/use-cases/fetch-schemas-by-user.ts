@@ -9,7 +9,7 @@ interface FetchSchemasByUserResponse {
 	schemas: Schema[];
 }
 
-export class FetchSchemasByUserUseCase {
+export class FetchSchemasByUser {
 	constructor(private schemaRepository: SchemaRepository) {}
 
 	async execute({

@@ -14,7 +14,7 @@ interface UpdateSchemaRequest {
 
 interface UpdateSchemaResponse {}
 
-export class UpdateSchemaUseCase {
+export class UpdateSchema {
 	constructor(
 		private schemaRepository: SchemaRepository,
 		private validator: Validator,

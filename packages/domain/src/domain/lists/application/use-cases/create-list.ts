@@ -13,7 +13,7 @@ interface CreateListResponse {
 	list: List;
 }
 
-export class CreateListUseCase {
+export class CreateList {
 	constructor(private listRepository: ListRepository) {}
 
 	async execute({

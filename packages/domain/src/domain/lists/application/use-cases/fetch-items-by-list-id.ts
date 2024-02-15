@@ -10,7 +10,7 @@ interface FetchItemsByItemIdResponse {
 	items: Item[];
 }
 
-export class FetchItemsByListIdUseCase {
+export class FetchItemsByListId {
 	constructor(private itemRepository: ItemRepository) {}
 
 	async execute({

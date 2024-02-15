@@ -1,17 +1,17 @@
 import { InMemorySchemaRepository } from "@test/repositories/in-memory-schema-repository";
 import { makeSchema } from "@test/factories/make-schema";
-import { FetchSchemasByUserUseCase } from "@src/domain/lists/application/use-cases/fetch-schemas-by-user";
+import { FetchSchemasByUser } from "@src/domain/lists/application/use-cases/fetch-schemas-by-user";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 
 let inMemorySchemaRepository: InMemorySchemaRepository;
 
-let sut: FetchSchemasByUserUseCase;
+let sut: FetchSchemasByUser;
 
 describe("Fetch Schemas", () => {
 	beforeEach(() => {
 		inMemorySchemaRepository = new InMemorySchemaRepository();
 
-		sut = new FetchSchemasByUserUseCase(inMemorySchemaRepository);
+		sut = new FetchSchemasByUser(inMemorySchemaRepository);
 	});
 
 	it("Should list all schemas", async () => {

@@ -1,7 +1,7 @@
 import { makeSchema } from "@test/factories/make-schema";
 import { InMemorySchemaRepository } from "@test/repositories/in-memory-schema-repository";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
-import { ValidateAllItemsFromListUseCase } from "@src/domain/lists/application/use-cases/validate-all-items-from-list";
+import { ValidateAllItemsFromList } from "@src/domain/lists/application/use-cases/validate-all-items-from-list";
 import { InMemoryItemRepository } from "@test/repositories/in-memory-item-repository";
 import { InMemoryListRepository } from "@test/repositories/in-memory-list-repository";
 import { JsonSchemaValidator } from "@src/domain/lists/application/services/json-schema-validator";
@@ -11,7 +11,7 @@ import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
 import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
 
-let sut: ValidateAllItemsFromListUseCase;
+let sut: ValidateAllItemsFromList;
 
 let inMemoryItemRepository: InMemoryItemRepository;
 let inMemorySchemaRepository: InMemorySchemaRepository;
@@ -27,7 +27,7 @@ describe("Validate Items by list", () => {
 		inMemoryListRepository = new InMemoryListRepository();
 		jsonSchemaValidator = new JsonSchemaValidator();
 
-		sut = new ValidateAllItemsFromListUseCase(
+		sut = new ValidateAllItemsFromList(
 			inMemoryItemRepository,
 			inMemorySchemaRepository,
 			inMemoryListRepository,

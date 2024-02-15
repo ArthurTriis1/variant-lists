@@ -1,15 +1,15 @@
 import { InMemoryListRepository } from "@test/repositories/in-memory-list-repository";
-import { CreateListUseCase } from "@src/domain/lists/application/use-cases/create-list-use-case";
+import { CreateList } from "@src/domain/lists/application/use-cases/create-list";
 
 let inMemoryListRepository: InMemoryListRepository;
 
-let sut: CreateListUseCase;
+let sut: CreateList;
 
 describe("Create List", () => {
 	beforeEach(() => {
 		inMemoryListRepository = new InMemoryListRepository();
 
-		sut = new CreateListUseCase(inMemoryListRepository);
+		sut = new CreateList(inMemoryListRepository);
 	});
 
 	it("should create List", async () => {

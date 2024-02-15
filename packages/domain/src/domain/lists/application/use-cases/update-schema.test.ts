@@ -1,12 +1,12 @@
 import { makeSchema } from "@test/factories/make-schema";
 import { InMemorySchemaRepository } from "@test/repositories/in-memory-schema-repository";
-import { UpdateSchemaUseCase } from "@src/domain/lists/application/use-cases/update-schema-use-case";
+import { UpdateSchema } from "@src/domain/lists/application/use-cases/update-schema";
 import { JsonSchemaValidator } from "@src/domain/lists/application/services/json-schema-validator";
 import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
 import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";
 import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 
-let sut: UpdateSchemaUseCase;
+let sut: UpdateSchema;
 
 let inMemorySchemaRepository: InMemorySchemaRepository;
 let jsonSchemaValidator: JsonSchemaValidator;
@@ -16,10 +16,7 @@ describe("Update user", () => {
 		inMemorySchemaRepository = new InMemorySchemaRepository();
 		jsonSchemaValidator = new JsonSchemaValidator();
 
-		sut = new UpdateSchemaUseCase(
-			inMemorySchemaRepository,
-			jsonSchemaValidator,
-		);
+		sut = new UpdateSchema(inMemorySchemaRepository, jsonSchemaValidator);
 	});
 
 	it("should update schema values", async () => {

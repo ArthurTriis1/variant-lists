@@ -1,11 +1,11 @@
 import { makeSchema } from "@test/factories/make-schema";
 import { InMemorySchemaRepository } from "@test/repositories/in-memory-schema-repository";
-import { GetSchemaBySlugUseCase } from "@src/domain/lists/application/use-cases/get-schema-by-slug";
+import { GetSchemaBySlug } from "@src/domain/lists/application/use-cases/get-schema-by-slug";
 import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 
-let sut: GetSchemaBySlugUseCase;
+let sut: GetSchemaBySlug;
 
 let inMemorySchemaRepository: InMemorySchemaRepository;
 
@@ -13,7 +13,7 @@ describe("Get Schema by slug", () => {
 	beforeEach(() => {
 		inMemorySchemaRepository = new InMemorySchemaRepository();
 
-		sut = new GetSchemaBySlugUseCase(inMemorySchemaRepository);
+		sut = new GetSchemaBySlug(inMemorySchemaRepository);
 	});
 
 	it("should return schema", async () => {

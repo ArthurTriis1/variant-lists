@@ -15,7 +15,7 @@ interface CreateSchemaResponse {
 	schema: Schema;
 }
 
-export class CreateSchemaUseCase {
+export class CreateSchema {
 	constructor(
 		private schemaRepository: SchemaRepository,
 		private validator: Validator,
