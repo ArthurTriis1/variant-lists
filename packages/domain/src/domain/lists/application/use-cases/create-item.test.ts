@@ -6,6 +6,8 @@ import { makeSchema } from "@test/factories/make-schema";
 import { makeList } from "@test/factories/make-list";
 import { JsonSchemaValidator } from "@src/domain/lists/application/services/json-schema-validator";
 import { ItemMismatchSchema } from "@src/core/errors/item-mismatch-schema-error";
+import { UniqueEntityID } from "../../enterprise/entities";
+import { NotAllowedError } from "@src/core/errors";
 
 let inMemoryItemRepository: InMemoryItemRepository;
 let inMemorySchemaRepository: InMemorySchemaRepository;
@@ -33,7 +35,10 @@ describe("Create Item", () => {
 		const schema = makeSchema();
 		inMemorySchemaRepository.create(schema);
 
-		const list = makeList({ schemaId: schema.id });
+		const list = makeList({
+			schemaId: schema.id,
+			creatorId: new UniqueEntityID("1"),
+		});
 		inMemoryListRepository.create(list);
 
 		const response = await sut.execute({
@@ -64,7 +69,10 @@ describe("Create Item", () => {
 
 		inMemorySchemaRepository.create(schema);
 
-		const list = makeList({ schemaId: schema.id });
+		const list = makeList({
+			schemaId: schema.id,
+			creatorId: new UniqueEntityID("1"),
+		});
 		inMemoryListRepository.create(list);
 
 		expect(
@@ -79,5 +87,29 @@ describe("Create Item", () => {
 					},
 				}),
 		).rejects.toBeInstanceOf(ItemMismatchSchema);
+	});
+
+	it("should throws error if creator list does not match", async () => {
+		const schema = makeSchema();
+
+		inMemorySchemaRepository.create(schema);
+
+		const list = makeList({
+			schemaId: schema.id,
+		});
+		inMemoryListRepository.create(list);
+
+		expect(
+			async () =>
+				await sut.execute({
+					title: "Primeiro esquema",
+					description: "description",
+					creatorId: "1",
+					listId: list.id.toString(),
+					data: {
+						error: "show error",
+					},
+				}),
+		).rejects.toBeInstanceOf(NotAllowedError);
 	});
 });

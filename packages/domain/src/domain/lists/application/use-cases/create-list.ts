@@ -1,6 +1,8 @@
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 import { List } from "@src/domain/lists/enterprise/entities/list";
 import { ListRepository } from "@src/domain/lists/application/repositories/list-repository";
+import { SchemaNotFoundError } from "@src/core/errors";
+import { SchemaRepository } from "../repositories/schema-repository";
 
 interface CreateListRequest {
 	title: string;
@@ -14,7 +16,10 @@ interface CreateListResponse {
 }
 
 export class CreateList {
-	constructor(private listRepository: ListRepository) {}
+	constructor(
+		private listRepository: ListRepository,
+		private schemaRepository: SchemaRepository,
+	) {}
 
 	async execute({
 		title,
@@ -22,6 +27,12 @@ export class CreateList {
 		creatorId,
 		schemaId,
 	}: CreateListRequest): Promise<CreateListResponse | null> {
+		const schema = await this.schemaRepository.findById(schemaId);
+
+		if (!schema) {
+			throw new SchemaNotFoundError();
+		}
+
 		const list = List.create({
 			title,
 			description,

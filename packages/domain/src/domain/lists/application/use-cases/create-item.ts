@@ -7,6 +7,7 @@ import { Validator } from "@src/domain/lists/application/services/validator";
 import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
 import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
 import { ItemMismatchSchema } from "@src/core/errors/item-mismatch-schema-error";
+import { NotAllowedError } from "@src/core/errors";
 
 interface CreateItemRequest {
 	title: string;
@@ -41,6 +42,10 @@ export class CreateItem {
 
 		if (!list) {
 			throw new ListNotFoundError();
+		}
+
+		if (list.creatorId.toString() !== creatorId) {
+			throw new NotAllowedError();
 		}
 
 		const schema = await this.schemaRepository.findById(
