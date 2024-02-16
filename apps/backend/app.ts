@@ -1,11 +1,13 @@
-import { createItemController } from "@src/controllers/create-schema.controller";
+import { createSchemaController } from "@src/controllers/create-schema.controller";
+import { registerUserController } from "@src/controllers/register-user.controller";
 import { UseCaseError } from "@variant-lists/domain";
 import Fastify from "fastify";
 import { ZodError } from "zod";
 
 const app = Fastify();
 
-app.register(createItemController);
+app.register(createSchemaController);
+app.register(registerUserController);
 
 app.setErrorHandler(function (error, request, reply) {
 	if (error instanceof ZodError) {

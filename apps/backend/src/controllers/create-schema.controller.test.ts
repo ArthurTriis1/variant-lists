@@ -2,19 +2,19 @@ import { makePrismaUser } from "@test/factories/make-prisma-user";
 import { app } from "app";
 import request from "supertest";
 
-describe("Pig (E2E)", () => {
+describe("Create Schema (E2E)", () => {
 	beforeAll(async () => {
 		await app.ready();
 	});
 
-	test("[POST] /item", async () => {
+	test("[POST] /schema", async () => {
 		const user = await makePrismaUser();
 
 		await request(app.server)
-			.post("/item")
+			.post("/schema")
 			.send({
-				title: "new item",
-				description: "A new item",
+				title: "new schema",
+				description: "A new achema",
 				creatorId: user.id.toString(),
 				data: {
 					type: "object",

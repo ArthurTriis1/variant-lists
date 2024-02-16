@@ -1,13 +1,13 @@
 @baseUrl = http://localhost:3000
 
-# @name create_item
-POST {{baseUrl}}/item
+# @name create_schema
+POST {{baseUrl}}/schema
 Content-Type: application/json
 
 {
-	"title": "hello2",
+	"title": "title name",
 	"description": "",
-	"creatorId": "1",
+	"creatorId": "325c1ae6-21f9-4dca-91cc-b9cddf7b590f",
 	"data": {
 		"type": "object",
 		"properties": {
@@ -19,4 +19,16 @@ Content-Type: application/json
 			}
 		}
 	}
+}
+
+###
+
+# @name register_user
+POST {{baseUrl}}/sign-up
+Content-Type: application/json
+
+{
+	"name": "user name",
+	"email": "user@user4.com",
+	"password": "123456"
 }

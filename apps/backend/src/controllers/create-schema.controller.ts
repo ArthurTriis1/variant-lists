@@ -9,8 +9,8 @@ const bodyValidate = z.object({
 	data: z.record(z.unknown()),
 });
 
-export const createItemController = async (app: FastifyInstance) => {
-	app.post("/item", async (request, reply) => {
+export const createSchemaController = async (app: FastifyInstance) => {
+	app.post("/schema", async (request, reply) => {
 		const body = bodyValidate.parse(request.body);
 
 		const schemaBuilder = new CreateSchemaBuilder();

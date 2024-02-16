@@ -1,3 +1,5 @@
+import { randomUUID } from "node:crypto";
+
 export class Slug {
 	public value: string;
 
@@ -27,6 +29,6 @@ export class Slug {
 			.replace(/--+/g, "-")
 			.replace(/-$/g, "");
 
-		return new Slug(slugText);
+		return new Slug(`${slugText}-${randomUUID()}`);
 	}
 }

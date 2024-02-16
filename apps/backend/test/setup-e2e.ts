@@ -17,8 +17,6 @@ afterAll(async () => {
 
 	const schemaId = url.searchParams.get("schema");
 
-	console.log(schemaId);
-
 	await prisma.$executeRawUnsafe(
 		`DROP SCHEMA IF EXISTS "${schemaId}" CASCADE`,
 	);

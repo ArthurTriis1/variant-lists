@@ -567,6 +567,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/bcryptjs@npm:^2.4.6":
+  version: 2.4.6
+  resolution: "@types/bcryptjs@npm:2.4.6"
+  checksum: 25ae1fd1e8a9bd688e22a8de905581d6d7bf26e823b797f895d2c488100b1f15d3c12a7d1a94f553087b010d316bf3978106df860e8e58fd13f52b4c708df5fd
+  languageName: node
+  linkType: hard
+
 "@types/cookiejar@npm:^2.1.5":
   version: 2.1.5
   resolution: "@types/cookiejar@npm:2.1.5"
@@ -816,10 +823,12 @@ __metadata:
   resolution: "@variant-lists/domain@workspace:packages/domain"
   dependencies:
     "@faker-js/faker": ^8.4.0
+    "@types/bcryptjs": ^2.4.6
     "@types/node": ^20.11.16
     "@typescript-eslint/eslint-plugin": ^6.4.0
     "@variant-lists/tsconfig": "workspace:*"
     ajv: ^8.12.0
+    bcryptjs: ^2.4.3
     eslint: ^8.56.0
     eslint-config-prettier: ^9.1.0
     eslint-config-standard-with-typescript: ^43.0.1
@@ -1225,6 +1234,13 @@ __metadata:
   version: 1.5.1
   resolution: "base64-js@npm:1.5.1"
   checksum: 669632eb3745404c2f822a18fc3a0122d2f9a7a13f7fb8b5823ee19d1d2ff9ee5b52c53367176ea4ad093c332fd5ab4bd0ebae5a8e27917a4105a4cfc86b1005
+  languageName: node
+  linkType: hard
+
+"bcryptjs@npm:^2.4.3":
+  version: 2.4.3
+  resolution: "bcryptjs@npm:2.4.3"
+  checksum: 0e80ed852a41f5dfb1853f53ee14a7390b0ef263ce05dba6e2ef3cd919dfad025a7c21ebcfe5bc7fa04b100990edf90c7a877ff7fe623d3e479753253131b629
   languageName: node
   linkType: hard
 
