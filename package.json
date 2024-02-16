@@ -11,6 +11,6 @@
 		"test:watch": "turbo run test:watch"
 	},
 	"devDependencies": {
-		"@variant-lists/tsconfig": "workspace:*"
+		"@variant-lists/tsconfig": "*"
 	}
 }
