@@ -32,6 +32,18 @@ export class Item extends Entity<ItemProps> {
 		return new Item(newProps, id);
 	}
 
+	get title() {
+		return this.props.title;
+	}
+
+	get description() {
+		return this.props.description;
+	}
+
+	get imageUrl() {
+		return this.props.imageUrl;
+	}
+
 	get slug() {
 		return this.props.slug;
 	}

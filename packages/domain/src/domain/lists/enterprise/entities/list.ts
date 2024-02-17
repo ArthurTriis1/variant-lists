@@ -24,6 +24,14 @@ export class List extends Entity<ListProps> {
 		return new List(newProps, id);
 	}
 
+	get title() {
+		return this.props.title;
+	}
+
+	get description() {
+		return this.props.description;
+	}
+
 	get schemaId() {
 		return this.props.schemaId;
 	}

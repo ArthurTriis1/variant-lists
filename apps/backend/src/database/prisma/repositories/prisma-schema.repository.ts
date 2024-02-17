@@ -11,7 +11,7 @@ class PrismaSchemaRepository implements SchemaRepository {
 	async save(schema: Schema): Promise<void> {
 		const data = PrismaSchemaMapper.toPrisma(schema);
 
-		prisma.schema.update({
+		await prisma.schema.update({
 			where: {
 				id: data.id,
 			},
