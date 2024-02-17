@@ -1,4 +1,4 @@
-import PrismaUserRepository from "@src/database/prisma/repositories/prisma-user-repository";
+import PrismaUserRepository from "@src/database/prisma/repositories/prisma-user.repository";
 import {
 	BcryptHasher,
 	HashGenerator,

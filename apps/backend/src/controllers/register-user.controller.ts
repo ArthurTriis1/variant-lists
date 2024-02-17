@@ -1,4 +1,4 @@
-import RegisterUserBuilder from "@src/builders/register-user-use-case-builder";
+import RegisterUserBuilder from "@src/builders/register-user.builder";
 import { FastifyInstance } from "fastify";
 import z from "zod";
 

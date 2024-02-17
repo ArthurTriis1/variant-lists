@@ -1,6 +1,6 @@
 import { prisma } from "@src/prisma";
 import { User, UserRepository } from "@variant-lists/domain";
-import { PrismaUserMapper } from "../mappers/prisma-schema-user";
+import { PrismaUserMapper } from "../mappers/prisma-user.mapper";
 
 class PrismaUserRepository implements UserRepository {
 	async create(user: User): Promise<void> {

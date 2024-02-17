@@ -1,6 +1,6 @@
 import { prisma } from "@src/prisma";
 import { Schema, SchemaRepository } from "@variant-lists/domain";
-import { PrismaSchemaMapper } from "../mappers/prisma-schema-mapper";
+import { PrismaSchemaMapper } from "../mappers/prisma-schema.mapper";
 
 class PrismaSchemaRepository implements SchemaRepository {
 	async create(schema: Schema): Promise<void> {

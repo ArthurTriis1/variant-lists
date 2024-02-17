@@ -1,4 +1,4 @@
-import { PrismaUserMapper } from "@src/database/prisma/mappers/prisma-schema-user";
+import { PrismaUserMapper } from "@src/database/prisma/mappers/prisma-user.mapper";
 import { prisma } from "@src/prisma";
 import { User, UserProps, makeUser } from "@variant-lists/domain";
 

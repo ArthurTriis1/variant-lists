@@ -1,4 +1,4 @@
-import { makePrismaUser } from "@test/factories/make-prisma-user";
+import { makePrismaUser } from "@test/factories/prisma-user.factory";
 import { app } from "app";
 import request from "supertest";
 

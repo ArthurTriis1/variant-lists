@@ -1,4 +1,4 @@
-import PrismaSchemaRepository from "@src/database/prisma/repositories/prisma-schema-repository";
+import PrismaSchemaRepository from "@src/database/prisma/repositories/prisma-schema.repository";
 import { JsonSchemaValidator, CreateSchema } from "@variant-lists/domain";
 
 export default class CreateSchemaBuilder {

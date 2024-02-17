@@ -1,4 +1,4 @@
-import { PrismaSchemaMapper } from "@src/database/prisma/mappers/prisma-schema-mapper";
+import { PrismaSchemaMapper } from "@src/database/prisma/mappers/prisma-schema.mapper";
 import { prisma } from "@src/prisma";
 import { Schema, SchemaProps, makeSchema } from "@variant-lists/domain";
 

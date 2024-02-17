@@ -1,4 +1,4 @@
-import CreateSchemaBuilder from "@src/builders/create-schema-use-case-builder";
+import CreateSchemaBuilder from "@src/builders/create-schema.builder";
 import { FastifyInstance } from "fastify";
 import z from "zod";
 
