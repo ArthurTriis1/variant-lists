@@ -3,6 +3,8 @@ import { Schema } from "@src/domain/lists/enterprise/entities/schema";
 import { SchemaRepository } from "@src/domain/lists/application/repositories/schema-repository";
 import { Validator } from "@src/domain/lists/application/services/validator";
 import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";
+import { UserRepository } from "../repositories/user-repository";
+import { CreatorNotFoundError } from "@src/core/errors/creator-not-found-error";
 
 interface CreateSchemaRequest {
 	title: string;
@@ -18,6 +20,7 @@ interface CreateSchemaResponse {
 export class CreateSchema {
 	constructor(
 		private schemaRepository: SchemaRepository,
+		private userRepository: UserRepository,
 		private validator: Validator,
 	) {}
 
@@ -26,6 +29,12 @@ export class CreateSchema {
 		data,
 		...props
 	}: CreateSchemaRequest): Promise<CreateSchemaResponse | null> {
+		const user = await this.userRepository.findById(creatorId);
+
+		if (!user) {
+			throw new CreatorNotFoundError();
+		}
+
 		const jsonSchemaIsValid = await this.validator.validateJsonSchema(data);
 
 		if (!jsonSchemaIsValid) {

@@ -6,12 +6,14 @@ import { makeSchema } from "@test/factories/make-schema";
 import { makeList } from "@test/factories/make-list";
 import { JsonSchemaValidator } from "@src/domain/lists/application/services/json-schema-validator";
 import { ItemMismatchSchema } from "@src/core/errors/item-mismatch-schema-error";
-import { UniqueEntityID } from "../../enterprise/entities";
 import { NotAllowedError } from "@src/core/errors";
+import { InMemoryUserRepository } from "@test/repositories/in-memory-user-repository";
+import { makeUser } from "@test/factories/make-user";
 
 let inMemoryItemRepository: InMemoryItemRepository;
 let inMemorySchemaRepository: InMemorySchemaRepository;
 let inMemoryListRepository: InMemoryListRepository;
+let inMemoryUserRepository: InMemoryUserRepository;
 let jsonSchemaValidator: JsonSchemaValidator;
 
 let sut: CreateItem;
@@ -21,30 +23,35 @@ describe("Create Item", () => {
 		inMemoryItemRepository = new InMemoryItemRepository();
 		inMemorySchemaRepository = new InMemorySchemaRepository();
 		inMemoryListRepository = new InMemoryListRepository();
+		inMemoryUserRepository = new InMemoryUserRepository();
 		jsonSchemaValidator = new JsonSchemaValidator();
 
 		sut = new CreateItem(
 			inMemoryItemRepository,
 			inMemorySchemaRepository,
 			inMemoryListRepository,
+			inMemoryUserRepository,
 			jsonSchemaValidator,
 		);
 	});
 
 	it("should create Item", async () => {
+		const user = makeUser();
+		inMemoryUserRepository.create(user);
+
 		const schema = makeSchema();
 		inMemorySchemaRepository.create(schema);
 
 		const list = makeList({
 			schemaId: schema.id,
-			creatorId: new UniqueEntityID("1"),
+			creatorId: user.id,
 		});
 		inMemoryListRepository.create(list);
 
 		const response = await sut.execute({
 			title: "Primeiro esquema",
 			description: "description",
-			creatorId: "1",
+			creatorId: user.id.toString(),
 			listId: list.id.toString(),
 			data: {
 				name: "My Name",
@@ -55,7 +62,11 @@ describe("Create Item", () => {
 	});
 
 	it("should throws error if Item dont match with schema", async () => {
+		const user = makeUser();
+		inMemoryUserRepository.create(user);
+
 		const schema = makeSchema({
+			creatorId: user.id,
 			data: {
 				type: "object",
 				properties: {
@@ -71,7 +82,7 @@ describe("Create Item", () => {
 
 		const list = makeList({
 			schemaId: schema.id,
-			creatorId: new UniqueEntityID("1"),
+			creatorId: user.id,
 		});
 		inMemoryListRepository.create(list);
 
@@ -80,7 +91,7 @@ describe("Create Item", () => {
 				await sut.execute({
 					title: "Primeiro esquema",
 					description: "description",
-					creatorId: "1",
+					creatorId: user.id.toString(),
 					listId: list.id.toString(),
 					data: {
 						error: "show error",
@@ -90,12 +101,21 @@ describe("Create Item", () => {
 	});
 
 	it("should throws error if creator list does not match", async () => {
-		const schema = makeSchema();
+		const user = makeUser();
+		inMemoryUserRepository.create(user);
+
+		const user2 = makeUser();
+		inMemoryUserRepository.create(user2);
+
+		const schema = makeSchema({
+			creatorId: user.id,
+		});
 
 		inMemorySchemaRepository.create(schema);
 
 		const list = makeList({
 			schemaId: schema.id,
+			creatorId: user.id,
 		});
 		inMemoryListRepository.create(list);
 
@@ -104,7 +124,7 @@ describe("Create Item", () => {
 				await sut.execute({
 					title: "Primeiro esquema",
 					description: "description",
-					creatorId: "1",
+					creatorId: user2.id.toString(),
 					listId: list.id.toString(),
 					data: {
 						error: "show error",

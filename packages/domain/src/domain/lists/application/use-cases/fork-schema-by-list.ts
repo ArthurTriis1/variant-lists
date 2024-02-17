@@ -6,6 +6,7 @@ import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";
 import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
+import { NotAllowedError } from "@src/core/errors";
 
 interface ForkSchemaByListRequest {
 	listId: string;
@@ -33,6 +34,10 @@ export class ForkSchemaByList {
 
 		if (!baseSchema) {
 			throw new SchemaNotFoundError();
+		}
+
+		if (baseSchema.creatorId.toString() !== creatorId) {
+			throw new NotAllowedError();
 		}
 
 		const isSchemaValid = await this.validator.validateJsonSchema(data);

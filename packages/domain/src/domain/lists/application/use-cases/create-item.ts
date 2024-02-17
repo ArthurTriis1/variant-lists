@@ -8,6 +8,8 @@ import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
 import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
 import { ItemMismatchSchema } from "@src/core/errors/item-mismatch-schema-error";
 import { NotAllowedError } from "@src/core/errors";
+import { UserRepository } from "../repositories/user-repository";
+import { CreatorNotFoundError } from "@src/core/errors/creator-not-found-error";
 
 interface CreateItemRequest {
 	title: string;
@@ -27,6 +29,7 @@ export class CreateItem {
 		private itemRepository: ItemRepository,
 		private schemaRepository: SchemaRepository,
 		private listRepository: ListRepository,
+		private userRepository: UserRepository,
 		private validator: Validator,
 	) {}
 
@@ -38,6 +41,12 @@ export class CreateItem {
 		imageUrl,
 		data,
 	}: CreateItemRequest): Promise<CreateItemResponse | null> {
+		const user = await this.userRepository.findById(creatorId);
+
+		if (!user) {
+			throw new CreatorNotFoundError();
+		}
+
 		const list = await this.listRepository.findById(listId);
 
 		if (!list) {

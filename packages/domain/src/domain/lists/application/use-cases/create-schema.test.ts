@@ -2,8 +2,11 @@ import { InMemorySchemaRepository } from "@test/repositories/in-memory-schema-re
 import { CreateSchema } from "@src/domain/lists/application/use-cases/create-schema";
 import { JsonSchemaValidator } from "@src/domain/lists/application/services/json-schema-validator";
 import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";
+import { InMemoryUserRepository } from "@test/repositories/in-memory-user-repository";
+import { makeUser } from "@test/factories/make-user";
 
 let inMemorySchemaRepository: InMemorySchemaRepository;
+let inMemoryUserRepository: InMemoryUserRepository;
 let jsonSchemaValidator: JsonSchemaValidator;
 
 let sut: CreateSchema;
@@ -11,16 +14,24 @@ let sut: CreateSchema;
 describe("Create Schema", () => {
 	beforeEach(() => {
 		inMemorySchemaRepository = new InMemorySchemaRepository();
+		inMemoryUserRepository = new InMemoryUserRepository();
 		jsonSchemaValidator = new JsonSchemaValidator();
 
-		sut = new CreateSchema(inMemorySchemaRepository, jsonSchemaValidator);
+		sut = new CreateSchema(
+			inMemorySchemaRepository,
+			inMemoryUserRepository,
+			jsonSchemaValidator,
+		);
 	});
 
 	it("should create Schema", async () => {
+		const user = makeUser();
+		inMemoryUserRepository.create(user);
+
 		const response = await sut.execute({
 			title: "Primeiro esquema",
 			description: "",
-			creatorId: "1",
+			creatorId: user.id.toString(),
 			data: {
 				type: "object",
 				properties: {
@@ -34,12 +45,14 @@ describe("Create Schema", () => {
 	});
 
 	it("should thorws error for invalid schema Schema", async () => {
+		const user = makeUser();
+		inMemoryUserRepository.create(user);
 		expect(
 			async () =>
 				await sut.execute({
 					title: "Primeiro esquema",
 					description: "",
-					creatorId: "1",
+					creatorId: user.id.toString(),
 					data: {
 						type: "object",
 						properties: {

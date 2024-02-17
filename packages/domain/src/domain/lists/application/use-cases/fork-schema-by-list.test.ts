@@ -7,9 +7,12 @@ import { makeList } from "@test/factories/make-list";
 import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";
 import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
 import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
+import { makeUser } from "@test/factories/make-user";
+import { InMemoryUserRepository } from "@test/repositories/in-memory-user-repository";
 
 let inMemorySchemaRepository: InMemorySchemaRepository;
 let inMemoryListRepository: InMemoryListRepository;
+let inMemoryUserRepository: InMemoryUserRepository;
 let jsonSchemaValidator: JsonSchemaValidator;
 
 let sut: ForkSchemaByList;
@@ -18,6 +21,7 @@ describe("Fork Schema", () => {
 	beforeEach(() => {
 		inMemorySchemaRepository = new InMemorySchemaRepository();
 		inMemoryListRepository = new InMemoryListRepository();
+		inMemoryUserRepository = new InMemoryUserRepository();
 		jsonSchemaValidator = new JsonSchemaValidator();
 
 		sut = new ForkSchemaByList(
@@ -28,11 +32,13 @@ describe("Fork Schema", () => {
 	});
 
 	it("Should fork schema mantening the list reference", async () => {
-		const schema = makeSchema({});
+		const user = makeUser();
+		inMemoryUserRepository.create(user);
 
+		const schema = makeSchema({ creatorId: user.id });
 		await inMemorySchemaRepository.create(schema);
 
-		const list = makeList({ schemaId: schema.id });
+		const list = makeList({ schemaId: schema.id, creatorId: user.id });
 		await inMemoryListRepository.create(list);
 
 		const data = {
@@ -48,7 +54,7 @@ describe("Fork Schema", () => {
 		await sut.execute({
 			listId: list.id.toString(),
 			schemaId: schema.id.toString(),
-			creatorId: "1",
+			creatorId: user.id.toString(),
 			data,
 		});
 
@@ -56,18 +62,20 @@ describe("Fork Schema", () => {
 		expect(inMemorySchemaRepository.schemas[1].data).toMatchObject(data);
 		expect(
 			inMemorySchemaRepository.schemas[1].creatorId.toString(),
-		).toEqual("1");
+		).toEqual(user.id.toString());
 		expect(inMemoryListRepository.lists[0].schemaId).toEqual(
 			inMemorySchemaRepository.schemas[1].id,
 		);
 	});
 
 	it("Should throw error to invalid schema", async () => {
-		const schema = makeSchema({});
+		const user = makeUser();
+		inMemoryUserRepository.create(user);
 
+		const schema = makeSchema({ creatorId: user.id });
 		await inMemorySchemaRepository.create(schema);
 
-		const list = makeList({ schemaId: schema.id });
+		const list = makeList({ schemaId: schema.id, creatorId: user.id });
 		await inMemoryListRepository.create(list);
 
 		const data = {};
@@ -77,7 +85,7 @@ describe("Fork Schema", () => {
 				await sut.execute({
 					listId: list.id.toString(),
 					schemaId: schema.id.toString(),
-					creatorId: "1",
+					creatorId: user.id.toString(),
 					data,
 				}),
 		).rejects.toBeInstanceOf(NotValidSchemaError);
@@ -111,11 +119,13 @@ describe("Fork Schema", () => {
 	});
 
 	it("Should throw error to not found list", async () => {
-		const schema = makeSchema({});
+		const user = makeUser();
+		inMemoryUserRepository.create(user);
 
+		const schema = makeSchema({ creatorId: user.id });
 		await inMemorySchemaRepository.create(schema);
 
-		const list = makeList({ schemaId: schema.id });
+		const list = makeList({ schemaId: schema.id, creatorId: user.id });
 
 		const data = {
 			type: "object",
@@ -132,7 +142,7 @@ describe("Fork Schema", () => {
 				await sut.execute({
 					listId: list.id.toString(),
 					schemaId: schema.id.toString(),
-					creatorId: "1",
+					creatorId: user.id.toString(),
 					data,
 				}),
 		).rejects.toBeInstanceOf(ListNotFoundError);

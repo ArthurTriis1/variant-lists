@@ -3,6 +3,8 @@ import { List } from "@src/domain/lists/enterprise/entities/list";
 import { ListRepository } from "@src/domain/lists/application/repositories/list-repository";
 import { SchemaNotFoundError } from "@src/core/errors";
 import { SchemaRepository } from "../repositories/schema-repository";
+import { UserRepository } from "../repositories/user-repository";
+import { CreatorNotFoundError } from "@src/core/errors/creator-not-found-error";
 
 interface CreateListRequest {
 	title: string;
@@ -19,6 +21,7 @@ export class CreateList {
 	constructor(
 		private listRepository: ListRepository,
 		private schemaRepository: SchemaRepository,
+		private userRepository: UserRepository,
 	) {}
 
 	async execute({
@@ -27,6 +30,12 @@ export class CreateList {
 		creatorId,
 		schemaId,
 	}: CreateListRequest): Promise<CreateListResponse | null> {
+		const user = await this.userRepository.findById(creatorId);
+
+		if (!user) {
+			throw new CreatorNotFoundError();
+		}
+
 		const schema = await this.schemaRepository.findById(schemaId);
 
 		if (!schema) {

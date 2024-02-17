@@ -1,4 +1,4 @@
-[] Arrumar presenters
+[X] Arrumar presenters
     remover senha de user
     arrumar id de user
 [] Adicionar validaçao de criador nos casos de uso
