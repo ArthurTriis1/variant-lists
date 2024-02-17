@@ -1,8 +1,9 @@
+import { UserPresenter } from "@src/presenters/user.presenter";
 import { FastifyInstance } from "fastify";
 import request from "supertest";
 
-export const getCookie = async (app: FastifyInstance) => {
-	await request(app.server).post("/sign-up").send({
+export const getUser = async (app: FastifyInstance) => {
+	const user = await request(app.server).post("/sign-up").send({
 		name: "user name",
 		email: "user@user.com",
 		password: "123456",
@@ -13,5 +14,8 @@ export const getCookie = async (app: FastifyInstance) => {
 		password: "123456",
 	});
 
-	return response.headers["set-cookie"];
+	return {
+		cookie: response.headers["set-cookie"],
+		user: user.body as UserPresenter,
+	};
 };

@@ -1,4 +1,5 @@
 import AutenticateUserBuilder from "@src/builders/authenticate.builder";
+import { UserPresenter } from "@src/presenters/user.presenter";
 import { FastifyInstance } from "fastify";
 import z from "zod";
 
@@ -14,7 +15,9 @@ export const autenticateUserController = async (app: FastifyInstance) => {
 		const schemaBuilder = new AutenticateUserBuilder();
 		const autenticateUser = schemaBuilder.build();
 
-		const user = await autenticateUser.execute(body);
+		const autenticateUserResponse = await autenticateUser.execute(body);
+
+		const user = UserPresenter.toHTTP(autenticateUserResponse.user);
 
 		const refreshToken = app.jwt.sign(user, { expiresIn: "1d" });
 
@@ -33,6 +36,6 @@ export const autenticateUserController = async (app: FastifyInstance) => {
 			.code(200)
 			.send({ token });
 
-		reply.send(user);
+		reply.send({ user });
 	});
 };

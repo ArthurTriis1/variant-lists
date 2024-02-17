@@ -1,4 +1,5 @@
 import RegisterUserBuilder from "@src/builders/register-user.builder";
+import { UserPresenter } from "@src/presenters/user.presenter";
 import { FastifyInstance } from "fastify";
 import z from "zod";
 
@@ -17,6 +18,8 @@ export const registerUserController = async (app: FastifyInstance) => {
 
 		const schemaResponse = await registerUser.execute(body);
 
-		reply.send(schemaResponse);
+		const user = UserPresenter.toHTTP(schemaResponse.user);
+
+		reply.send({ user });
 	});
 };

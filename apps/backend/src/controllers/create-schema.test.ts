@@ -1,5 +1,5 @@
 import { makePrismaUser } from "@test/factories/prisma-user.factory";
-import { getCookie } from "@test/getCookie";
+import { getUser } from "@test/getUser";
 import { app } from "app";
 import request from "supertest";
 
@@ -9,7 +9,7 @@ describe("Create Schema (E2E)", () => {
 	beforeAll(async () => {
 		await app.ready();
 
-		cookie = await getCookie(app);
+		cookie = (await getUser(app)).cookie;
 	});
 
 	test("[POST] /schema", async () => {
