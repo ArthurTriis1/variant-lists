@@ -1,16 +1,19 @@
 import PrismaUserRepository from "@src/database/prisma/repositories/prisma-user.repository";
 import { BcryptHasher } from "@src/services/bcrypt-hasher.service";
-import { HashGenerator, RegisterUser } from "@variant-lists/domain";
+import { HashComparer, AutenticateUser } from "@variant-lists/domain";
 
-export default class RegisterUserBuilder {
+export default class AutenticateUserBuilder {
 	prismaUserRepository: PrismaUserRepository;
-	bcryptHasher: HashGenerator;
+	bcryptHasher: HashComparer;
 	constructor() {
 		this.prismaUserRepository = new PrismaUserRepository();
 		this.bcryptHasher = new BcryptHasher();
 	}
 
 	build() {
-		return new RegisterUser(this.prismaUserRepository, this.bcryptHasher);
+		return new AutenticateUser(
+			this.prismaUserRepository,
+			this.bcryptHasher,
+		);
 	}
 }

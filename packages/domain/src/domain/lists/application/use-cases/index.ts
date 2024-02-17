@@ -11,3 +11,4 @@ export * from "./get-schema-by-slug";
 export * from "./update-schema";
 export * from "./validate-all-items-from-list";
 export * from "./register-user";
+export * from "./autenticate-user";

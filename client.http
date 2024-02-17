@@ -1,14 +1,39 @@
 @baseUrl = http://localhost:3000
-@user_id = {{register_user.response.body.user._id.value}}
+@token = {{auth_user.response.body.token}}
+@refresh_token = {{auth_user.response.headers.set-cookie}}
+
+# @name register_user
+POST {{baseUrl}}/sign-up
+Content-Type: application/json
+
+{
+	"name": "user name",
+	"email": "user@user.com",
+	"password": "123456"
+}
+
+###
+
+# @name auth_user
+POST {{baseUrl}}/sign-in
+Content-Type: application/json
+
+{
+	"email": "user@user.com",
+	"password": "123456"
+}
+
+###
 
 # @name create_schema
 POST {{baseUrl}}/schema
 Content-Type: application/json
+Cookie: {{refresh_token}}
 
 {
 	"title": "title name",
 	"description": "",
-	"creatorId": "{{user_id}}",
+	"creatorId": "cc0f26ee-ab78-43f3-96da-783be4251089",
 	"data": {
 		"type": "object",
 		"properties": {
@@ -20,16 +45,4 @@ Content-Type: application/json
 			}
 		}
 	}
-}
-
-###
-
-# @name register_user
-POST {{baseUrl}}/sign-up
-Content-Type: application/json
-
-{
-	"name": "user name",
-	"email": "user@user.com",
-	"password": "123456"
 }

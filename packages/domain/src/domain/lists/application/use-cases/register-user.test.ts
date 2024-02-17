@@ -1,21 +1,21 @@
 import { InMemoryUserRepository } from "@test/repositories/in-memory-user-repository";
 import { RegisterUser } from "./register-user";
 import { HashGenerator } from "../services/hash-generator";
-import { BcryptHasher } from "../services/bcrypt-hasher";
 import { makeUser } from "@test/factories";
 import { UserAlreadyExistsError } from "@src/core/errors/user-already-exists-error";
+import { Hasher } from "@test/services/hasher";
 
 let inMemoryUserRepository: InMemoryUserRepository;
-let bcryptHasher: HashGenerator;
+let hasher: HashGenerator;
 
 let sut: RegisterUser;
 
 describe("Create User", () => {
 	beforeEach(() => {
 		inMemoryUserRepository = new InMemoryUserRepository();
-		bcryptHasher = new BcryptHasher();
+		hasher = new Hasher();
 
-		sut = new RegisterUser(inMemoryUserRepository, bcryptHasher);
+		sut = new RegisterUser(inMemoryUserRepository, hasher);
 	});
 
 	it("should create User", async () => {

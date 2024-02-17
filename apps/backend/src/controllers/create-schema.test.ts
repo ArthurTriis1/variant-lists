@@ -1,10 +1,15 @@
 import { makePrismaUser } from "@test/factories/prisma-user.factory";
+import { getCookie } from "@test/getCookie";
 import { app } from "app";
 import request from "supertest";
+
+let cookie: string;
 
 describe("Create Schema (E2E)", () => {
 	beforeAll(async () => {
 		await app.ready();
+
+		cookie = await getCookie(app);
 	});
 
 	test("[POST] /schema", async () => {
@@ -12,6 +17,7 @@ describe("Create Schema (E2E)", () => {
 
 		await request(app.server)
 			.post("/schema")
+			.set("Cookie", cookie)
 			.send({
 				title: "new schema",
 				description: "A new achema",

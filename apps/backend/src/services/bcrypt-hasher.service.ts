@@ -1,6 +1,5 @@
+import { HashGenerator, HashComparer } from "@variant-lists/domain";
 import { hash, compare } from "bcryptjs";
-import { HashGenerator } from "./hash-generator";
-import { HashComparer } from "./hash-comparer";
 
 export class BcryptHasher implements HashGenerator, HashComparer {
 	private HASH_SALT_LENGTH = 8;
