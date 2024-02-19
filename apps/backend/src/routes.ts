@@ -9,6 +9,7 @@ import { getItemBySlugController } from "@src/controllers/get-item-by-slug.contr
 import { getListBySlugController } from "./controllers/get-list-by-slug.controller";
 import { getSchemaBySlugController } from "./controllers/get-schema-by-slug.controller";
 import { validateAllItemsFromListController } from "./controllers/validate-all-items-from-list.controller";
+import { updateSchemaController } from "./controllers/update-schema.controller";
 
 const authenticatedRoutes = (
 	app: FastifyInstance,
@@ -26,6 +27,7 @@ const authenticatedRoutes = (
 	app.register(getItemBySlugController);
 	app.register(getListBySlugController);
 	app.register(getSchemaBySlugController);
+	app.register(updateSchemaController);
 	app.register(validateAllItemsFromListController);
 
 	done();

@@ -10,5 +10,3 @@
 fetch item
 fecth lists
 fetch schema
-update schema
-validate all items
