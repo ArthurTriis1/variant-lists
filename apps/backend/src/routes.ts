@@ -8,6 +8,7 @@ import { forkSchemaByListController } from "@src/controllers/fork-schema.control
 import { getItemBySlugController } from "@src/controllers/get-item-by-slug.controller";
 import { getListBySlugController } from "./controllers/get-list-by-slug.controller";
 import { getSchemaBySlugController } from "./controllers/get-schema-by-slug.controller";
+import { validateAllItemsFromListController } from "./controllers/validate-all-items-from-list.controller";
 
 const authenticatedRoutes = (
 	app: FastifyInstance,
@@ -25,6 +26,7 @@ const authenticatedRoutes = (
 	app.register(getItemBySlugController);
 	app.register(getListBySlugController);
 	app.register(getSchemaBySlugController);
+	app.register(validateAllItemsFromListController);
 
 	done();
 };
