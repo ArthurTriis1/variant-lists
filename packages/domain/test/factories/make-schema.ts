@@ -12,7 +12,7 @@ export function makeSchema(
 	const schema = Schema.create(
 		{
 			creatorId: new UniqueEntityID(),
-			title: faker.lorem.text(),
+			title: faker.word.words(2),
 			description: faker.lorem.paragraph(),
 			data: {
 				type: "object",

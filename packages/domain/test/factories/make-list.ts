@@ -10,7 +10,7 @@ export function makeList(
 		{
 			creatorId: new UniqueEntityID(),
 			schemaId: new UniqueEntityID(),
-			title: faker.lorem.text(),
+			title: faker.word.words(2),
 			description: faker.lorem.paragraph(),
 			...override,
 		},

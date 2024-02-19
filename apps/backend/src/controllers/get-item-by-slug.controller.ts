@@ -11,8 +11,6 @@ export const getItemBySlugController = async (app: FastifyInstance) => {
 		const creatorId = request.user.id;
 		const { slug } = bodyValidate.parse(request.params);
 
-		console.log(slug);
-
 		const getItemBySlugBuilder = new GetItemBySlugBuilder();
 		const getItemBySlug = getItemBySlugBuilder.build();
 

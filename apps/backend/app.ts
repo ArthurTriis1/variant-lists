@@ -1,5 +1,5 @@
 import { errorHandler } from "@src/plugins/error-handler.plugin";
-import { routes } from "@src/plugins/routes.plugin";
+import { routes } from "@src/routes";
 import Fastify from "fastify";
 import jwt from "@fastify/jwt";
 import fastifyCookie from "@fastify/cookie";
@@ -17,10 +17,6 @@ app.register(jwt, {
 	sign: {
 		expiresIn: "10m",
 	},
-});
-
-app.get("/verifycookie", (request, reply) => {
-	reply.send({ code: "OK", message: "it works!" });
 });
 
 app.register(routes);
