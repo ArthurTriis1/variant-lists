@@ -3,6 +3,7 @@ import { createSchemaController } from "@src/controllers/create-schema.controlle
 import { registerUserController } from "@src/controllers/register-user.controller";
 import { autenticateUserController } from "@src/controllers/autenticate-user.controller";
 import { createItemController } from "@src/controllers/create-item.controller";
+import { createListController } from "@src/controllers/create-list.controller";
 
 const authenticatedRoutes = (
 	app: FastifyInstance,
@@ -15,6 +16,7 @@ const authenticatedRoutes = (
 
 	app.register(createSchemaController);
 	app.register(createItemController);
+	app.register(createListController);
 
 	done();
 };
