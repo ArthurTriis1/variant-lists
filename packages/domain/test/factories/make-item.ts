@@ -9,7 +9,7 @@ export function makeItem(
 	const item = Item.create(
 		{
 			creatorId: new UniqueEntityID(),
-			title: faker.lorem.text(),
+			title: faker.word.words(2),
 			description: faker.lorem.paragraph(),
 			listId: new UniqueEntityID(),
 			imageUrl: faker.image.url(),

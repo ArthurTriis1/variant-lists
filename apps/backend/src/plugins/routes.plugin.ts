@@ -5,6 +5,7 @@ import { autenticateUserController } from "@src/controllers/autenticate-user.con
 import { createItemController } from "@src/controllers/create-item.controller";
 import { createListController } from "@src/controllers/create-list.controller";
 import { forkSchemaByListController } from "@src/controllers/fork-schema.controller";
+import { getItemBySlugController } from "@src/controllers/get-item-by-slug.controller";
 
 const authenticatedRoutes = (
 	app: FastifyInstance,
@@ -19,6 +20,7 @@ const authenticatedRoutes = (
 	app.register(createItemController);
 	app.register(createListController);
 	app.register(forkSchemaByListController);
+	app.register(getItemBySlugController);
 
 	done();
 };

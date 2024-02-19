@@ -13,7 +13,7 @@ export class PrismaItemMapper {
 				imageUrl: raw.imageUrl ?? undefined,
 				lastValidationDate: raw.lastValidationDate ?? undefined,
 				isValid: raw.isValid ?? undefined,
-				data: JSON.parse(raw.data?.toString() ?? "{}"),
+				data: raw.data as Record<string, unknown>,
 			},
 			new UniqueEntityID(raw.id),
 		);
