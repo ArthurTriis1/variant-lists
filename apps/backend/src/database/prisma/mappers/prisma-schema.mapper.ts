@@ -8,7 +8,7 @@ export class PrismaSchemaMapper {
 				title: raw.title,
 				description: raw.description,
 				creatorId: new UniqueEntityID(raw.creatorId),
-				data: JSON.parse(raw.data?.toString() ?? "{}"),
+				data: raw.data as Record<string, unknown>,
 				lastUpdateSchemaDate: raw.lastUpdateSchemaDate,
 				slug: Slug.create(raw.slug),
 			},
