@@ -6,7 +6,4 @@
     secret
     database_user
 [X] Transformar getCookie em getUser
-
-fetch item
-fecth lists
-fetch schema
+[] Arrumar Presenters
