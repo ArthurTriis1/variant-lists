@@ -1,8 +1,7 @@
 import { Item } from "@src/domain/lists/enterprise/entities/item";
 import { ItemRepository } from "@src/domain/lists/application/repositories/item-repository";
 import { ListRepository } from "../repositories";
-import { NotAllowedError } from "@src/core/errors";
-import { ListNotFoundError } from "dist";
+import { NotAllowedError, ListNotFoundError } from "@src/core/errors";
 
 interface FetchItemsByListIdRequest {
 	creatorId: string;
