@@ -5,10 +5,12 @@ import { z } from "zod";
 
 const bodyValidate = z.object({
 	listId: z.string(),
-	page: z.coerce.number().default(0),
+	page: z.coerce.number().default(1),
 });
 
-export const fetchItemsByListController = async (app: FastifyInstance) => {
+export const fetchItemsByListController = async (
+	app: FastifyInstance,
+): Promise<void> => {
 	app.get("/items/:listId", async (request, reply) => {
 		const creatorId = request.user.id;
 
@@ -28,6 +30,6 @@ export const fetchItemsByListController = async (app: FastifyInstance) => {
 
 		const presentedItems = response.items.map(ItemPresenter.toHTTP);
 
-		reply.send({ items: presentedItems });
+		reply.send({ items: presentedItems, total: response.total });
 	});
 };

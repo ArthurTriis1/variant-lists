@@ -9,5 +9,6 @@ export interface ItemRepository {
 		listId: string,
 		paginationParams: PaginationParams,
 	): Promise<Item[]>;
+	countByListId(listId: string): Promise<number>;
 	findAllByListId(listId: string): Promise<Item[]>;
 }

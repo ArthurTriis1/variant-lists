@@ -12,6 +12,7 @@ interface FetchItemsByListIdRequest {
 
 interface FetchItemsByItemIdResponse {
 	items: Item[];
+	total: number;
 }
 
 export class FetchItemsByListId {
@@ -35,12 +36,15 @@ export class FetchItemsByListId {
 			throw new NotAllowedError();
 		}
 
+		const total = await this.itemRepository.countByListId(listId);
+
 		const items = await this.itemRepository.findManyByListId(listId, {
 			page,
 		});
 
 		return {
 			items,
+			total,
 		};
 	}
 }

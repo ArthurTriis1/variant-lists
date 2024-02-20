@@ -26,6 +26,11 @@ export class InMemoryItemRepository implements ItemRepository {
 		return this.items.filter((list) => list.listId.toValue() === listId);
 	}
 
+	async countByListId(listId: string): Promise<number> {
+		return this.items.filter((list) => list.listId.toValue() === listId)
+			.length;
+	}
+
 	async save(item: Item): Promise<void> {
 		const itemIndex = this.items.findIndex(
 			(foundItem) => foundItem.id === item.id,

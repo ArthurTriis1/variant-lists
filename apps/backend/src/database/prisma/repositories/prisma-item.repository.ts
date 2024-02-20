@@ -1,5 +1,5 @@
 import { prisma } from "@src/prisma";
-import { Item, ItemRepository } from "@variant-lists/domain";
+import { Item, ItemRepository, PaginationParams } from "@variant-lists/domain";
 import { PrismaItemMapper } from "../mappers/prisma-item.mapper";
 
 class PrismaItemRepository implements ItemRepository {
@@ -25,14 +25,27 @@ class PrismaItemRepository implements ItemRepository {
 
 		return item ? PrismaItemMapper.toDomain(item) : null;
 	}
-	async findManyByListId(listId: string): Promise<Item[]> {
+	async findManyByListId(
+		listId: string,
+		{ page }: PaginationParams,
+	): Promise<Item[]> {
 		const items = await prisma.item.findMany({
 			where: {
 				listId,
 			},
+			take: 20,
+			skip: (page - 1) * 20,
 		});
 
 		return items.length ? items.map(PrismaItemMapper.toDomain) : [];
+	}
+
+	async countByListId(listId: string): Promise<number> {
+		return await prisma.item.count({
+			where: {
+				listId,
+			},
+		});
 	}
 
 	async findAllByListId(listId: string): Promise<Item[]> {
