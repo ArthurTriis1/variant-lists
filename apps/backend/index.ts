@@ -1,5 +1,8 @@
+import { env } from "@src/env";
 import { app } from "app";
 
-app.listen({ port: 3000 }).then((value) =>
+const { HOST, PORT } = env;
+
+app.listen({ port: PORT, host: HOST }).then((value) =>
 	console.log(`Server started on: ${value}`),
 );
