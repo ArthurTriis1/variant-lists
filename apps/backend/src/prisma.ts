@@ -1,7 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 import { generateUniqueDatabaseURL } from "@test/generateUniqueDatabaseURL";
+import { env } from "./env";
 
-if (process.env.TEST) {
+const { TEST } = env;
+
+if (TEST) {
 	generateUniqueDatabaseURL();
 }
 

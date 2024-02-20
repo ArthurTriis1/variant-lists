@@ -1,4 +1,5 @@
 import AutenticateUserBuilder from "@src/builders/authenticate.builder";
+import { env } from "@src/env";
 import { UserPresenter } from "@src/presenters/user.presenter";
 import { FastifyInstance } from "fastify";
 import z from "zod";
@@ -22,12 +23,14 @@ export const autenticateUserController = async (app: FastifyInstance) => {
 		const refreshToken = app.jwt.sign(user, { expiresIn: "1d" });
 
 		const token = app.jwt.sign({
-			user,
+			...user,
 		});
+
+		const { HOST, PORT } = env;
 
 		reply
 			.setCookie("refreshToken", refreshToken, {
-				domain: "localhost",
+				domain: `${HOST}:${PORT}`,
 				path: "/",
 				secure: true, // send cookie over HTTPS only
 				httpOnly: true,

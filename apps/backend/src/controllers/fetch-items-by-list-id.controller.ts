@@ -1,4 +1,5 @@
 import FetchItemsByListBuilder from "@src/builders/fetch-items-by-list.builder";
+import { ItemPresenter } from "@src/presenters/item.presenter";
 import { FastifyInstance } from "fastify";
 import { z } from "zod";
 
@@ -19,12 +20,14 @@ export const fetchItemsByListController = async (app: FastifyInstance) => {
 		const schemaBuilder = new FetchItemsByListBuilder();
 		const fetchItemsByList = schemaBuilder.build();
 
-		const schemaResponse = await fetchItemsByList.execute({
+		const response = await fetchItemsByList.execute({
 			creatorId,
 			listId,
 			page,
 		});
 
-		reply.send(schemaResponse);
+		const presentedItems = response.items.map(ItemPresenter.toHTTP);
+
+		reply.send({ items: presentedItems });
 	});
 };

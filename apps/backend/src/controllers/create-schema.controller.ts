@@ -1,4 +1,5 @@
 import CreateSchemaBuilder from "@src/builders/create-schema.builder";
+import { SchemaPresenter } from "@src/presenters/schema.presenter";
 import { FastifyInstance } from "fastify";
 import z from "zod";
 
@@ -17,11 +18,11 @@ export const createSchemaController = async (app: FastifyInstance) => {
 		const schemaBuilder = new CreateSchemaBuilder();
 		const createSchema = schemaBuilder.build();
 
-		const schemaResponse = await createSchema.execute({
+		const { schema } = await createSchema.execute({
 			...body,
 			creatorId,
 		});
 
-		reply.send(schemaResponse);
+		reply.send(SchemaPresenter.toHTTP(schema));
 	});
 };

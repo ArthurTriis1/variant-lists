@@ -16,6 +16,6 @@ export const getUser = async (app: FastifyInstance) => {
 
 	return {
 		cookie: response.headers["set-cookie"],
-		user: responseUser.body.user as UserPresented,
+		user: responseUser.body as UserPresented,
 	};
 };

@@ -1,4 +1,5 @@
 import GetListBySlugBuilder from "@src/builders/get-list-by-slug.builder";
+import { ListPresenter } from "@src/presenters/list.presenter";
 import { FastifyInstance } from "fastify";
 import { z } from "zod";
 
@@ -14,11 +15,11 @@ export const getListBySlugController = async (app: FastifyInstance) => {
 		const getListBySlugBuilder = new GetListBySlugBuilder();
 		const getListBySlug = getListBySlugBuilder.build();
 
-		const listResponse = await getListBySlug.execute({
+		const response = await getListBySlug.execute({
 			slug,
 			creatorId,
 		});
 
-		reply.send(listResponse);
+		reply.send(ListPresenter.toHTTP(response.list));
 	});
 };

@@ -17,11 +17,11 @@ export const forkSchemaByListController = async (app: FastifyInstance) => {
 		const schemaBuilder = new ForkSchemaByListBuilder();
 		const forkSchemaByList = schemaBuilder.build();
 
-		const schemaResponse = await forkSchemaByList.execute({
+		await forkSchemaByList.execute({
 			...body,
 			creatorId,
 		});
 
-		reply.send(schemaResponse);
+		reply.code(201).send();
 	});
 };

@@ -21,11 +21,11 @@ export const updateSchemaController = async (app: FastifyInstance) => {
 		const schemaBuilder = new UpdateSchemaBuilder();
 		const updateSchema = schemaBuilder.build();
 
-		const schemaResponse = await updateSchema.execute({
+		await updateSchema.execute({
 			...body,
 			creatorId,
 		});
 
-		reply.send(schemaResponse);
+		reply.code(201).send();
 	});
 };

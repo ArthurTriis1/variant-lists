@@ -1,4 +1,5 @@
 import FetchSchemasByUserBuilder from "@src/builders/fetch-schemas-by-user.builder";
+import { SchemaPresenter } from "@src/presenters/schema.presenter";
 import { FastifyInstance } from "fastify";
 
 export const fetchSchemasByUserController = async (app: FastifyInstance) => {
@@ -8,10 +9,12 @@ export const fetchSchemasByUserController = async (app: FastifyInstance) => {
 		const schemaBuilder = new FetchSchemasByUserBuilder();
 		const fetchSchemasByUser = schemaBuilder.build();
 
-		const schemaResponse = await fetchSchemasByUser.execute({
+		const response = await fetchSchemasByUser.execute({
 			creatorId,
 		});
 
-		reply.send(schemaResponse);
+		const presentedSchemas = response.schemas.map(SchemaPresenter.toHTTP);
+
+		reply.send({ schemas: presentedSchemas });
 	});
 };

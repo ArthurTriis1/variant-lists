@@ -1,4 +1,5 @@
 import FetchlistsByUserBuilder from "@src/builders/fetch-lists-by-user.builder";
+import { ListPresenter } from "@src/presenters/list.presenter";
 import { FastifyInstance } from "fastify";
 
 export const fetchListsByUserController = async (app: FastifyInstance) => {
@@ -8,10 +9,12 @@ export const fetchListsByUserController = async (app: FastifyInstance) => {
 		const schemaBuilder = new FetchlistsByUserBuilder();
 		const fetchlistsByUser = schemaBuilder.build();
 
-		const schemaResponse = await fetchlistsByUser.execute({
+		const response = await fetchlistsByUser.execute({
 			creatorId,
 		});
 
-		reply.send(schemaResponse);
+		const presentedLists = response.lists.map(ListPresenter.toHTTP);
+
+		reply.send({ lists: presentedLists });
 	});
 };

@@ -40,7 +40,7 @@ export class CreateItem {
 		listId,
 		imageUrl,
 		data,
-	}: CreateItemRequest): Promise<CreateItemResponse | null> {
+	}: CreateItemRequest): Promise<CreateItemResponse> {
 		const user = await this.userRepository.findById(creatorId);
 
 		if (!user) {

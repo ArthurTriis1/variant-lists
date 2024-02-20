@@ -1,4 +1,5 @@
 import CreateListBuilder from "@src/builders/create-list.builder";
+import { ListPresenter } from "@src/presenters/list.presenter";
 import { FastifyInstance } from "fastify";
 import z from "zod";
 
@@ -17,8 +18,8 @@ export const createListController = async (app: FastifyInstance) => {
 		const listBuilder = new CreateListBuilder();
 		const createList = listBuilder.build();
 
-		const listResponse = await createList.execute({ ...body, creatorId });
+		const { list } = await createList.execute({ ...body, creatorId });
 
-		reply.send(listResponse);
+		reply.send(ListPresenter.toHTTP(list));
 	});
 };

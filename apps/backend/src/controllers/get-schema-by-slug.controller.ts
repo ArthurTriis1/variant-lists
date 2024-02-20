@@ -1,4 +1,5 @@
 import GetSchemaBySlugBuilder from "@src/builders/get-schema-by-slug.builder";
+import { SchemaPresenter } from "@src/presenters/schema.presenter";
 import { FastifyInstance } from "fastify";
 import { z } from "zod";
 
@@ -14,11 +15,11 @@ export const getSchemaBySlugController = async (app: FastifyInstance) => {
 		const getSchemaBySlugBuilder = new GetSchemaBySlugBuilder();
 		const getSchemaBySlug = getSchemaBySlugBuilder.build();
 
-		const schemaResponse = await getSchemaBySlug.execute({
+		const response = await getSchemaBySlug.execute({
 			slug,
 			creatorId,
 		});
 
-		reply.send(schemaResponse);
+		reply.send(SchemaPresenter.toHTTP(response.schema));
 	});
 };

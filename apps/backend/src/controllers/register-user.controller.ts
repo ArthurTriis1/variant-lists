@@ -18,8 +18,6 @@ export const registerUserController = async (app: FastifyInstance) => {
 
 		const schemaResponse = await registerUser.execute(body);
 
-		const user = UserPresenter.toHTTP(schemaResponse.user);
-
-		reply.send({ user });
+		reply.send(UserPresenter.toHTTP(schemaResponse.user));
 	});
 };

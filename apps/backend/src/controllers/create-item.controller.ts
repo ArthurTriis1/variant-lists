@@ -1,4 +1,5 @@
 import CreateItemBuilder from "@src/builders/create-item.builder";
+import { ItemPresenter } from "@src/presenters/item.presenter";
 import { FastifyInstance } from "fastify";
 import z from "zod";
 
@@ -18,8 +19,8 @@ export const createItemController = async (app: FastifyInstance) => {
 		const itemBuilder = new CreateItemBuilder();
 		const createItem = itemBuilder.build();
 
-		const itemResponse = await createItem.execute({ ...body, creatorId });
+		const { item } = await createItem.execute({ ...body, creatorId });
 
-		reply.send(itemResponse);
+		reply.send(ItemPresenter.toHTTP(item));
 	});
 };

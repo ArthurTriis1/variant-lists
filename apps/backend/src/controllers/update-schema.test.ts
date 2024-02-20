@@ -38,6 +38,6 @@ describe("Update Schema (E2E)", () => {
 					},
 				},
 			})
-			.expect(200);
+			.expect(201);
 	});
 });

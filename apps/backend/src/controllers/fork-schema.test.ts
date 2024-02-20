@@ -44,6 +44,6 @@ describe("Fork Schema By List (E2E)", () => {
 					required: ["field"],
 				},
 			})
-			.expect(200);
+			.expect(201);
 	});
 });

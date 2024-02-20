@@ -28,7 +28,7 @@ export class CreateSchema {
 		creatorId,
 		data,
 		...props
-	}: CreateSchemaRequest): Promise<CreateSchemaResponse | null> {
+	}: CreateSchemaRequest): Promise<CreateSchemaResponse> {
 		const user = await this.userRepository.findById(creatorId);
 
 		if (!user) {

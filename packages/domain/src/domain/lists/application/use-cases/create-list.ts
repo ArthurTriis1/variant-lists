@@ -29,7 +29,7 @@ export class CreateList {
 		description,
 		creatorId,
 		schemaId,
-	}: CreateListRequest): Promise<CreateListResponse | null> {
+	}: CreateListRequest): Promise<CreateListResponse> {
 		const user = await this.userRepository.findById(creatorId);
 
 		if (!user) {

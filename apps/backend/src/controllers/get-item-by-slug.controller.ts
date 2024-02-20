@@ -1,4 +1,5 @@
 import GetItemBySlugBuilder from "@src/builders/get-item-by-slug.builder";
+import { ItemPresenter } from "@src/presenters/item.presenter";
 import { FastifyInstance } from "fastify";
 import { z } from "zod";
 
@@ -14,11 +15,11 @@ export const getItemBySlugController = async (app: FastifyInstance) => {
 		const getItemBySlugBuilder = new GetItemBySlugBuilder();
 		const getItemBySlug = getItemBySlugBuilder.build();
 
-		const schemaResponse = await getItemBySlug.execute({
+		const response = await getItemBySlug.execute({
 			slug,
 			creatorId,
 		});
 
-		reply.send(schemaResponse);
+		reply.send(ItemPresenter.toHTTP(response.item));
 	});
 };
