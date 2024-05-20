@@ -11,6 +11,7 @@
 		"test:watch": "turbo run test:watch"
 	},
 	"devDependencies": {
-		"@variant-lists/tsconfig": "*"
+		"@variant-lists/tsconfig": "*",
+		"turbo": "^1.13.3"
 	}
 }
