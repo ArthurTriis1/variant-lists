@@ -1,31 +1,43 @@
 import UpdateSchemaBuilder from "@src/builders/update-schema.builder";
 import { FastifyInstance } from "fastify";
+import { ZodTypeProvider } from "fastify-type-provider-zod";
 import z from "zod";
 
-const bodyValidate = z.object({
+const body = z.object({
 	title: z.string().optional(),
 	description: z.string().optional(),
 	data: z.record(z.unknown()).optional(),
+});
+
+const params = z.object({
 	schemaId: z.string(),
 });
 
 export const updateSchemaController = async (app: FastifyInstance) => {
-	app.put("/schema/:schemaId", async (request, reply) => {
-		const creatorId = request.user.id;
+	app.withTypeProvider<ZodTypeProvider>().put(
+		"/schema/:schemaId",
+		{
+			schema: {
+				body,
+				params,
+				response: {
+					201: z.null(),
+				},
+			},
+		},
+		async ({ body, params: { schemaId }, user }, reply) => {
+			const creatorId = user.id;
 
-		const body = bodyValidate.parse({
-			...(request.body as Record<string, unknown>),
-			schemaId: (request.params as { schemaId: string })?.schemaId,
-		});
+			const schemaBuilder = new UpdateSchemaBuilder();
+			const updateSchema = schemaBuilder.build();
 
-		const schemaBuilder = new UpdateSchemaBuilder();
-		const updateSchema = schemaBuilder.build();
+			await updateSchema.execute({
+				...body,
+				schemaId,
+				creatorId,
+			});
 
-		await updateSchema.execute({
-			...body,
-			creatorId,
-		});
-
-		reply.code(201).send();
-	});
+			reply.code(201).send();
+		},
+	);
 };

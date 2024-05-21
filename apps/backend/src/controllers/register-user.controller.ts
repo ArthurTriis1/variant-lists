@@ -1,23 +1,33 @@
 import RegisterUserBuilder from "@src/builders/register-user.builder";
 import { UserPresenter } from "@src/presenters/user.presenter";
 import { FastifyInstance } from "fastify";
+import { ZodTypeProvider } from "fastify-type-provider-zod";
 import z from "zod";
 
-const bodyValidate = z.object({
+const body = z.object({
 	name: z.string(),
 	email: z.string().email(),
 	password: z.string(),
 });
 
+const response = {
+	200: z.object({
+		id: z.string(),
+		name: z.string(),
+	}),
+};
+
 export const registerUserController = async (app: FastifyInstance) => {
-	app.post("/sign-up", async (request, reply) => {
-		const body = bodyValidate.parse(request.body);
+	app.withTypeProvider<ZodTypeProvider>().post(
+		"/sign-up",
+		{ schema: { body, response } },
+		async ({ body }, reply) => {
+			const schemaBuilder = new RegisterUserBuilder();
+			const registerUser = schemaBuilder.build();
 
-		const schemaBuilder = new RegisterUserBuilder();
-		const registerUser = schemaBuilder.build();
+			const schemaResponse = await registerUser.execute(body);
 
-		const schemaResponse = await registerUser.execute(body);
-
-		reply.send(UserPresenter.toHTTP(schemaResponse.user));
-	});
+			reply.send(UserPresenter.toHTTP(schemaResponse.user));
+		},
+	);
 };

@@ -1,28 +1,39 @@
 import ValidateAllItemsFromListBuilder from "@src/builders/validate-all-items-from-list.builder";
 import { FastifyInstance } from "fastify";
+import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from "zod";
 
-const bodyValidate = z.object({
+const body = z.object({
 	listId: z.string(),
 });
 
 export const validateAllItemsFromListController = async (
 	app: FastifyInstance,
 ) => {
-	app.put("/validate-all-items", async (request, reply) => {
-		const creatorId = request.user.id;
-		const { listId } = bodyValidate.parse(request.body);
+	app.withTypeProvider<ZodTypeProvider>().put(
+		"/validate-all-items",
+		{
+			schema: {
+				body,
+				response: {
+					201: z.null(),
+				},
+			},
+		},
+		async ({ body: { listId }, user }, reply) => {
+			const creatorId = user.id;
 
-		const validateAllItemsFromListBuilder =
-			new ValidateAllItemsFromListBuilder();
-		const validateAllItemsFromList =
-			validateAllItemsFromListBuilder.build();
+			const validateAllItemsFromListBuilder =
+				new ValidateAllItemsFromListBuilder();
+			const validateAllItemsFromList =
+				validateAllItemsFromListBuilder.build();
 
-		await validateAllItemsFromList.execute({
-			listId,
-			creatorId,
-		});
+			await validateAllItemsFromList.execute({
+				listId,
+				creatorId,
+			});
 
-		reply.code(201).send();
-	});
+			reply.code(201).send();
+		},
+	);
 };
