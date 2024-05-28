@@ -7,6 +7,9 @@ import z from "zod";
 const body = z.object({
 	title: z.string(),
 	description: z.string(),
+});
+
+const params = z.object({
 	schemaId: z.string(),
 });
 
@@ -22,20 +25,25 @@ const response = {
 
 export const createListController = async (app: FastifyInstance) => {
 	app.withTypeProvider<ZodTypeProvider>().post(
-		"/list",
+		"/:schemaId/list",
 		{
 			schema: {
 				body,
+				params,
 				response,
 			},
 		},
-		async ({ body, user }, reply) => {
+		async ({ body, user, params: { schemaId } }, reply) => {
 			const creatorId = user.id;
 
 			const listBuilder = new CreateListBuilder();
 			const createList = listBuilder.build();
 
-			const { list } = await createList.execute({ ...body, creatorId });
+			const { list } = await createList.execute({
+				...body,
+				creatorId,
+				schemaId,
+			});
 
 			reply.send(ListPresenter.toHTTP(list));
 		},

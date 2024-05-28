@@ -18,7 +18,7 @@ describe("Create Item (E2E)", () => {
 		cookie = response.cookie;
 	});
 
-	test("[POST] /item", async () => {
+	test("[POST] /:listId/item", async () => {
 		const schema = await makePrismaSchema({
 			creatorId: new UniqueEntityID(user.id),
 		});
@@ -29,12 +29,11 @@ describe("Create Item (E2E)", () => {
 		});
 
 		await request(app.server)
-			.post("/item")
+			.post(`/${list.id.toString()}/item`)
 			.set("Cookie", cookie)
 			.send({
 				title: "new item",
 				description: "description",
-				listId: list.id.toString(),
 				data: {
 					name: "My Name",
 				},

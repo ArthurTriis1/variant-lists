@@ -19,7 +19,7 @@ describe("Get items by user (E2E)", () => {
 		cookie = response.cookie;
 	});
 
-	test("[GET] /items", async () => {
+	test("[GET] /:listId/items", async () => {
 		const schema = await makePrismaSchema({
 			creatorId: new UniqueEntityID(user.id),
 		});
@@ -35,7 +35,7 @@ describe("Get items by user (E2E)", () => {
 		});
 
 		await request(app.server)
-			.get("/items/" + list.id)
+			.get(`/${list.id.toString()}/items`)
 			.set("Cookie", cookie)
 			.send()
 			.expect(200);

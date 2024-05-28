@@ -19,7 +19,7 @@ describe("Get schema by slug (E2E)", () => {
 		cookie = response.cookie;
 	});
 
-	test("[PUT] /validate-all-items", async () => {
+	test("[PUT] /listId/validate-all-items", async () => {
 		const schema = await makePrismaSchema({
 			creatorId: new UniqueEntityID(user.id),
 		});
@@ -35,11 +35,9 @@ describe("Get schema by slug (E2E)", () => {
 		});
 
 		await request(app.server)
-			.put("/validate-all-items")
+			.put(`/${list.id.toString()}/validate-all-items`)
 			.set("Cookie", cookie)
-			.send({
-				listId: list.id.toString(),
-			})
+			.send()
 			.expect(201);
 	});
 });

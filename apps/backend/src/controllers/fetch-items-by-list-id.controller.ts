@@ -35,7 +35,7 @@ export const fetchItemsByListController = async (
 	app: FastifyInstance,
 ): Promise<void> => {
 	app.withTypeProvider<ZodTypeProvider>().get(
-		"/items/:listId",
+		"/:listId/items",
 		{
 			schema: {
 				params,

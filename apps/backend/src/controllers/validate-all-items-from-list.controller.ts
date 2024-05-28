@@ -3,7 +3,7 @@ import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import { z } from "zod";
 
-const body = z.object({
+const params = z.object({
 	listId: z.string(),
 });
 
@@ -11,16 +11,16 @@ export const validateAllItemsFromListController = async (
 	app: FastifyInstance,
 ) => {
 	app.withTypeProvider<ZodTypeProvider>().put(
-		"/validate-all-items",
+		"/:listId/validate-all-items",
 		{
 			schema: {
-				body,
+				params,
 				response: {
 					201: z.null(),
 				},
 			},
 		},
-		async ({ body: { listId }, user }, reply) => {
+		async ({ params: { listId }, user }, reply) => {
 			const creatorId = user.id;
 
 			const validateAllItemsFromListBuilder =
