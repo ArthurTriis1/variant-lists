@@ -11,6 +11,7 @@ describe("Register user (E2E)", () => {
 			.post("/sign-up")
 			.send({
 				name: "user name",
+				username: "user_name",
 				email: "user@user.com",
 				password: "123456",
 			})
@@ -20,6 +21,7 @@ describe("Register user (E2E)", () => {
 	test("should throws with the same email", async () => {
 		await request(app.server).post("/sign-up").send({
 			name: "user name",
+			username: "user_name",
 			email: "user@user2.com",
 			password: "123456",
 		});
@@ -28,6 +30,7 @@ describe("Register user (E2E)", () => {
 			.post("/sign-up")
 			.send({
 				name: "user name",
+				username: "user_name",
 				email: "user@user2.com",
 				password: "123456",
 			})

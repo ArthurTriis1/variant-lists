@@ -22,7 +22,9 @@ export class AutenticateUser {
 		email,
 		password,
 	}: AutenticateUserRequest): Promise<AutenticateUserResponse> {
-		const user = await this.usersRepository.findByEmail(email);
+		const user = await this.usersRepository.findByEmailOrUsername({
+			email,
+		});
 
 		if (!user) {
 			throw new NotAllowedError();

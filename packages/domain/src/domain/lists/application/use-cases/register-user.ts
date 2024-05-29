@@ -6,6 +6,7 @@ import { HashGenerator } from "../services/hash-generator";
 interface RegisterUserRequest {
 	name: string;
 	email: string;
+	username: string;
 	password: string;
 }
 
@@ -21,12 +22,16 @@ export class RegisterUser {
 
 	async execute({
 		name,
+		username,
 		email,
 		password,
 	}: RegisterUserRequest): Promise<RegisterUserResponse> {
-		const userWithSameEmail = await this.usersRepository.findByEmail(email);
+		const userFound = await this.usersRepository.findByEmailOrUsername({
+			email,
+			username,
+		});
 
-		if (userWithSameEmail) {
+		if (userFound) {
 			throw new UserAlreadyExistsError();
 		}
 
@@ -35,6 +40,7 @@ export class RegisterUser {
 		const user = User.create({
 			name,
 			email,
+			username,
 			password: hashedPassword,
 		});
 

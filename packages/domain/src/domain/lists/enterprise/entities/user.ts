@@ -3,6 +3,7 @@ import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 
 export type UserProps = {
 	name: string;
+	username: string;
 	email: string;
 	password: string;
 };
@@ -22,5 +23,9 @@ export class User extends Entity<UserProps> {
 
 	get email() {
 		return this.props.email;
+	}
+
+	get username() {
+		return this.props.username;
 	}
 }

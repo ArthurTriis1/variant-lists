@@ -1,5 +1,9 @@
 import { prisma } from "@src/prisma";
-import { User, UserRepository } from "@variant-lists/domain";
+import {
+	FindByEmailOrUsernameProps,
+	User,
+	UserRepository,
+} from "@variant-lists/domain";
 import { PrismaUserMapper } from "../mappers/prisma-user.mapper";
 
 class PrismaUserRepository implements UserRepository {
@@ -19,10 +23,13 @@ class PrismaUserRepository implements UserRepository {
 		return user ? PrismaUserMapper.toDomain(user) : null;
 	}
 
-	async findByEmail(email: string): Promise<User | null> {
-		const user = await prisma.user.findUnique({
+	async findByEmailOrUsername({
+		username,
+		email,
+	}: FindByEmailOrUsernameProps): Promise<User | null> {
+		const user = await prisma.user.findFirst({
 			where: {
-				email,
+				OR: [{ username }, { email }],
 			},
 		});
 

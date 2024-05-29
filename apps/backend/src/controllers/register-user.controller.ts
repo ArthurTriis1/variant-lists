@@ -7,6 +7,7 @@ import z from "zod";
 const body = z.object({
 	name: z.string(),
 	email: z.string().email(),
+	username: z.string(),
 	password: z.string(),
 });
 

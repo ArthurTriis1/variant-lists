@@ -5,6 +5,7 @@ import request from "supertest";
 export const getUser = async (app: FastifyInstance) => {
 	const responseUser = await request(app.server).post("/sign-up").send({
 		name: "user name",
+		username: "user_name",
 		email: "user@user.com",
 		password: "123456",
 	});

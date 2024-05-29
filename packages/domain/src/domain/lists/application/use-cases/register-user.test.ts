@@ -24,6 +24,7 @@ describe("Create User", () => {
 		const response = await sut.execute({
 			email: user.email,
 			name: user.name,
+			username: user.username,
 			password: user.password,
 		});
 
@@ -39,6 +40,7 @@ describe("Create User", () => {
 			email: user1.email,
 			name: user1.name,
 			password: user1.password,
+			username: user1.username,
 		});
 
 		const user2 = makeUser({ email: "user@user.com" });
@@ -49,6 +51,7 @@ describe("Create User", () => {
 					email: user2.email,
 					name: user2.name,
 					password: user2.password,
+					username: user2.username,
 				}),
 		).rejects.toBeInstanceOf(UserAlreadyExistsError);
 	});

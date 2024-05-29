@@ -9,6 +9,7 @@ describe("Autenticate user (E2E)", () => {
 	test("[POST] /sign-up", async () => {
 		await request(app.server).post("/sign-up").send({
 			name: "user name",
+			username: "user_name",
 			email: "user@user.com",
 			password: "123456",
 		});
