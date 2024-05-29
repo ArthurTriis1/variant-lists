@@ -19,13 +19,26 @@ describe("Autenticate User", () => {
 		sut = new AutenticateUser(inMemoryUserRepository, hasher);
 	});
 
-	it("should auth User", async () => {
+	it("should auth User with email", async () => {
 		const user = makeUser({ password: "password-hash" });
 
 		inMemoryUserRepository.users.push(user);
 
 		const response = await sut.execute({
 			email: user.email,
+			password: "password",
+		});
+
+		expect(response.user).toBeTruthy();
+	});
+
+	it("should auth User with username", async () => {
+		const user = makeUser({ password: "password-hash" });
+
+		inMemoryUserRepository.users.push(user);
+
+		const response = await sut.execute({
+			username: user.username,
 			password: "password",
 		});
 

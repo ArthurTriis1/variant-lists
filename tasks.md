@@ -1,8 +1,8 @@
 User
 
-[] - Add username
-    [] - Register with username
-    [] - Login with username or email
+[x] - Add username
+    [x] - Register with username
+    [x] - Login with username or email
 
 Schema
 [] - Turn username and slug the key

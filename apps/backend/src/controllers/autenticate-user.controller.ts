@@ -5,10 +5,22 @@ import { FastifyInstance } from "fastify";
 import { ZodTypeProvider } from "fastify-type-provider-zod";
 import z from "zod";
 
-const body = z.object({
-	email: z.string().email(),
-	password: z.string(),
-});
+const body = z
+	.object({
+		email: z.string().optional(),
+		username: z.string().optional(),
+		password: z.string(),
+	})
+	.and(
+		z.union([
+			z.object({
+				email: z.string(),
+			}),
+			z.object({
+				username: z.string(),
+			}),
+		]),
+	);
 
 const response = {
 	200: z.object({

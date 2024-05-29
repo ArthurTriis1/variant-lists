@@ -21,5 +21,13 @@ describe("Autenticate user (E2E)", () => {
 				password: "123456",
 			})
 			.expect(200);
+
+		await request(app.server)
+			.post("/sign-in")
+			.send({
+				username: "user_name",
+				password: "123456",
+			})
+			.expect(200);
 	});
 });

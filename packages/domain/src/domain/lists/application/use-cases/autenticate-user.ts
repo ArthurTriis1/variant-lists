@@ -1,12 +1,20 @@
+import { AtLeastOne } from "@src/core/types/AtLeastOne";
 import { User } from "../../enterprise/entities/user";
 import { UserRepository } from "../repositories/user-repository";
 import { HashComparer } from "../services";
 import { NotAllowedError } from "@src/core/errors";
 
-interface AutenticateUserRequest {
+type AutenticateUserRequest = AtLeastOne<{
 	email: string;
+	username: string;
+}> & {
 	password: string;
-}
+};
+
+export const autenticateUserRequest: AutenticateUserRequest = {
+	password: "",
+	username: "",
+};
 
 type AutenticateUserResponse = {
 	user: User;
@@ -19,11 +27,11 @@ export class AutenticateUser {
 	) {}
 
 	async execute({
-		email,
 		password,
+		...loginData
 	}: AutenticateUserRequest): Promise<AutenticateUserResponse> {
 		const user = await this.usersRepository.findByEmailOrUsername({
-			email,
+			...loginData,
 		});
 
 		if (!user) {
