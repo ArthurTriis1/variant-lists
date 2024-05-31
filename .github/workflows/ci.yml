@@ -26,8 +26,8 @@ jobs:
     - name: Set up environment variables
       run: |
         echo "DATABASE_URL=$DATABASE_URL" >> $GITHUB_ENV
-        echo "API_KEY=$API_KEY" >> $GITHUB_ENV
-        echo "OTHER_ENV=$OTHER_ENV" >> $GITHUB_ENV
+        echo "PORT=$PORT" >> $GITHUB_ENV
+        echo "PORT=$PORT" >> $GITHUB_ENV
 
     - name: Enter in packages
       run: cd packages/domain
