@@ -6,6 +6,11 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    env:
+      DATABASE_URL: 'postgres://postgres:docker@localhost:5432/variant-lists?schema=public'
+      PORT: '3001'
+      HOST: '127.0.0.1'
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -18,8 +23,18 @@ jobs:
     - name: Install dependencies
       run: yarn
 
+    - name: Set up environment variables
+      run: |
+        echo "DATABASE_URL=$DATABASE_URL" >> $GITHUB_ENV
+        echo "API_KEY=$API_KEY" >> $GITHUB_ENV
+        echo "OTHER_ENV=$OTHER_ENV" >> $GITHUB_ENV
+
     - name: Enter in packages
       run: cd packages/domain
 
     - name: Run tests
       run: yarn test
+      env:
+        DATABASE_URL: $DATABASE_URL
+        PORT: $PORT
+        HOST: $HOST
