@@ -26,17 +26,15 @@ jobs:
     - name: Build packages
       run: yarn build
 
-    - name: Set up environment variables
-      run: |
-        echo "DATABASE_URL=$DATABASE_URL" >> $GITHUB_ENV
-        echo "PORT=$PORT" >> $GITHUB_ENV
-        echo "PORT=$PORT" >> $GITHUB_ENV
-
     - name: Set up Docker Compose
       run: docker-compose up -d
 
     - name: Wait for services to be ready
-      run: sleep 20
+      run: sleep 5
 
     - name: Run tests
       run: yarn test
+
+    - name: Shut down Docker Compose
+      if: always()
+      run: docker-compose down
