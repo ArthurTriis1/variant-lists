@@ -34,7 +34,3 @@ jobs:
 
     - name: Run tests
       run: yarn test
-      env:
-        DATABASE_URL: $DATABASE_URL
-        PORT: $PORT
-        HOST: $HOST
