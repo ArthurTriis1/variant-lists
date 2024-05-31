@@ -4,6 +4,11 @@ User
     [x] - Register with username
     [x] - Login with username or email
 
+[] - Github Actions
+    [] - Branch Policie
+    [] - unit test
+    [] - integrate test
+
 Schema
 [] - Turn username and slug the key
     [] - Checar se a key (username + slug) já existe
