@@ -12,6 +12,9 @@
       },
 	  "serve": {},
       "test": {},
+	  "test:integration": {
+		"dependsOn": ["^build"]
+	  },
       "test:watch": {},
       "lint": {}
     }

@@ -5,7 +5,7 @@
     "dev": "tsx watch ./index.ts",
     "build": "tsup ./index.ts",
     "serve": "node dist/index.js",
-    "test": "vitest run",
+    "test:integration": "vitest run",
     "test:watch": "vitest"
   },
   "dependencies": {
