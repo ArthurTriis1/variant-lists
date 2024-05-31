@@ -6,11 +6,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    env:
-      DATABASE_URL: 'postgres://postgres:docker@localhost:5432/variant-lists?schema=public'
-      PORT: '3001'
-      HOST: '127.0.0.1'
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
