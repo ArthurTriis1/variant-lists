@@ -32,8 +32,11 @@ jobs:
         echo "PORT=$PORT" >> $GITHUB_ENV
         echo "PORT=$PORT" >> $GITHUB_ENV
 
-    - name: Enter in packages
-      run: cd packages/domain
+    - name: Set up Docker Compose
+      run: docker-compose up -d
+
+    - name: Wait for services to be ready
+      run: sleep 20
 
     - name: Run tests
       run: yarn test
