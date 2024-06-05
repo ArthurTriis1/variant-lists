@@ -7,7 +7,7 @@ export type SchemaProps = {
 	title: string;
 	slug: Slug;
 	description: string;
-	creatorId: UniqueEntityID;
+	creatorUsername: string;
 	data: Record<string, unknown>;
 	lastUpdateSchemaDate: Date;
 };
@@ -46,12 +46,12 @@ export class Schema extends Entity<SchemaProps> {
 		this.props.title = value;
 	}
 
-	get creatorId() {
-		return this.props.creatorId;
+	get creatorUsername() {
+		return this.props.creatorUsername;
 	}
 
-	set creatorId(value: UniqueEntityID) {
-		this.props.creatorId = value;
+	set creatorUsername(value: string) {
+		this.props.creatorUsername = value;
 	}
 
 	get description() {

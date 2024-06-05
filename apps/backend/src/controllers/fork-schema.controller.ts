@@ -21,14 +21,14 @@ export const forkSchemaByListController = async (app: FastifyInstance) => {
 			},
 		},
 		async ({ body, user }, reply) => {
-			const creatorId = user.id;
+			const creatorUsername = user.username;
 
 			const schemaBuilder = new ForkSchemaByListBuilder();
 			const forkSchemaByList = schemaBuilder.build();
 
 			await forkSchemaByList.execute({
 				...body,
-				creatorId,
+				creatorUsername,
 			});
 
 			reply.code(201).send();

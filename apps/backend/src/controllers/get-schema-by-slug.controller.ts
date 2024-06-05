@@ -6,6 +6,7 @@ import { z } from "zod";
 
 const params = z.object({
 	slug: z.string(),
+	creatorUsername: z.string(),
 });
 
 const response = {
@@ -13,7 +14,7 @@ const response = {
 		title: z.string(),
 		slug: z.string(),
 		description: z.string(),
-		creatorId: z.string(),
+		creatorUsername: z.string(),
 		data: z.record(z.string(), z.unknown()),
 		lastUpdateSchemaDate: z.string(),
 	}),
@@ -21,22 +22,23 @@ const response = {
 
 export const getSchemaBySlugController = async (app: FastifyInstance) => {
 	app.withTypeProvider<ZodTypeProvider>().get(
-		"/schema/:slug",
+		"/:creatorUsername/schema/:slug",
 		{
 			schema: {
 				params,
 				response,
 			},
 		},
-		async ({ params: { slug }, user }, reply) => {
-			const creatorId = user.id;
+		async ({ params: { slug, creatorUsername }, user }, reply) => {
+			const userId = user.id;
 
 			const getSchemaBySlugBuilder = new GetSchemaBySlugBuilder();
 			const getSchemaBySlug = getSchemaBySlugBuilder.build();
 
 			const response = await getSchemaBySlug.execute({
 				slug,
-				creatorId,
+				creatorUsername,
+				userId,
 			});
 
 			reply.send(SchemaPresenter.toHTTP(response.schema));

@@ -7,7 +7,7 @@ import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 interface UpdateSchemaRequest {
 	title?: string;
 	description?: string;
-	creatorId: string;
+	creatorUsername: string;
 	schemaId: string;
 	data?: Record<string, unknown>;
 }
@@ -23,7 +23,7 @@ export class UpdateSchema {
 	async execute({
 		title,
 		schemaId,
-		creatorId,
+		creatorUsername,
 		description,
 		data,
 	}: UpdateSchemaRequest): Promise<UpdateSchemaResponse | null> {
@@ -33,7 +33,7 @@ export class UpdateSchema {
 			throw new SchemaNotFoundError();
 		}
 
-		if (schema.creatorId.toString() !== creatorId) {
+		if (schema.creatorUsername !== creatorUsername) {
 			throw new NotAllowedError();
 		}
 

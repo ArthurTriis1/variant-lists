@@ -26,18 +26,19 @@ model User {
 model Schema {
   id                   String   @id @default(uuid())
   title                String
-  slug                 String   @unique
+  slug                 String
   description          String
   data                 Json
   lastUpdateSchemaDate DateTime @map("last_update_schema_date")
   lists      List[]
 
-  creator   User   @relation(fields: [creatorId], references: [id])
-  creatorId String @map("creator_id")
+  creator   User   @relation(fields: [creatorUsername], references: [username])
+  creatorUsername String @map("creator_username")
 
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
 
+  @@unique([creatorUsername, slug])
   @@map("schemas")
 }
 

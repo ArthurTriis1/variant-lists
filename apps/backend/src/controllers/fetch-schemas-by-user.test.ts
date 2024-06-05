@@ -19,7 +19,7 @@ describe("Get schemas by user (E2E)", () => {
 
 	test("[GET] /schemas", async () => {
 		await makePrismaSchema({
-			creatorId: new UniqueEntityID(user.id),
+			creatorUsername: user.username,
 		});
 
 		await request(app.server)

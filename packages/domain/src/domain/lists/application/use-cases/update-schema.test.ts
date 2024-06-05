@@ -37,7 +37,7 @@ describe("Update user", () => {
 			title: newTitle,
 			description: newDescription,
 			data: newData,
-			creatorId: schema.creatorId.toString(),
+			creatorUsername: schema.creatorUsername,
 			schemaId: schema.id.toString(),
 		});
 
@@ -57,7 +57,7 @@ describe("Update user", () => {
 		expect(async () => {
 			await sut.execute({
 				title: newTitle,
-				creatorId: schema.creatorId.toString(),
+				creatorUsername: schema.creatorUsername,
 				schemaId: schema.id.toString(),
 			});
 		}).rejects.toBeInstanceOf(SchemaNotFoundError);
@@ -69,7 +69,7 @@ describe("Update user", () => {
 
 		expect(async () => {
 			await sut.execute({
-				creatorId: schema.creatorId.toString(),
+				creatorUsername: schema.creatorUsername,
 				schemaId: schema.id.toString(),
 				data: {},
 			});
@@ -82,7 +82,7 @@ describe("Update user", () => {
 
 		expect(async () => {
 			await sut.execute({
-				creatorId: "XXX",
+				creatorUsername: "XXX",
 				schemaId: schema.id.toString(),
 			});
 		}).rejects.toBeInstanceOf(NotAllowedError);
@@ -104,7 +104,7 @@ describe("Update user", () => {
 
 		await sut.execute({
 			data: newData,
-			creatorId: schema.creatorId.toString(),
+			creatorUsername: schema.creatorUsername,
 			schemaId: schema.id.toString(),
 		});
 

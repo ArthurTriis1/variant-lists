@@ -1,10 +1,10 @@
-import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 import { Schema } from "@src/domain/lists/enterprise/entities/schema";
 import { SchemaRepository } from "@src/domain/lists/application/repositories/schema-repository";
 import { Validator } from "@src/domain/lists/application/services/validator";
 import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";
 import { UserRepository } from "../repositories/user-repository";
 import { CreatorNotFoundError } from "@src/core/errors/creator-not-found-error";
+import { SlugAlreadyExistsError } from "@src/core/errors/slug-already-exists";
 
 interface CreateSchemaRequest {
 	title: string;
@@ -43,9 +43,18 @@ export class CreateSchema {
 
 		const schema = Schema.create({
 			...props,
-			creatorId: new UniqueEntityID(creatorId),
+			creatorUsername: user.username,
 			data,
 		});
+
+		const existSchema = await this.schemaRepository.findBySlug({
+			creatorUsername: user.username,
+			slug: schema.slug.value,
+		});
+
+		if (existSchema) {
+			throw new SlugAlreadyExistsError();
+		}
 
 		await this.schemaRepository.create(schema);
 

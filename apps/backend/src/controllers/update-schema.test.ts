@@ -1,7 +1,6 @@
 import { UserPresented } from "@src/presenters/user.presenter";
 import { makePrismaSchema } from "@test/factories/prisma-schema.factory";
 import { getUser } from "@test/getUser";
-import { UniqueEntityID } from "@variant-lists/domain";
 import { app } from "app";
 import request from "supertest";
 
@@ -19,7 +18,7 @@ describe("Update Schema (E2E)", () => {
 
 	test("[PUT] /schema/:schemaId", async () => {
 		const schema = await makePrismaSchema({
-			creatorId: new UniqueEntityID(user.id),
+			creatorUsername: user.username,
 		});
 
 		await request(app.server)

@@ -28,20 +28,26 @@ class PrismaSchemaRepository implements SchemaRepository {
 
 		return schema ? PrismaSchemaMapper.toDomain(schema) : null;
 	}
-	async findBySlug(slug: string): Promise<Schema | null> {
+	async findBySlug({
+		slug,
+		creatorUsername,
+	}: {
+		slug: string;
+		creatorUsername: string;
+	}): Promise<Schema | null> {
 		const schema = await prisma.schema.findUnique({
 			where: {
-				slug,
+				creatorUsername_slug: { slug, creatorUsername },
 			},
 		});
 
 		return schema ? PrismaSchemaMapper.toDomain(schema) : null;
 	}
 
-	async findManyByCreatorId(creatorId: string): Promise<Schema[]> {
+	async findManyByCreatorUsername(creatorId: string): Promise<Schema[]> {
 		const schemas = await prisma.schema.findMany({
 			where: {
-				creatorId,
+				creatorUsername: creatorId,
 			},
 		});
 

@@ -14,9 +14,19 @@ export class InMemorySchemaRepository implements SchemaRepository {
 		);
 	}
 
-	async findBySlug(slug: string): Promise<Schema | null> {
+	async findBySlug({
+		slug,
+		creatorUsername,
+	}: {
+		slug: string;
+		creatorUsername: string;
+	}): Promise<Schema | null> {
 		return (
-			this.schemas.find((schema) => schema.slug.value === slug) ?? null
+			this.schemas.find(
+				(schema) =>
+					schema.slug.value === slug &&
+					schema.creatorUsername === creatorUsername,
+			) ?? null
 		);
 	}
 
@@ -28,9 +38,11 @@ export class InMemorySchemaRepository implements SchemaRepository {
 		this.schemas[itemIndex] = schema;
 	}
 
-	async findManyByCreatorId(creatorId: string): Promise<Schema[]> {
+	async findManyByCreatorUsername(
+		creatorUsername: string,
+	): Promise<Schema[]> {
 		return this.schemas.filter(
-			(schema) => schema.creatorId.toString() === creatorId,
+			(schema) => schema.creatorUsername.toString() === creatorUsername,
 		);
 	}
 }

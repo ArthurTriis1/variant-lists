@@ -3,7 +3,6 @@ import { ListRepository } from "@src/domain/lists/application/repositories/list-
 import { Validator } from "@src/domain/lists/application/services/validator";
 import { Schema } from "@src/domain/lists/enterprise/entities/schema";
 import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
-import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 import { NotValidSchemaError } from "@src/core/errors/not-valid-schema-error";
 import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
 import { NotAllowedError } from "@src/core/errors";
@@ -11,7 +10,7 @@ import { NotAllowedError } from "@src/core/errors";
 interface ForkSchemaByListRequest {
 	listId: string;
 	schemaId: string;
-	creatorId: string;
+	creatorUsername: string;
 	data: Record<string, unknown>;
 }
 
@@ -27,7 +26,7 @@ export class ForkSchemaByList {
 	async execute({
 		listId,
 		schemaId,
-		creatorId,
+		creatorUsername,
 		data,
 	}: ForkSchemaByListRequest): Promise<ForkSchemaByListResponse> {
 		const baseSchema = await this.schemaRepository.findById(schemaId);
@@ -36,7 +35,7 @@ export class ForkSchemaByList {
 			throw new SchemaNotFoundError();
 		}
 
-		if (baseSchema.creatorId.toString() !== creatorId) {
+		if (baseSchema.creatorUsername !== creatorUsername) {
 			throw new NotAllowedError();
 		}
 
@@ -55,7 +54,7 @@ export class ForkSchemaByList {
 		const { title, description } = baseSchema;
 
 		const schema = Schema.create({
-			creatorId: new UniqueEntityID(creatorId),
+			creatorUsername: creatorUsername,
 			data: data,
 			title,
 			description,

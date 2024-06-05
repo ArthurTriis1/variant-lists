@@ -20,7 +20,7 @@ describe("Create Item (E2E)", () => {
 
 	test("[POST] /:listId/item", async () => {
 		const schema = await makePrismaSchema({
-			creatorId: new UniqueEntityID(user.id),
+			creatorUsername: "user_name",
 		});
 
 		const list = await makePrismaList({

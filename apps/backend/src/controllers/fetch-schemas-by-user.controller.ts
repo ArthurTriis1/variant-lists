@@ -11,7 +11,7 @@ const response = {
 				title: z.string(),
 				slug: z.string(),
 				description: z.string(),
-				creatorId: z.string(),
+				creatorUsername: z.string(),
 				data: z.record(z.string(), z.unknown()),
 				lastUpdateSchemaDate: z.string(),
 			}),
@@ -28,13 +28,13 @@ export const fetchSchemasByUserController = async (app: FastifyInstance) => {
 			},
 		},
 		async (request, reply) => {
-			const creatorId = request.user.id;
+			const creatorUsername = request.user.username;
 
 			const schemaBuilder = new FetchSchemasByUserBuilder();
 			const fetchSchemasByUser = schemaBuilder.build();
 
 			const response = await fetchSchemasByUser.execute({
-				creatorId,
+				creatorUsername,
 			});
 
 			const presentedSchemas = response.schemas.map(
