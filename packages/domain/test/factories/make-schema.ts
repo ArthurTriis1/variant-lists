@@ -11,7 +11,7 @@ export function makeSchema(
 ) {
 	const schema = Schema.create(
 		{
-			creatorId: new UniqueEntityID(),
+			creatorUsername: faker.internet.userName(),
 			title: faker.word.words(2),
 			description: faker.lorem.paragraph(),
 			data: {

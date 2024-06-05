@@ -3,7 +3,6 @@ import { getUser } from "@test/getUser";
 import { app } from "app";
 import request from "supertest";
 import { UserPresented } from "@src/presenters/user.presenter";
-import { UniqueEntityID } from "@variant-lists/domain";
 
 let cookie: string;
 let user: UserPresented;
@@ -17,13 +16,13 @@ describe("Get schema by slug (E2E)", () => {
 		cookie = response.cookie;
 	});
 
-	test("[GET] /schema/:slug", async () => {
+	test("[GET] /:creatorUsername/schema/:slug", async () => {
 		const schema = await makePrismaSchema({
-			creatorId: new UniqueEntityID(user.id),
+			creatorUsername: user.username,
 		});
 
 		await request(app.server)
-			.get("/schema/" + schema.slug.value)
+			.get(`/${user.username}/schema/${schema.slug.value}`)
 			.set("Cookie", cookie)
 			.send()
 			.expect(200);

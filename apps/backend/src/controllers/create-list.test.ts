@@ -3,7 +3,6 @@ import { getUser } from "@test/getUser";
 import { app } from "app";
 import request from "supertest";
 import { UserPresented } from "@src/presenters/user.presenter";
-import { UniqueEntityID } from "@variant-lists/domain";
 
 let cookie: string;
 let user: UserPresented;
@@ -19,7 +18,7 @@ describe("Create List (E2E)", () => {
 
 	test("[POST] :schemaId/list", async () => {
 		const schema = await makePrismaSchema({
-			creatorId: new UniqueEntityID(user.id),
+			creatorUsername: user.username,
 		});
 
 		await request(app.server)

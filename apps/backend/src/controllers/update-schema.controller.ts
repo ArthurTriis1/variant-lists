@@ -26,7 +26,7 @@ export const updateSchemaController = async (app: FastifyInstance) => {
 			},
 		},
 		async ({ body, params: { schemaId }, user }, reply) => {
-			const creatorId = user.id;
+			const creatorUsername = user.username;
 
 			const schemaBuilder = new UpdateSchemaBuilder();
 			const updateSchema = schemaBuilder.build();
@@ -34,7 +34,7 @@ export const updateSchemaController = async (app: FastifyInstance) => {
 			await updateSchema.execute({
 				...body,
 				schemaId,
-				creatorId,
+				creatorUsername,
 			});
 
 			reply.code(201).send();

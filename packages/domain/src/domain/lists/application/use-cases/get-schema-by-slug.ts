@@ -2,10 +2,12 @@ import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
 import { Schema } from "@src/domain/lists/enterprise/entities/schema";
 import { SchemaRepository } from "@src/domain/lists/application/repositories/schema-repository";
 import { NotAllowedError } from "@src/core/errors/not-allowed-error";
+import { UserRepository } from "../repositories";
 
 interface GetSchemaBySlugRequest {
 	slug: string;
-	creatorId: string;
+	creatorUsername: string;
+	userId: string;
 }
 
 interface GetSchemaBySlugResponse {
@@ -13,20 +15,29 @@ interface GetSchemaBySlugResponse {
 }
 
 export class GetSchemaBySlug {
-	constructor(private schemaRepository: SchemaRepository) {}
+	constructor(
+		private schemaRepository: SchemaRepository,
+		private userRepository: UserRepository,
+	) {}
 
 	async execute({
 		slug,
-		creatorId,
+		creatorUsername,
+		userId,
 	}: GetSchemaBySlugRequest): Promise<GetSchemaBySlugResponse> {
-		const schema = await this.schemaRepository.findBySlug(slug);
+		const user = await this.userRepository.findById(userId);
+
+		if (!user || creatorUsername !== user?.username) {
+			throw new NotAllowedError();
+		}
+
+		const schema = await this.schemaRepository.findBySlug({
+			slug,
+			creatorUsername,
+		});
 
 		if (!schema) {
 			throw new SchemaNotFoundError();
-		}
-
-		if (schema.creatorId.toString() !== creatorId) {
-			throw new NotAllowedError();
 		}
 
 		return { schema };

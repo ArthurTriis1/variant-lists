@@ -15,7 +15,7 @@ const response = {
 		title: z.string(),
 		slug: z.string(),
 		description: z.string(),
-		creatorId: z.string(),
+		creatorUsername: z.string(),
 		data: z.record(z.string(), z.unknown()),
 		lastUpdateSchemaDate: z.string(),
 	}),

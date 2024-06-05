@@ -35,7 +35,7 @@ describe("Fork Schema", () => {
 		const user = makeUser();
 		inMemoryUserRepository.create(user);
 
-		const schema = makeSchema({ creatorId: user.id });
+		const schema = makeSchema({ creatorUsername: user.username });
 		await inMemorySchemaRepository.create(schema);
 
 		const list = makeList({ schemaId: schema.id, creatorId: user.id });
@@ -54,15 +54,15 @@ describe("Fork Schema", () => {
 		await sut.execute({
 			listId: list.id.toString(),
 			schemaId: schema.id.toString(),
-			creatorId: user.id.toString(),
+			creatorUsername: user.username,
 			data,
 		});
 
 		expect(inMemorySchemaRepository.schemas.length).toBe(2);
 		expect(inMemorySchemaRepository.schemas[1].data).toMatchObject(data);
-		expect(
-			inMemorySchemaRepository.schemas[1].creatorId.toString(),
-		).toEqual(user.id.toString());
+		expect(inMemorySchemaRepository.schemas[1].creatorUsername).toEqual(
+			user.username,
+		);
 		expect(inMemoryListRepository.lists[0].schemaId).toEqual(
 			inMemorySchemaRepository.schemas[1].id,
 		);
@@ -72,7 +72,7 @@ describe("Fork Schema", () => {
 		const user = makeUser();
 		inMemoryUserRepository.create(user);
 
-		const schema = makeSchema({ creatorId: user.id });
+		const schema = makeSchema({ creatorUsername: user.username });
 		await inMemorySchemaRepository.create(schema);
 
 		const list = makeList({ schemaId: schema.id, creatorId: user.id });
@@ -85,7 +85,7 @@ describe("Fork Schema", () => {
 				await sut.execute({
 					listId: list.id.toString(),
 					schemaId: schema.id.toString(),
-					creatorId: user.id.toString(),
+					creatorUsername: user.username,
 					data,
 				}),
 		).rejects.toBeInstanceOf(NotValidSchemaError);
@@ -112,7 +112,7 @@ describe("Fork Schema", () => {
 				await sut.execute({
 					listId: list.id.toString(),
 					schemaId: schema.id.toString(),
-					creatorId: "1",
+					creatorUsername: "user_name",
 					data,
 				}),
 		).rejects.toBeInstanceOf(SchemaNotFoundError);
@@ -122,7 +122,7 @@ describe("Fork Schema", () => {
 		const user = makeUser();
 		inMemoryUserRepository.create(user);
 
-		const schema = makeSchema({ creatorId: user.id });
+		const schema = makeSchema({ creatorUsername: user.username });
 		await inMemorySchemaRepository.create(schema);
 
 		const list = makeList({ schemaId: schema.id, creatorId: user.id });
@@ -142,7 +142,7 @@ describe("Fork Schema", () => {
 				await sut.execute({
 					listId: list.id.toString(),
 					schemaId: schema.id.toString(),
-					creatorId: user.id.toString(),
+					creatorUsername: user.username,
 					data,
 				}),
 		).rejects.toBeInstanceOf(ListNotFoundError);

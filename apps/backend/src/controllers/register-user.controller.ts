@@ -15,6 +15,7 @@ const response = {
 	200: z.object({
 		id: z.string(),
 		name: z.string(),
+		username: z.string(),
 	}),
 };
 
@@ -26,9 +27,9 @@ export const registerUserController = async (app: FastifyInstance) => {
 			const schemaBuilder = new RegisterUserBuilder();
 			const registerUser = schemaBuilder.build();
 
-			const schemaResponse = await registerUser.execute(body);
+			const userResponse = await registerUser.execute(body);
 
-			reply.send(UserPresenter.toHTTP(schemaResponse.user));
+			reply.send(UserPresenter.toHTTP(userResponse.user));
 		},
 	);
 };

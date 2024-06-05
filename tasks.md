@@ -4,10 +4,10 @@ User
     [x] - Register with username
     [x] - Login with username or email
 
-[] - Github Actions
-    [] - Branch Policie
-    [] - unit test
-    [] - integrate test
+[x] - Github Actions
+    [x] - Branch Policie
+    [x] - unit test
+    [x] - integrate test
 
 Schema
 [] - Turn username and slug the key

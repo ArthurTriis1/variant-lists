@@ -21,7 +21,7 @@ describe("Get items by user (E2E)", () => {
 
 	test("[GET] /:listId/items", async () => {
 		const schema = await makePrismaSchema({
-			creatorId: new UniqueEntityID(user.id),
+			creatorUsername: user.username,
 		});
 
 		const list = await makePrismaList({

@@ -21,7 +21,7 @@ describe("Get schema by slug (E2E)", () => {
 
 	test("[PUT] /listId/validate-all-items", async () => {
 		const schema = await makePrismaSchema({
-			creatorId: new UniqueEntityID(user.id),
+			creatorUsername: user.username,
 		});
 
 		const list = await makePrismaList({

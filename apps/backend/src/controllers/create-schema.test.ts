@@ -22,7 +22,7 @@ describe("Create Schema (E2E)", () => {
 			.send({
 				title: "new schema",
 				description: "A new achema",
-				creatorId: user.id.toString(),
+				creatorUsername: user.username,
 				data: {
 					type: "object",
 					properties: {

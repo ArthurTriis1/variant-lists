@@ -20,7 +20,7 @@ describe("Get list by slug (E2E)", () => {
 
 	test("[GET] /list/:slug", async () => {
 		const schema = await makePrismaSchema({
-			creatorId: new UniqueEntityID(user.id),
+			creatorUsername: user.username,
 		});
 
 		const list = await makePrismaList({
