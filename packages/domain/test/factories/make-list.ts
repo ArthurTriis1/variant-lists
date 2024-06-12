@@ -8,7 +8,7 @@ export function makeList(
 ) {
 	const list = List.create(
 		{
-			creatorId: new UniqueEntityID(),
+			creatorUsername: faker.internet.userName(),
 			schemaId: new UniqueEntityID(),
 			title: faker.word.words(2),
 			description: faker.lorem.paragraph(),

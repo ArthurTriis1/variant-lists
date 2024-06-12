@@ -1,6 +1,6 @@
 import { Item } from "@src/domain/lists/enterprise/entities/item";
 import { ItemRepository } from "@src/domain/lists/application/repositories/item-repository";
-import { ListRepository } from "../repositories";
+import { ListRepository, UserRepository } from "../repositories";
 import { NotAllowedError, ListNotFoundError } from "@src/core/errors";
 
 interface FetchItemsByListIdRequest {
@@ -18,6 +18,7 @@ export class FetchItemsByListId {
 	constructor(
 		private itemRepository: ItemRepository,
 		private listRepository: ListRepository,
+		private userRepository: UserRepository,
 	) {}
 
 	async execute({
@@ -25,13 +26,15 @@ export class FetchItemsByListId {
 		listId,
 		page = 1,
 	}: FetchItemsByListIdRequest): Promise<FetchItemsByItemIdResponse> {
+		const user = await this.userRepository.findById(creatorId);
+
 		const list = await this.listRepository.findById(listId);
 
 		if (!list) {
 			throw new ListNotFoundError();
 		}
 
-		if (list?.creatorId.toString() !== creatorId) {
+		if (list?.creatorUsername !== user?.username) {
 			throw new NotAllowedError();
 		}
 

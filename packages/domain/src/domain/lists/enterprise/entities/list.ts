@@ -8,7 +8,7 @@ export type ListProps = {
 	slug: Slug;
 	description: string;
 	schemaId: UniqueEntityID;
-	creatorId: UniqueEntityID;
+	creatorUsername: string;
 };
 
 export class List extends Entity<ListProps> {
@@ -44,7 +44,7 @@ export class List extends Entity<ListProps> {
 		return this.props.slug;
 	}
 
-	get creatorId() {
-		return this.props.creatorId;
+	get creatorUsername() {
+		return this.props.creatorUsername;
 	}
 }

@@ -1,7 +1,7 @@
 import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 import { List } from "@src/domain/lists/enterprise/entities/list";
 import { ListRepository } from "@src/domain/lists/application/repositories/list-repository";
-import { SchemaNotFoundError } from "@src/core/errors";
+import { SchemaNotFoundError, SlugAlreadyExistsError } from "@src/core/errors";
 import { SchemaRepository } from "../repositories/schema-repository";
 import { UserRepository } from "../repositories/user-repository";
 import { CreatorNotFoundError } from "@src/core/errors/creator-not-found-error";
@@ -45,9 +45,18 @@ export class CreateList {
 		const list = List.create({
 			title,
 			description,
-			creatorId: new UniqueEntityID(creatorId),
+			creatorUsername: user.username,
 			schemaId: new UniqueEntityID(schemaId),
 		});
+
+		const existList = await this.listRepository.findBySlug({
+			creatorUsername: user.username,
+			slug: list.slug.value,
+		});
+
+		if (existList) {
+			throw new SlugAlreadyExistsError();
+		}
 
 		await this.listRepository.create(list);
 

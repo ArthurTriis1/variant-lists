@@ -5,6 +5,7 @@ import { Validator } from "@src/domain/lists/application/services/validator";
 import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
 import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
+import { UserRepository } from "../repositories";
 
 interface ValidateAllItemsFromListRequest {
 	creatorId: string;
@@ -18,6 +19,7 @@ export class ValidateAllItemsFromList {
 		private itemRepository: ItemRepository,
 		private schemaRepository: SchemaRepository,
 		private listRepository: ListRepository,
+		private userRepository: UserRepository,
 		private validator: Validator,
 	) {}
 
@@ -25,13 +27,15 @@ export class ValidateAllItemsFromList {
 		creatorId,
 		listId,
 	}: ValidateAllItemsFromListRequest): Promise<ValidateAllItemsFromListResponse | null> {
+		const user = await this.userRepository.findById(creatorId);
+
 		const list = await this.listRepository.findById(listId);
 
 		if (!list) {
 			throw new ListNotFoundError();
 		}
 
-		if (list.creatorId.toString() !== creatorId) {
+		if (list.creatorUsername !== user?.username) {
 			throw new NotAllowedError();
 		}
 

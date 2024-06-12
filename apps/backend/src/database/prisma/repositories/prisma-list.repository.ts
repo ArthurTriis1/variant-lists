@@ -28,20 +28,26 @@ class PrismaListRepository implements ListRepository {
 
 		return list ? PrismaListMapper.toDomain(list) : null;
 	}
-	async findBySlug(slug: string): Promise<List | null> {
+	async findBySlug({
+		slug,
+		creatorUsername,
+	}: {
+		slug: string;
+		creatorUsername: string;
+	}): Promise<List | null> {
 		const list = await prisma.list.findUnique({
 			where: {
-				slug,
+				creatorUsername_slug: { slug, creatorUsername },
 			},
 		});
 
 		return list ? PrismaListMapper.toDomain(list) : null;
 	}
 
-	async findManyByCreatorId(creatorId: string): Promise<List[]> {
+	async findManyByCreatorUsername(creatorId: string): Promise<List[]> {
 		const lists = await prisma.list.findMany({
 			where: {
-				creatorId,
+				creatorUsername: creatorId,
 			},
 		});
 

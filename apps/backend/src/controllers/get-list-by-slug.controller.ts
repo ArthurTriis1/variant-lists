@@ -6,6 +6,7 @@ import { z } from "zod";
 
 const params = z.object({
 	slug: z.string(),
+	creatorUsername: z.string(),
 });
 
 const response = {
@@ -20,22 +21,23 @@ const response = {
 
 export const getListBySlugController = async (app: FastifyInstance) => {
 	app.withTypeProvider<ZodTypeProvider>().get(
-		"/list/:slug",
+		"/:creatorUsername/list/:slug",
 		{
 			schema: {
 				params,
 				response,
 			},
 		},
-		async ({ params: { slug }, user }, reply) => {
-			const creatorId = user.id;
+		async ({ params: { slug, creatorUsername }, user }, reply) => {
+			const userId = user.id;
 
 			const getListBySlugBuilder = new GetListBySlugBuilder();
 			const getListBySlug = getListBySlugBuilder.build();
 
 			const response = await getListBySlug.execute({
 				slug,
-				creatorId,
+				userId,
+				creatorUsername,
 			});
 
 			reply.send(ListPresenter.toHTTP(response.list));

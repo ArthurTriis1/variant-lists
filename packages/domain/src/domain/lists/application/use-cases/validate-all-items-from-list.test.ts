@@ -10,12 +10,15 @@ import { makeItem } from "@test/factories/make-item";
 import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
 import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
+import { InMemoryUserRepository } from "@test/repositories";
+import { makeUser } from "@test/factories";
 
 let sut: ValidateAllItemsFromList;
 
 let inMemoryItemRepository: InMemoryItemRepository;
 let inMemorySchemaRepository: InMemorySchemaRepository;
 let inMemoryListRepository: InMemoryListRepository;
+let inMemoryUserRepository: InMemoryUserRepository;
 let jsonSchemaValidator: JsonSchemaValidator;
 
 describe("Validate Items by list", () => {
@@ -25,17 +28,22 @@ describe("Validate Items by list", () => {
 		inMemoryItemRepository = new InMemoryItemRepository();
 		inMemorySchemaRepository = new InMemorySchemaRepository();
 		inMemoryListRepository = new InMemoryListRepository();
+		inMemoryUserRepository = new InMemoryUserRepository();
 		jsonSchemaValidator = new JsonSchemaValidator();
 
 		sut = new ValidateAllItemsFromList(
 			inMemoryItemRepository,
 			inMemorySchemaRepository,
 			inMemoryListRepository,
+			inMemoryUserRepository,
 			jsonSchemaValidator,
 		);
 	});
 
 	it("Item should be valid and the lastValidationDate should be updated", async () => {
+		const user = makeUser({}, new UniqueEntityID("1"));
+		await inMemoryUserRepository.create(user);
+
 		const schema = makeSchema({
 			data: {
 				type: "object",
@@ -48,13 +56,13 @@ describe("Validate Items by list", () => {
 			},
 		});
 
-		inMemorySchemaRepository.create(schema);
+		await inMemorySchemaRepository.create(schema);
 
 		const list = makeList({
 			schemaId: schema.id,
-			creatorId: new UniqueEntityID("1"),
+			creatorUsername: user.username,
 		});
-		inMemoryListRepository.create(list);
+		await inMemoryListRepository.create(list);
 
 		const item = makeItem({
 			listId: list.id,
@@ -65,8 +73,9 @@ describe("Validate Items by list", () => {
 			isValid: false,
 		});
 
-		inMemoryItemRepository.create(item);
+		await inMemoryItemRepository.create(item);
 
+		// Validate the different times
 		await new Promise((resolve) => {
 			setTimeout(() => {
 				resolve(null);
@@ -96,6 +105,9 @@ describe("Validate Items by list", () => {
 	});
 
 	it("Item should be invalid and the lastValidationDate should be updated", async () => {
+		const user = makeUser({}, new UniqueEntityID("1"));
+		await inMemoryUserRepository.create(user);
+
 		const schema = makeSchema({
 			data: {
 				type: "object",
@@ -112,7 +124,7 @@ describe("Validate Items by list", () => {
 
 		const list = makeList({
 			schemaId: schema.id,
-			creatorId: new UniqueEntityID("1"),
+			creatorUsername: user.username,
 		});
 		inMemoryListRepository.create(list);
 
@@ -156,6 +168,9 @@ describe("Validate Items by list", () => {
 	});
 
 	it("Item should be invalid first and valid second", async () => {
+		const user = makeUser({}, new UniqueEntityID("1"));
+		await inMemoryUserRepository.create(user);
+
 		const schema = makeSchema({
 			data: {
 				type: "object",
@@ -172,7 +187,7 @@ describe("Validate Items by list", () => {
 
 		const list = makeList({
 			schemaId: schema.id,
-			creatorId: new UniqueEntityID("1"),
+			creatorUsername: user.username,
 		});
 		inMemoryListRepository.create(list);
 
@@ -258,12 +273,15 @@ describe("Validate Items by list", () => {
 	});
 
 	it("Should throws found schema error", async () => {
+		const user = makeUser({}, new UniqueEntityID("1"));
+		await inMemoryUserRepository.create(user);
+
 		const schema = makeSchema({});
 
 		inMemorySchemaRepository.create(schema);
 
 		const list = makeList({
-			creatorId: new UniqueEntityID("1"),
+			creatorUsername: user.username,
 		});
 		inMemoryListRepository.create(list);
 

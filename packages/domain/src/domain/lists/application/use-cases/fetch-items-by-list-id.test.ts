@@ -21,6 +21,7 @@ describe("Fetch Items", () => {
 		sut = new FetchItemsByListId(
 			inMemoryItemRepository,
 			inMemoryListRepository,
+			inMemoryUserRepository,
 		);
 	});
 
@@ -28,7 +29,7 @@ describe("Fetch Items", () => {
 		const user = makeUser();
 		inMemoryUserRepository.create(user);
 
-		const list = makeList({ creatorId: user.id });
+		const list = makeList({ creatorUsername: user.username });
 		inMemoryListRepository.create(list);
 
 		await inMemoryItemRepository.create(
@@ -62,7 +63,7 @@ describe("Fetch Items", () => {
 		const user = makeUser();
 		inMemoryUserRepository.create(user);
 
-		const list = makeList({ creatorId: user.id });
+		const list = makeList({ creatorUsername: user.username });
 		inMemoryListRepository.create(list);
 
 		for (let i = 1; i <= 22; i++) {
