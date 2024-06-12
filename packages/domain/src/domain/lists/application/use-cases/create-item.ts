@@ -53,7 +53,7 @@ export class CreateItem {
 			throw new ListNotFoundError();
 		}
 
-		if (list.creatorId.toString() !== creatorId) {
+		if (list.creatorUsername !== user.username) {
 			throw new NotAllowedError();
 		}
 

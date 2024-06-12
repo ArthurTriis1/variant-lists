@@ -8,7 +8,7 @@ export class PrismaListMapper {
 				title: raw.title,
 				slug: Slug.create(raw.slug),
 				description: raw.description,
-				creatorId: new UniqueEntityID(raw.creatorId),
+				creatorUsername: raw.creatorUsername,
 				schemaId: new UniqueEntityID(raw.schemaId),
 			},
 			new UniqueEntityID(raw.id),
@@ -21,7 +21,7 @@ export class PrismaListMapper {
 			title: list.title,
 			slug: list.slug.value,
 			description: list.description,
-			creatorId: list.creatorId.toString(),
+			creatorUsername: list.creatorUsername,
 			schemaId: list.schemaId.toString(),
 		};
 	}

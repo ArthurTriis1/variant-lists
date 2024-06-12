@@ -12,8 +12,20 @@ export class InMemoryListRepository implements ListRepository {
 		return this.lists.find((list) => list.id.toString() === id) ?? null;
 	}
 
-	async findBySlug(slug: string): Promise<List | null> {
-		return this.lists.find((list) => list.slug.value === slug) ?? null;
+	async findBySlug({
+		slug,
+		creatorUsername,
+	}: {
+		slug: string;
+		creatorUsername: string;
+	}): Promise<List | null> {
+		return (
+			this.lists.find(
+				(list) =>
+					list.slug.value === slug &&
+					list.creatorUsername === creatorUsername,
+			) ?? null
+		);
 	}
 
 	async save(list: List) {
@@ -22,9 +34,9 @@ export class InMemoryListRepository implements ListRepository {
 		this.lists[itemIndex] = list;
 	}
 
-	async findManyByCreatorId(creatorId: string): Promise<List[]> {
+	async findManyByCreatorUsername(creatorUsername: string): Promise<List[]> {
 		return this.lists.filter(
-			(list) => list.creatorId.toString() === creatorId,
+			(list) => list.creatorUsername === creatorUsername,
 		);
 	}
 }

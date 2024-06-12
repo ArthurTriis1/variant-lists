@@ -3,7 +3,6 @@ import { getUser } from "@test/getUser";
 import { app } from "app";
 import request from "supertest";
 import { UserPresented } from "@src/presenters/user.presenter";
-import { UniqueEntityID } from "@variant-lists/domain";
 import { makePrismaSchema } from "@test/factories/prisma-schema.factory";
 
 let cookie: string;
@@ -24,7 +23,7 @@ describe("Get list by slug (E2E)", () => {
 		});
 
 		await makePrismaList({
-			creatorId: new UniqueEntityID(user.id),
+			creatorUsername: user.username,
 			schemaId: schema.id,
 		});
 

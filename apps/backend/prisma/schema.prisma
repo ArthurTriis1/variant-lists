@@ -45,12 +45,12 @@ model Schema {
 model List {
   id          String @id @default(uuid())
   title       String
-  slug        String @unique
+  slug        String
   description String
   items      Item[]
 
-  creator   User   @relation(fields: [creatorId], references: [id])
-  creatorId String @map("creator_id")
+  creator   User   @relation(fields: [creatorUsername], references: [username])
+  creatorUsername String @map("creator_username")
 
   schema Schema @relation(fields: [schemaId], references: [id])
   schemaId  String
@@ -58,6 +58,7 @@ model List {
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime? @updatedAt @map("updated_at")
 
+  @@unique([creatorUsername, slug])
   @@map("lists")
 }
 

@@ -4,7 +4,6 @@ import { app } from "app";
 import request from "supertest";
 import { makePrismaList } from "@test/factories/prisma-list.factory";
 import { UserPresented } from "@src/presenters/user.presenter";
-import { UniqueEntityID } from "@variant-lists/domain";
 
 let cookie: string;
 let user: UserPresented;
@@ -25,11 +24,11 @@ describe("Get list by slug (E2E)", () => {
 
 		const list = await makePrismaList({
 			schemaId: schema.id,
-			creatorId: new UniqueEntityID(user.id),
+			creatorUsername: user.username,
 		});
 
 		await request(app.server)
-			.get("/list/" + list.slug.value)
+			.get(`/${user.username}/list/${list.slug.value}`)
 			.set("Cookie", cookie)
 			.send()
 			.expect(200);

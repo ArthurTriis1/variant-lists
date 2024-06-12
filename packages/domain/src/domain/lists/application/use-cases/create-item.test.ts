@@ -44,7 +44,7 @@ describe("Create Item", () => {
 
 		const list = makeList({
 			schemaId: schema.id,
-			creatorId: user.id,
+			creatorUsername: user.username,
 		});
 		inMemoryListRepository.create(list);
 
@@ -66,7 +66,7 @@ describe("Create Item", () => {
 		inMemoryUserRepository.create(user);
 
 		const schema = makeSchema({
-			creatorId: user.id,
+			creatorUsername: user.username,
 			data: {
 				type: "object",
 				properties: {
@@ -82,7 +82,7 @@ describe("Create Item", () => {
 
 		const list = makeList({
 			schemaId: schema.id,
-			creatorId: user.id,
+			creatorUsername: user.username,
 		});
 		inMemoryListRepository.create(list);
 
@@ -108,14 +108,14 @@ describe("Create Item", () => {
 		inMemoryUserRepository.create(user2);
 
 		const schema = makeSchema({
-			creatorId: user.id,
+			creatorUsername: user.username,
 		});
 
 		inMemorySchemaRepository.create(schema);
 
 		const list = makeList({
 			schemaId: schema.id,
-			creatorId: user.id,
+			creatorUsername: user.username,
 		});
 		inMemoryListRepository.create(list);
 
