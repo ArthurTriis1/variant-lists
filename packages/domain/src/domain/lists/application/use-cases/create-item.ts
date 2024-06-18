@@ -1,4 +1,3 @@
-import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 import { Item } from "@src/domain/lists/enterprise/entities/item";
 import { ItemRepository } from "@src/domain/lists/application/repositories/item-repository";
 import { SchemaRepository } from "@src/domain/lists/application/repositories/schema-repository";
@@ -77,8 +76,8 @@ export class CreateItem {
 		const item = Item.create({
 			title,
 			description,
-			creatorId: new UniqueEntityID(creatorId),
-			listId: new UniqueEntityID(listId),
+			creatorUsername: user.username,
+			listSlug: list.slug.value,
 			data,
 			lastValidationDate: new Date(),
 			isValid: true,

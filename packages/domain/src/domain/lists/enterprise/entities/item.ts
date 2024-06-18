@@ -7,8 +7,8 @@ export type ItemProps = {
 	title: string;
 	slug: Slug;
 	description: string;
-	listId: UniqueEntityID;
-	creatorId: UniqueEntityID;
+	listSlug: string;
+	creatorUsername: string;
 	imageUrl?: string;
 	lastValidationDate: Date;
 	isValid: boolean;
@@ -48,12 +48,12 @@ export class Item extends Entity<ItemProps> {
 		return this.props.slug;
 	}
 
-	get creatorId() {
-		return this.props.creatorId;
+	get creatorUsername() {
+		return this.props.creatorUsername;
 	}
 
-	get listId() {
-		return this.props.listId;
+	get listSlug() {
+		return this.props.listSlug;
 	}
 
 	get lastValidationDate() {

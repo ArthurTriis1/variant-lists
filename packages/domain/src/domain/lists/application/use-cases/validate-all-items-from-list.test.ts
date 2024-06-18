@@ -65,8 +65,8 @@ describe("Validate Items by list", () => {
 		await inMemoryListRepository.create(list);
 
 		const item = makeItem({
-			listId: list.id,
-			creatorId: new UniqueEntityID("1"),
+			listSlug: list.slug.value,
+			creatorUsername: user.username,
 			data: {
 				name: "My Name",
 			},
@@ -129,8 +129,8 @@ describe("Validate Items by list", () => {
 		inMemoryListRepository.create(list);
 
 		const item = makeItem({
-			listId: list.id,
-			creatorId: new UniqueEntityID("1"),
+			listSlug: list.slug.value,
+			creatorUsername: user.username,
 			data: {
 				name: "My Name",
 			},
@@ -193,8 +193,8 @@ describe("Validate Items by list", () => {
 
 		const item1 = makeItem({
 			title: "Item 1",
-			listId: list.id,
-			creatorId: new UniqueEntityID("1"),
+			listSlug: list.slug.value,
+			creatorUsername: user.username,
 			data: {
 				name: "My Name",
 			},
@@ -205,8 +205,8 @@ describe("Validate Items by list", () => {
 
 		const item2 = makeItem({
 			title: "Item 2",
-			listId: list.id,
-			creatorId: new UniqueEntityID("1"),
+			listSlug: list.slug.value,
+			creatorUsername: user.username,
 			data: {
 				title: "My Name",
 			},

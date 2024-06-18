@@ -2,10 +2,13 @@ import { NotAllowedError } from "@src/core/errors/not-allowed-error";
 import { Item } from "@src/domain/lists/enterprise/entities/item";
 import { ItemRepository } from "@src/domain/lists/application/repositories/item-repository";
 import { ItemNotFoundError } from "@src/core/errors/item-not-found-error";
+import { UserRepository } from "../repositories";
 
 interface GetItemBySlugRequest {
 	slug: string;
-	creatorId: string;
+	userId: string;
+	creatorUsername: string;
+	listSlug: string;
 }
 
 interface GetItemBySlugResponse {
@@ -13,19 +16,30 @@ interface GetItemBySlugResponse {
 }
 
 export class GetItemBySlug {
-	constructor(private itemRepository: ItemRepository) {}
+	constructor(
+		private itemRepository: ItemRepository,
+		private userRepository: UserRepository,
+	) {}
 
 	async execute({
 		slug,
-		creatorId,
+		userId,
+		listSlug,
+		creatorUsername,
 	}: GetItemBySlugRequest): Promise<GetItemBySlugResponse> {
-		const item = await this.itemRepository.findBySlug(slug);
+		const item = await this.itemRepository.findBySlug({
+			slug,
+			listSlug,
+			creatorUsername,
+		});
 
 		if (!item) {
 			throw new ItemNotFoundError();
 		}
 
-		if (item.creatorId.toString() !== creatorId) {
+		const user = await this.userRepository.findById(userId);
+
+		if (item.creatorUsername !== user?.username) {
 			throw new NotAllowedError();
 		}
 

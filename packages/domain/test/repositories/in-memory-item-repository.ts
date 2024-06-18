@@ -9,26 +9,59 @@ export class InMemoryItemRepository implements ItemRepository {
 		this.items.push(item);
 	}
 
-	async findBySlug(slug: string): Promise<Item | null> {
-		return this.items.find((item) => item.slug.value === slug) ?? null;
+	async findBySlug({
+		slug,
+		listSlug,
+		creatorUsername,
+	}: {
+		slug: string;
+		listSlug: string;
+		creatorUsername: string;
+	}): Promise<Item | null> {
+		return (
+			this.items.find(
+				(item) =>
+					item.slug.value === slug &&
+					item.listSlug === listSlug &&
+					item.creatorUsername === creatorUsername,
+			) ?? null
+		);
 	}
 
-	async findManyByListId(
-		listId: string,
+	async findManyByListSlug(
+		listSlug: string,
+		creatorUsername: string,
 		{ page }: PaginationParams,
 	): Promise<Item[]> {
 		return this.items
-			.filter((list) => list.listId.toValue() === listId)
+			.filter(
+				(list) =>
+					list.listSlug === listSlug &&
+					list.creatorUsername === creatorUsername,
+			)
 			.slice((page - 1) * 20, page * 20);
 	}
 
-	async findAllByListId(listId: string): Promise<Item[]> {
-		return this.items.filter((list) => list.listId.toValue() === listId);
+	async findAllByListSlug(
+		listSlug: string,
+		creatorUsername: string,
+	): Promise<Item[]> {
+		return this.items.filter(
+			(list) =>
+				list.listSlug === listSlug &&
+				list.creatorUsername === creatorUsername,
+		);
 	}
 
-	async countByListId(listId: string): Promise<number> {
-		return this.items.filter((list) => list.listId.toValue() === listId)
-			.length;
+	async countByListSlug(
+		listSlug: string,
+		creatorUsername: string,
+	): Promise<number> {
+		return this.items.filter(
+			(list) =>
+				list.listSlug === listSlug &&
+				list.creatorUsername === creatorUsername,
+		).length;
 	}
 
 	async save(item: Item): Promise<void> {
