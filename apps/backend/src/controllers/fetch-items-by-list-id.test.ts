@@ -3,7 +3,6 @@ import { getUser } from "@test/getUser";
 import { app } from "app";
 import request from "supertest";
 import { UserPresented } from "@src/presenters/user.presenter";
-import { UniqueEntityID } from "@variant-lists/domain";
 import { makePrismaSchema } from "@test/factories/prisma-schema.factory";
 import { makePrismaList } from "@test/factories/prisma-list.factory";
 
@@ -30,8 +29,8 @@ describe("Get items by user (E2E)", () => {
 		});
 
 		await makePrismaItem({
-			listId: list.id,
-			creatorId: new UniqueEntityID(user.id),
+			listSlug: list.slug.value,
+			creatorUsername: user.username,
 		});
 
 		await request(app.server)

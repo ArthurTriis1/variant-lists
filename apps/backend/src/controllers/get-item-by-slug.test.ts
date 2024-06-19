@@ -4,7 +4,6 @@ import { app } from "app";
 import request from "supertest";
 import { makePrismaList } from "@test/factories/prisma-list.factory";
 import { UserPresented } from "@src/presenters/user.presenter";
-import { UniqueEntityID } from "@variant-lists/domain";
 import { makePrismaItem } from "@test/factories/prisma-item.factory";
 
 let cookie: string;
@@ -19,7 +18,7 @@ describe("Get item by slug (E2E)", () => {
 		cookie = response.cookie;
 	});
 
-	test("[GET] /item/:slug", async () => {
+	test("[GET] /item/:creatorUsername/:listSlug/:slug", async () => {
 		const schema = await makePrismaSchema({
 			creatorUsername: user.username,
 		});
@@ -30,12 +29,12 @@ describe("Get item by slug (E2E)", () => {
 		});
 
 		const item = await makePrismaItem({
-			listId: list.id,
-			creatorId: new UniqueEntityID(user.id),
+			listSlug: list.slug.value,
+			creatorUsername: list.creatorUsername,
 		});
 
 		await request(app.server)
-			.get("/item/" + item.slug.value)
+			.get(`/item/${user.username}/${list.slug.value}/${item.slug.value}`)
 			.set("Cookie", cookie)
 			.send()
 			.expect(200);

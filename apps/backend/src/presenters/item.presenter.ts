@@ -4,8 +4,8 @@ export type ItemPresented = {
 	title: string;
 	slug: string;
 	description: string;
-	listId: string;
-	creatorId: string;
+	listSlug: string;
+	creatorUsername: string;
 	imageUrl?: string;
 	lastValidationDate: string;
 	isValid: boolean;
@@ -18,8 +18,8 @@ export class ItemPresenter {
 			title: item.title,
 			slug: item.slug.value,
 			description: item.description,
-			listId: item.listId.toString(),
-			creatorId: item.creatorId.toString(),
+			listSlug: item.listSlug,
+			creatorUsername: item.creatorUsername,
 			imageUrl: item.imageUrl,
 			lastValidationDate: item.lastValidationDate.toISOString(),
 			isValid: item.isValid,

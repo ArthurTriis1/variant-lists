@@ -47,7 +47,10 @@ export class ValidateAllItemsFromList {
 			throw new SchemaNotFoundError();
 		}
 
-		const items = await this.itemRepository.findAllByListId(listId);
+		const items = await this.itemRepository.findAllByListSlug(
+			list.slug.value,
+			user.username,
+		);
 
 		items.forEach(async (item) => {
 			const isUpToDate =

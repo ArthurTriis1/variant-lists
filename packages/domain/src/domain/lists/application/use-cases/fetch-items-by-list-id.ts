@@ -38,11 +38,18 @@ export class FetchItemsByListId {
 			throw new NotAllowedError();
 		}
 
-		const total = await this.itemRepository.countByListId(listId);
+		const total = await this.itemRepository.countByListSlug(
+			list.slug.value,
+			user.username,
+		);
 
-		const items = await this.itemRepository.findManyByListId(listId, {
-			page,
-		});
+		const items = await this.itemRepository.findManyByListSlug(
+			list.slug.value,
+			user.username,
+			{
+				page,
+			},
+		);
 
 		return {
 			items,

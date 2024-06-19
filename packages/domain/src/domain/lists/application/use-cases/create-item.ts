@@ -1,4 +1,3 @@
-import { UniqueEntityID } from "@src/core/entities/uinique-entity-id";
 import { Item } from "@src/domain/lists/enterprise/entities/item";
 import { ItemRepository } from "@src/domain/lists/application/repositories/item-repository";
 import { SchemaRepository } from "@src/domain/lists/application/repositories/schema-repository";
@@ -7,7 +6,7 @@ import { Validator } from "@src/domain/lists/application/services/validator";
 import { ListNotFoundError } from "@src/core/errors/list-not-found-error";
 import { SchemaNotFoundError } from "@src/core/errors/schema-not-found-error";
 import { ItemMismatchSchema } from "@src/core/errors/item-mismatch-schema-error";
-import { NotAllowedError } from "@src/core/errors";
+import { NotAllowedError, SlugAlreadyExistsError } from "@src/core/errors";
 import { UserRepository } from "../repositories/user-repository";
 import { CreatorNotFoundError } from "@src/core/errors/creator-not-found-error";
 
@@ -77,13 +76,23 @@ export class CreateItem {
 		const item = Item.create({
 			title,
 			description,
-			creatorId: new UniqueEntityID(creatorId),
-			listId: new UniqueEntityID(listId),
+			creatorUsername: user.username,
+			listSlug: list.slug.value,
 			data,
 			lastValidationDate: new Date(),
 			isValid: true,
 			imageUrl,
 		});
+
+		const existItem = await this.itemRepository.findBySlug({
+			slug: item.slug.value,
+			listSlug: list.slug.value,
+			creatorUsername: user.username,
+		});
+
+		if (existItem) {
+			throw new SlugAlreadyExistsError();
+		}
 
 		await this.itemRepository.create(item);
 

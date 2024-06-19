@@ -8,10 +8,10 @@ export function makeItem(
 ) {
 	const item = Item.create(
 		{
-			creatorId: new UniqueEntityID(),
+			creatorUsername: faker.internet.displayName(),
 			title: faker.word.words(2),
 			description: faker.lorem.paragraph(),
-			listId: new UniqueEntityID(),
+			listSlug: faker.lorem.slug(),
 			imageUrl: faker.image.url(),
 			data: {},
 			...override,

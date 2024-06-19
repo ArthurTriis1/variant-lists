@@ -34,20 +34,20 @@ describe("Fetch Items", () => {
 
 		await inMemoryItemRepository.create(
 			makeItem({
-				listId: list.id,
-				creatorId: user.id,
+				listSlug: list.slug.value,
+				creatorUsername: user.username,
 			}),
 		);
 		await inMemoryItemRepository.create(
 			makeItem({
-				listId: list.id,
-				creatorId: user.id,
+				listSlug: list.slug.value,
+				creatorUsername: user.username,
 			}),
 		);
 		await inMemoryItemRepository.create(
 			makeItem({
-				listId: list.id,
-				creatorId: user.id,
+				listSlug: list.slug.value,
+				creatorUsername: user.username,
 			}),
 		);
 
@@ -69,7 +69,8 @@ describe("Fetch Items", () => {
 		for (let i = 1; i <= 22; i++) {
 			await inMemoryItemRepository.create(
 				makeItem({
-					listId: list.id,
+					listSlug: list.slug.value,
+					creatorUsername: user.username,
 				}),
 			);
 		}

@@ -16,22 +16,37 @@ class PrismaItemRepository implements ItemRepository {
 			data,
 		});
 	}
-	async findBySlug(slug: string): Promise<Item | null> {
+	async findBySlug({
+		slug,
+		listSlug,
+		creatorUsername,
+	}: {
+		slug: string;
+		listSlug: string;
+		creatorUsername: string;
+	}): Promise<Item | null> {
 		const item = await prisma.item.findUnique({
 			where: {
-				slug,
+				creatorUsername_listSlug_slug: {
+					slug,
+					creatorUsername,
+					listSlug,
+				},
 			},
 		});
 
 		return item ? PrismaItemMapper.toDomain(item) : null;
 	}
-	async findManyByListId(
-		listId: string,
+
+	async findManyByListSlug(
+		listSlug: string,
+		creatorUsername: string,
 		{ page }: PaginationParams,
 	): Promise<Item[]> {
 		const items = await prisma.item.findMany({
 			where: {
-				listId,
+				listSlug,
+				creatorUsername,
 			},
 			take: 20,
 			skip: (page - 1) * 20,
@@ -40,18 +55,20 @@ class PrismaItemRepository implements ItemRepository {
 		return items.length ? items.map(PrismaItemMapper.toDomain) : [];
 	}
 
-	async countByListId(listId: string): Promise<number> {
+	async countByListSlug(listSlug: string, creatorUsername: string) {
 		return await prisma.item.count({
 			where: {
-				listId,
+				listSlug,
+				creatorUsername,
 			},
 		});
 	}
 
-	async findAllByListId(listId: string): Promise<Item[]> {
+	async findAllByListSlug(listSlug: string, creatorUsername: string) {
 		const items = await prisma.item.findMany({
 			where: {
-				listId,
+				listSlug,
+				creatorUsername,
 			},
 		});
 
