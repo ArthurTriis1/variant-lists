@@ -6,6 +6,8 @@ import { z } from "zod";
 
 const params = z.object({
 	slug: z.string(),
+	listSlug: z.string(),
+	creatorUsername: z.string(),
 });
 
 const response = {
@@ -13,8 +15,8 @@ const response = {
 		title: z.string(),
 		slug: z.string(),
 		description: z.string(),
-		listId: z.string(),
-		creatorId: z.string(),
+		listSlug: z.string(),
+		creatorUsername: z.string(),
 		imageUrl: z.string().optional(),
 		lastValidationDate: z.string(),
 		isValid: z.boolean(),
@@ -24,22 +26,27 @@ const response = {
 
 export const getItemBySlugController = async (app: FastifyInstance) => {
 	app.withTypeProvider<ZodTypeProvider>().get(
-		"/item/:slug",
+		"/item/:creatorUsername/:listSlug/:slug",
 		{
 			schema: {
 				params,
 				response,
 			},
 		},
-		async ({ params: { slug }, user }, reply) => {
-			const creatorId = user.id;
+		async (
+			{ params: { slug, creatorUsername, listSlug }, user },
+			reply,
+		) => {
+			const userId = user.id;
 
 			const getItemBySlugBuilder = new GetItemBySlugBuilder();
 			const getItemBySlug = getItemBySlugBuilder.build();
 
 			const response = await getItemBySlug.execute({
 				slug,
-				creatorId,
+				creatorUsername,
+				listSlug,
+				userId,
 			});
 
 			reply.send(ItemPresenter.toHTTP(response.item));

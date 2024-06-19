@@ -8,8 +8,8 @@ export class PrismaItemMapper {
 				title: raw.title,
 				slug: Slug.create(raw.slug),
 				description: raw.slug,
-				listId: new UniqueEntityID(raw.listId),
-				creatorId: new UniqueEntityID(raw.creatorId),
+				creatorUsername: raw.creatorUsername,
+				listSlug: raw.listSlug,
 				imageUrl: raw.imageUrl ?? undefined,
 				lastValidationDate: raw.lastValidationDate ?? undefined,
 				isValid: raw.isValid ?? undefined,
@@ -29,8 +29,8 @@ export class PrismaItemMapper {
 			lastValidationDate: item.lastValidationDate,
 			isValid: item.isValid,
 			data: item.data as Prisma.InputJsonValue,
-			creatorId: item.creatorId.toString(),
-			listId: item.listId.toString(),
+			creatorUsername: item.creatorUsername,
+			listSlug: item.listSlug,
 		};
 	}
 }

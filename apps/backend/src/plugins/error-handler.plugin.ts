@@ -17,7 +17,7 @@ export const errorHandler = (
 		return;
 	}
 
-	console.error(error);
+	// console.error(error);
 
 	reply.send(error);
 };

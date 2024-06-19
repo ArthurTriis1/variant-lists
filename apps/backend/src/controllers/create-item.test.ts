@@ -4,7 +4,6 @@ import { app } from "app";
 import request from "supertest";
 import { makePrismaList } from "@test/factories/prisma-list.factory";
 import { UserPresented } from "@src/presenters/user.presenter";
-import { UniqueEntityID } from "@variant-lists/domain";
 
 let cookie: string;
 let user: UserPresented;
