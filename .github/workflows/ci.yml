@@ -1,56 +1,58 @@
 name: Run Integration Tests
 
-on: [push, pull_request]
+on: [pull_request]
 
 jobs:
-  unit-tests:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+    unit-tests:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '20'
-        cache: 'yarn'
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: "20"
+                  cache: "yarn"
 
-    - name: Install dependencies
-      run: yarn
-      
-    - name: Run tests
-      run: yarn test
+            - name: Install dependencies
+              run: yarn
 
-  integration-tests:
-    runs-on: ubuntu-latest
+            - name: Run tests
+              run: yarn test
 
-    env:
-      DATABASE_URL: 'postgres://postgres:docker@localhost:5432/variant-lists?schema=public'
-      PORT: '3001'
-      HOST: '127.0.0.1'
+    integration-tests:
+        runs-on: ubuntu-latest
 
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v2
 
-    - name: Set up Node.js
-      uses: actions/setup-node@v2
-      with:
-        node-version: '20'
-        cache: 'yarn'
+            - name: Set up Node.js
+              uses: actions/setup-node@v2
+              with:
+                  node-version: "20"
+                  cache: "yarn"
 
-    - name: Install dependencies
-      run: yarn
+            - name: Install dependencies
+              run: yarn
 
-    - name: Set up Docker Compose
-      run: docker-compose up -d
+            - name: Install Docker Compose
+              run: sudo apt-get update && sudo apt-get install -y docker-compose
 
-    - name: Wait for services to be ready
-      run: sleep 5
+            - name: Set up Docker Compose
+              run: docker-compose up -d
 
-    - name: Run tests
-      run: yarn test:integration
+            - name: Wait for services to be ready
+              run: sleep 5
 
-    - name: Shut down Docker Compose
-      if: always()
-      run: docker-compose down
+            - name: Run integration tests
+              run: yarn test:integration
+              env:
+                  DATABASE_URL: "postgres://postgres:docker@localhost:5432/variant-lists?schema=public"
+                  PORT: "3001"
+                  HOST: "127.0.0.1"
+
+            - name: Shut down Docker Compose
+              if: always()
+              run: docker-compose down

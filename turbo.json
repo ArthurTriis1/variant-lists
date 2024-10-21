@@ -1,21 +1,30 @@
 {
-    "$schema": "https://turbo.build/schema.json",
-    "pipeline": {
-        "dev": {
-            "cache": false,
-			"persistent": true,
-			"dependsOn": ["^dev"]
-        },
-      "build": {
-        "outputs": ["dist/**"],
-		"dependsOn": ["^build"]
-      },
-	  "serve": {},
-      "test": {},
-	  "test:integration": {
-		"dependsOn": ["^build"]
-	  },
-      "test:watch": {},
-      "lint": {}
-    }
+  "$schema": "https://turbo.build/schema.json",
+  "globalEnv": ["DATABASE_URL", "HOST", "PORT"],
+  "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": [
+        "^dev"
+      ]
+    },
+    "build": {
+      "outputs": [
+        "dist/**"
+      ],
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "serve": {},
+    "test": {},
+    "test:integration": {
+      "dependsOn": [
+        "^build"
+      ]
+    },
+    "test:watch": {},
+    "lint": {}
   }
+}
