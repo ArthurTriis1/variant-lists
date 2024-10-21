@@ -24,11 +24,6 @@ jobs:
     integration-tests:
         runs-on: ubuntu-latest
 
-        env:
-            DATABASE_URL: "postgres://postgres:docker@localhost:5432/variant-lists?schema=public"
-            PORT: "3001"
-            HOST: "127.0.0.1"
-
         steps:
             - name: Checkout repository
               uses: actions/checkout@v2
@@ -47,6 +42,10 @@ jobs:
 
             - name: Set up Docker Compose
               run: docker-compose up -d
+              env:
+                  DATABASE_URL: "postgres://postgres:docker@localhost:5432/variant-lists?schema=public"
+                  PORT: "3001"
+                  HOST: "127.0.0.1"
 
             - name: Wait for services to be ready
               run: sleep 5
