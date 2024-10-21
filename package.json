@@ -1,18 +1,20 @@
 {
-	"private": true,
-	"workspaces": [
-		"packages/*",
-		"apps/*"
-	],
-	"scripts": {
-		"dev": "turbo run dev --parallel",
-		"build": "turbo run build",
-		"test": "turbo run test",
-		"test:integration": "turbo run test:integration",
-		"test:watch": "turbo run test:watch"
-	},
-	"devDependencies": {
-		"@variant-lists/tsconfig": "*",
-		"turbo": "^1.13.3"
-	}
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "scripts": {
+    "dev": "turbo run dev --parallel",
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "test:integration": "turbo run test:integration",
+    "test:watch": "turbo run test:watch"
+  },
+  "devDependencies": {
+    "@variant-lists/tsconfig": "*",
+    "turbo": "^2.2.2"
+  },
+  "packageManager": "yarn@1.22.22",
+  "name": "variant-lists"
 }
