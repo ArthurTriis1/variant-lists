@@ -1,16 +1,14 @@
-import type { Metadata } from "next";
-import localFont from "next/font/local";
-import "./globals.css";
+import { Londrina_Solid } from "next/font/google";
 
-const geistSans = localFont({
-	src: "./fonts/GeistVF.woff",
-	variable: "--font-geist-sans",
-	weight: "100 900",
-});
-const geistMono = localFont({
-	src: "./fonts/GeistMonoVF.woff",
-	variable: "--font-geist-mono",
-	weight: "100 900",
+import type { Metadata } from "next";
+import "./globals.css";
+import { Card } from "@/components/ui/card";
+
+const londrinaSolid = Londrina_Solid({
+	weight: ["100", "300", "400", "900"],
+	subsets: ["latin"],
+	variable: "--font-londrina-solid",
+	display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -24,11 +22,13 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="en">
+		<html lang="en" className={`${londrinaSolid.variable}`}>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`antialiased h-screen w-screen flex justify-center items-center`}
 			>
-				{children}
+				<Card className="border-4 rounded-2xl border-black drop-shadow-hard pt-28 px-8">
+					{children}
+				</Card>
 			</body>
 		</html>
 	);
