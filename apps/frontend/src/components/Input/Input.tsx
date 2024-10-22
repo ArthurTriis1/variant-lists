@@ -1,8 +1,9 @@
-import { ReactNode } from "react";
-import { Input } from "../ui/input";
+import { ComponentProps, ReactNode } from "react";
+import { Input as ShadcnInput } from "../ui/input";
 import { Label } from "../ui/label";
+import { cn } from "@/lib/utils";
 
-export type InputTextProps = {
+export type InputTextProps = ComponentProps<"div"> & {
 	placeholder: string;
 	label: string;
 	type: string;
@@ -10,19 +11,24 @@ export type InputTextProps = {
 	icon?: ReactNode;
 };
 
-export const InputText = ({
+export const Input = ({
 	placeholder,
 	label,
 	type,
 	id,
 	icon,
+	className,
+	...otherProps
 }: InputTextProps) => {
 	return (
-		<div className="grid w-full max-w-sm items-center gap-1.5 mt-6">
+		<div
+			className={cn("grid w-full items-center gap-1.5 mt-6", className)}
+			{...otherProps}
+		>
 			<Label className="font-light text-xl" htmlFor={id}>
 				{label}
 			</Label>
-			<Input
+			<ShadcnInput
 				type={type}
 				id={id}
 				placeholder={placeholder}

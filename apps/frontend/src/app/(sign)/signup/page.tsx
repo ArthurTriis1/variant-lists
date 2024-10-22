@@ -2,7 +2,7 @@ import { Button } from "@/components/Button/Button";
 import { Input } from "@/components/Input/Input";
 import Link from "next/link";
 
-export default function Signin() {
+export default function Signup() {
 	return (
 		<div className="w-[calc(100vw-80px)] sm:w-[400px]">
 			<h1 className="text-center text-6xl uppercase">
@@ -22,9 +22,16 @@ export default function Signin() {
 				id="password"
 				placeholder="Password"
 			/>
+			<Input
+				className="mt-6"
+				label="Confirm Password"
+				type="password"
+				id="confirm-password"
+				placeholder="Confirm Password"
+			/>
 
 			<Button size="full" className="mt-8 capitalize">
-				login
+				Subscribe
 			</Button>
 
 			<Button
@@ -33,7 +40,7 @@ export default function Signin() {
 				variant="ghost"
 				className="mt-8 capitalize"
 			>
-				<Link href="/signup">Sign-Up</Link>
+				<Link href="/signin">Sign-in</Link>
 			</Button>
 		</div>
 	);

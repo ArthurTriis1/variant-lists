@@ -26,7 +26,7 @@ export default function RootLayout({
 			<body
 				className={`antialiased h-screen w-screen flex justify-center items-center`}
 			>
-				<Card className="border-4 rounded-2xl border-black drop-shadow-hard pt-28 px-8">
+				<Card className="h-[80vh] border-4 rounded-2xl border-black drop-shadow-hard pt-28 px-8">
 					{children}
 				</Card>
 			</body>
