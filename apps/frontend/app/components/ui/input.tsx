@@ -15,7 +15,8 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             type={type}
             className={cn(
-              "w-full rounded-[16px] border-[4px] border-black bg-white px-[16px] py-[8px] text-[20px] font-londrina text-gray-500 drop-shadow-custom",
+              "w-full rounded-[16px] border-[4px] border-black bg-white px-[16px] py-[8px] text-[20px] font-londrina text-gray-500",
+              error ? "drop-shadow-error" : "drop-shadow-custom",
               "placeholder:text-gray-500",
               "focus:outline-none",
               className
@@ -27,6 +28,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             <div className="absolute right-[16px] top-1/2 -translate-y-1/2 text-gray-500">
               {icon}
             </div>
+          )}
+          {error && (
+            <span title={error} className="bg-black text-[16px] font-londrina text-white absolute bottom-0 left-0 translate-y-[20px] translate-x-[16px] w-[calc(100%-20px)] truncate whitespace-nowrap cursor-default">
+              {error}
+            </span>
           )}
         </div>
       </div>

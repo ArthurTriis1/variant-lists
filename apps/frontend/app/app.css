@@ -4,6 +4,10 @@
   .drop-shadow-custom {
     filter: drop-shadow(4px 4px 0px rgba(0, 0, 0, 1));
   }
+
+  .drop-shadow-error {
+    filter: drop-shadow(4px 24px 0px rgba(0, 0, 0, 1));
+  }
 }
 
 @import "tailwindcss";

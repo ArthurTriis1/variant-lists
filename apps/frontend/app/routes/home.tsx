@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "../components/ui/button";
-import { Input, InputLabel, InputError } from "../components/ui/input";
+import { Input, InputLabel } from "../components/ui/input";
 import { EnvelopeSimpleIcon } from "@phosphor-icons/react";
 
 export default function Home() {
@@ -18,11 +18,10 @@ export default function Home() {
           icon={<EnvelopeSimpleIcon size={24} />}
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          error={isInvalid ? "E-mail inválido sdasd  adsds dsadad asdsdas  dasdasdsdsd dsadadsd sadsdasd adsds" : undefined}
         >
           <InputLabel>E-mail</InputLabel>
         </Input>
-        {isInvalid && <InputError>E-mail inválido</InputError>}
-
       </div>
 
       <div className="flex gap-8">
