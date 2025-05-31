@@ -15,7 +15,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             type={type}
             className={cn(
-              "w-full rounded-[16px] border-[4px] border-black bg-white px-[16px] py-[8px] text-[20px] font-londrina text-gray-500",
+              "w-full rounded-[16px] border-[4px] border-black bg-white px-[16px] py-[8px] text-[20px] font-londrina text-gray-500 mb-[20px]",
               error ? "drop-shadow-error" : "drop-shadow-custom",
               "placeholder:text-gray-500",
               "focus:outline-none",
@@ -25,12 +25,12 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
           {icon && (
-            <div className="absolute right-[16px] top-1/2 -translate-y-1/2 text-gray-500">
+            <div className="absolute right-[16px] top-1/2 -translate-y-[20px] text-gray-500">
               {icon}
             </div>
           )}
           {error && (
-            <span title={error} className="bg-black text-[16px] font-londrina text-white absolute bottom-0 left-0 translate-y-[20px] translate-x-[16px] w-[calc(100%-20px)] truncate whitespace-nowrap cursor-default">
+            <span title={error} className="bg-black text-[16px] font-londrina text-white absolute bottom-0 left-0 translate-x-[16px] w-[calc(100%-20px)] truncate whitespace-nowrap cursor-default">
               {error}
             </span>
           )}
