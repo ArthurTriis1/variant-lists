@@ -11,9 +11,6 @@ jobs:
 
             - name: Set up Node.js
               uses: actions/setup-node@v2
-              with:
-                  node-version: "20"
-                  cache: "yarn"
 
             - name: Install dependencies
               run: yarn
@@ -30,9 +27,6 @@ jobs:
 
             - name: Set up Node.js
               uses: actions/setup-node@v2
-              with:
-                  node-version: "20"
-                  cache: "yarn"
 
             - name: Install dependencies
               run: yarn
@@ -52,6 +46,8 @@ jobs:
                   DATABASE_URL: "postgres://postgres:docker@localhost:5432/variant-lists?schema=public"
                   PORT: "3001"
                   HOST: "127.0.0.1"
+                  JWT_REFRESH_SECRET: "secret"
+                  JWT_SECRET: "secret"
 
             - name: Shut down Docker Compose
               if: always()
