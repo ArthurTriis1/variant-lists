@@ -1,36 +1,77 @@
 import * as React from "react"
 import { cn } from "~/lib/utils"
 
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   icon?: React.ReactNode
+  error?: string
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, icon, ...props }, ref) => {
+  ({ className, type, icon, error, children, ...props }, ref) => {
     return (
-      <div className="relative w-full">
-        <input
-          type={type}
-          className={cn(
-            "w-full rounded-[16px] border-[4px] border-black bg-white px-[16px] py-[8px] text-[20px] font-londrina text-gray-500 drop-shadow-custom",
-            "placeholder:text-gray-500",
-            "focus:outline-none",
-            className
+      <div className="w-full space-y-1.5">
+        {children}
+        <div className="relative w-full">
+          <input
+            type={type}
+            className={cn(
+              "w-full rounded-[16px] border-[4px] border-black bg-white px-[16px] py-[8px] text-[20px] font-londrina text-gray-500 drop-shadow-custom",
+              "placeholder:text-gray-500",
+              "focus:outline-none",
+              className
+            )}
+            ref={ref}
+            {...props}
+          />
+          {icon && (
+            <div className="absolute right-[16px] top-1/2 -translate-y-1/2 text-gray-500">
+              {icon}
+            </div>
           )}
-          ref={ref}
-          {...props}
-        />
-        {icon && (
-          <div className="absolute right-[16px] top-1/2 -translate-y-1/2 text-gray-500">
-            {icon}
-          </div>
-        )}
+        </div>
       </div>
     )
   }
 )
 
-Input.displayName = "Input"
+const Label = React.forwardRef<
+  HTMLLabelElement,
+  React.LabelHTMLAttributes<HTMLLabelElement>
+>(({ className, ...props }, ref) => {
+  return (
+    <label
+      ref={ref}
+      className={cn(
+        "text-[20px] font-londrina text-black",
+        className
+      )}
+      {...props}
+    />
+  )
+})
 
-export { Input } 
+const Error = React.forwardRef<
+  HTMLParagraphElement,
+  React.HTMLAttributes<HTMLParagraphElement>
+>(({ className, children, ...props }, ref) => {
+  if (!children) return null
+
+  return (
+    <p
+      ref={ref}
+      className={cn(
+        "text-[16px] font-londrina text-red-500 mt-1",
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </p>
+  )
+})
+
+Input.displayName = "Input"
+Label.displayName = "Input.Label"
+Error.displayName = "Input.Error"
+
+export { Input, Label as InputLabel, Error as InputError } 
