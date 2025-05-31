@@ -2,18 +2,19 @@ import { useState } from "react";
 import { Button } from "../components/ui/button";
 
 export default function Home() {
-  const [count, setCount] = useState(0);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-4">
-      <h1 className="text-4xl font-bold">Contador: {count}</h1>
-      <div className="flex gap-2">
-        <Button onClick={() => setCount(count - 1)} variant="outline">
-          Diminuir
-        </Button>
-        <Button onClick={() => setCount(count + 1)}>
-          Aumentar
-        </Button>
+    <div className="min-h-screen flex flex-col items-center justify-center gap-8">
+
+
+
+      <div className="flex flex-col gap-4">
+        <h2 className="text-2xl font-bold">Variantes de Botão:</h2>
+        <div className="flex gap-8">
+          <Button variant="default">Default</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="ghost">Ghost</Button>
+        </div>
       </div>
     </div>
   );
