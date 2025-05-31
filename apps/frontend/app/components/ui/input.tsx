@@ -25,7 +25,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
           {icon && (
-            <div className="absolute right-[16px] top-1/2 -translate-y-[20px] text-gray-500">
+            <div className="absolute right-[16px] top-1/2 -translate-y-[22px] text-gray-500">
               {icon}
             </div>
           )}

@@ -13,30 +13,36 @@ export default function Home() {
     <div className="min-h-screen flex flex-col items-center justify-center gap-8">
       <Card className="p-8 w-full max-w-md">
         <h1 className="text-4xl font-bold mb-8">Contador: {count}</h1>
-        
+
         <div className="w-full">
-          <Input 
+          <Input
             placeholder="placeholder@gmail.com"
             icon={<EnvelopeSimpleIcon size={24} />}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            error={isInvalid ? "E-mail inválido sdasd  adsds dsadad asdsdas  dasdasdsdsd dsadadsd sadsdasd adsds" : undefined}
+            error={isInvalid ? "E-mail inválido" : undefined}
           >
             <InputLabel>E-mail</InputLabel>
           </Input>
         </div>
 
         <div className="flex gap-8 mt-8">
-          <Button 
-            onClick={() => setCount(count - 1)} 
+          <Button
+            onClick={() => setCount(count - 1)}
             variant="outline"
           >
             Diminuir
           </Button>
-          <Button 
+          <Button
             onClick={() => setCount(count + 1)}
           >
             Aumentar
+          </Button>
+          <Button
+            variant="ghost"
+            onClick={() => setCount(0)}
+          >
+            Resetar
           </Button>
         </div>
       </Card>
