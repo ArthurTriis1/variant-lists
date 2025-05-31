@@ -35,7 +35,7 @@ export default function SignIn() {
 
       <div className="flex flex-col gap-4 mt-4">
         <Button>Login</Button>
-        <Link to="/sign-up" className="text-center -mt-5">Sign-Up</Link>
+        <Link to="/sign-up" className="text-center">Sign-Up</Link>
       </div>
     </>
   );

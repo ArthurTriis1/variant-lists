@@ -1,15 +1,18 @@
-import { Outlet } from "react-router";
+import { Outlet, useLocation, useResolvedPath } from "react-router";
 import { Card } from "~/components/ui/card";
 
+const pathMapper = {
+  "/sign-in": "Sign-In",
+  "/sign-up": "Sign-Up",
+};
+
 export default function AuthLayout() {
+  const location = useLocation();
+
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4">
-      <div className="absolute top-4 right-4">
-        <div className="flex items-center gap-2">
-          <div className="w-4 h-4 bg-black rounded-full" />
-          <div className="w-8 h-4 bg-black rounded-full" />
-          <div className="w-4 h-4 bg-black rounded-full" />
-        </div>
+      <div className="w-full max-w-md mb-1" >
+        <span className="text-2xl font-londrina">{pathMapper[location.pathname as keyof typeof pathMapper]}</span>
       </div>
       <Card className="w-full max-w-md p-8 flex flex-col gap-8 pt-16 pb-16">
         <div className="flex flex-col items-center gap-8">
