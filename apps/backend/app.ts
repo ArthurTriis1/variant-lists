@@ -10,6 +10,7 @@ import {
 } from "fastify-type-provider-zod";
 import fastifySwagger from "@fastify/swagger";
 import fastifySwaggerUI from "@fastify/swagger-ui";
+import { env } from "@src/env";
 
 const app = Fastify();
 
@@ -20,13 +21,13 @@ app.setSerializerCompiler(serializerCompiler);
 app.register(fastifyCookie);
 
 app.register(jwt, {
-	secret: "supersecret",
+	secret: env.JWT_SECRET,
 	cookie: {
 		cookieName: "refreshToken",
 		signed: false,
 	},
 	sign: {
-		expiresIn: "10m",
+		expiresIn: env.JWT_EXPIRES_IN,
 	},
 });
 

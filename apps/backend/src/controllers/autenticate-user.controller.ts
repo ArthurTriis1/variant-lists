@@ -45,10 +45,12 @@ export const autenticateUserController = async (app: FastifyInstance) => {
 
 			const user = UserPresenter.toHTTP(autenticateUserResponse.user);
 
-			const refreshToken = app.jwt.sign(user, { expiresIn: "1d" });
+			const refreshToken = app.jwt.sign(user, { 
+				expiresIn: env.JWT_REFRESH_EXPIRES_IN
+			});
 
-			const token = app.jwt.sign({
-				...user,
+			const token = app.jwt.sign(user, {
+				expiresIn: env.JWT_EXPIRES_IN
 			});
 
 			const { HOST, PORT } = env;
@@ -57,9 +59,9 @@ export const autenticateUserController = async (app: FastifyInstance) => {
 				.setCookie("refreshToken", refreshToken, {
 					domain: `${HOST}:${PORT}`,
 					path: "/",
-					secure: true, // send cookie over HTTPS only
+					secure: true,
 					httpOnly: true,
-					sameSite: true, // alternative CSRF protection
+					sameSite: true,
 				})
 				.code(200)
 				.send({ token });
