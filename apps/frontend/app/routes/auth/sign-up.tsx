@@ -1,26 +1,22 @@
-import { useState } from "react";
-import { Form } from "react-router";
-import { Card } from "~/components/ui/card";
+import { useForm } from "@conform-to/react";
+import { parseWithZod } from "@conform-to/zod";
+import { getFormProps, getInputProps } from "@conform-to/react";
+import { useFetcher } from "react-router";
 import { Input, InputLabel } from "~/components/ui/input";
 import { Button } from "~/components/ui/button";
 import { EnvelopeSimpleIcon, LockSimpleIcon } from "@phosphor-icons/react";
 import { Link } from "react-router";
+import { signUpSchema } from "~/schemas/auth";
 
 export async function action({ request }: { request: Request }) {
   const formData = await request.formData();
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
-  const confirmPassword = formData.get("confirmPassword") as string;
+  const submission = parseWithZod(formData, { schema: signUpSchema });
 
-  // Validações do servidor
-  if (!email.includes("@")) {
-    return { error: "E-mail inválido" };
+  if (submission.status !== "success") {
+    return submission.reply();
   }
 
-  if (password !== confirmPassword) {
-    return { error: "As senhas não coincidem" };
-  }
-
+  const { email, password } = submission.value;
   console.log({ email, password });
 
   await new Promise(resolve => setTimeout(resolve, 1000));
@@ -29,56 +25,57 @@ export async function action({ request }: { request: Request }) {
 }
 
 export default function SignUp() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const fetcher = useFetcher();
+  const [form, { email, password, confirmPassword }] = useForm({
+    shouldValidate: "onBlur",
+    onValidate({ formData }) {
+      return parseWithZod(formData, { schema: signUpSchema });
+    },
+  });
 
-  const isEmailInvalid = email && !email.includes("@");
-  const isPasswordInvalid = password && confirmPassword && password !== confirmPassword;
+  const isSubmitting = fetcher.state === "submitting";
 
   return (
     <>
-      <Form method="post" className="flex flex-col gap-4">
+      <fetcher.Form method="post" className="flex flex-col gap-4" {...getFormProps(form)}>
+        <div>{form.errors}</div>
         <Input
-          name="email"
+          {...getInputProps(email, { type: "email" })}
           placeholder="placeholder@gmail.com"
           icon={<EnvelopeSimpleIcon size={24} />}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          error={isEmailInvalid ? "E-mail inválido" : undefined}
+          error={email.errors?.[0]}
+          disabled={isSubmitting}
         >
           <InputLabel>E-mail</InputLabel>
         </Input>
 
         <Input
-          name="password"
-          type="password"
+          {...getInputProps(password, { type: "password" })}
           placeholder="••••••••••••"
           icon={<LockSimpleIcon size={24} />}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          error={isPasswordInvalid ? "As senhas não coincidem" : undefined}
+          error={password.errors?.[0]}
+          disabled={isSubmitting}
         >
           <InputLabel>Password</InputLabel>
         </Input>
 
         <Input
-          name="confirmPassword"
-          type="password"
+          {...getInputProps(confirmPassword, { type: "password" })}
           placeholder="••••••••••••"
           icon={<LockSimpleIcon size={24} />}
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          error={isPasswordInvalid ? "As senhas não coincidem" : undefined}
+          error={confirmPassword.errors?.[0]}
+          disabled={isSubmitting}
         >
           <InputLabel>Confirm Password</InputLabel>
         </Input>
 
         <div className="flex flex-col gap-4 mt-4">
-          <Button type="submit">Subscribe</Button>
+          <Button type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Cadastrando..." : "Cadastrar"}
+          </Button>
           <Link to="/sign-in" className="text-center">Sign-In</Link>
         </div>
-      </Form>
+      </fetcher.Form>
     </>
   );
 } 
