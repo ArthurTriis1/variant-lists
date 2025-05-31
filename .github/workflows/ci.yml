@@ -43,10 +43,10 @@ jobs:
             - name: Run integration tests
               run: yarn test:integration
               env:
-                DATABASE_URL: "postgres://postgres:docker@localhost:5432/variant-lists?schema=public"
-                PORT: "3001"
-                HOST: "127.0.0.1"
-                JWT_REFRESH_SECRET: "secret"
+                DATABASE_URL: ${{ secrets.DATABASE_URL }}
+                PORT: ${{ secrets.PORT }}
+                HOST: ${{ secrets.HOST }}
+                JWT_REFRESH_SECRET: ${{ secrets.JWT_REFRESH_SECRET }}
                 JWT_SECRET: ${{ secrets.JWT_SECRET }}
 
             - name: Shut down Docker Compose
