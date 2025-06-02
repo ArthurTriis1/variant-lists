@@ -1,37 +1,31 @@
 {
-  "$schema": "https://turbo.build/schema.json",
-  "globalEnv": [
-    "DATABASE_URL",
-    "HOST",
-    "PORT",
-    "JWT_REFRESH_SECRET",
-    "JWT_SECRET"
-  ],
-  "tasks": {
-    "dev": {
-      "cache": false,
-      "persistent": true,
-      "dependsOn": [
-        "^dev"
-      ]
-    },
-    "build": {
-      "outputs": [
-        "dist/**",
-        "build/**"
-      ],
-      "dependsOn": [
-        "^build"
-      ]
-    },
-    "serve": {},
-    "test": {},
-    "test:integration": {
-      "dependsOn": [
-        "^build"
-      ]
-    },
-    "test:watch": {},
-    "lint": {}
-  }
+	"$schema": "https://turbo.build/schema.json",
+	"globalEnv": [
+		"DATABASE_URL",
+		"HOST",
+		"PORT",
+		"JWT_REFRESH_SECRET",
+		"JWT_SECRET"
+	],
+	"tasks": {
+		"dev": {
+			"cache": false,
+			"persistent": true,
+			"dependsOn": ["^dev"]
+		},
+		"build": {
+			"outputs": ["dist/**", "build/**"],
+			"dependsOn": ["^build"]
+		},
+		"serve": {},
+		"test": {},
+		"test:integration": {
+			"dependsOn": ["^build"]
+		},
+		"test:watch": {},
+		"lint": {},
+		"lint:fix": {},
+		"format": {},
+		"format:check": {}
+	}
 }

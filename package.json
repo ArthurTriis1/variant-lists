@@ -1,20 +1,37 @@
 {
-  "private": true,
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
-  "scripts": {
-    "dev": "turbo run dev --parallel",
-    "build": "turbo run build",
-    "test": "turbo run test",
-    "test:integration": "turbo run test:integration",
-    "test:watch": "turbo run test:watch"
-  },
-  "devDependencies": {
-    "@variant-lists/tsconfig": "*",
-    "turbo": "^2.2.2"
-  },
-  "packageManager": "yarn@1.22.22",
-  "name": "variant-lists"
+	"private": true,
+	"workspaces": [
+		"packages/*",
+		"apps/*"
+	],
+	"scripts": {
+		"dev": "turbo run dev --parallel",
+		"build": "turbo run build",
+		"test": "turbo run test",
+		"test:integration": "turbo run test:integration",
+		"test:watch": "turbo run test:watch",
+		"lint": "turbo run lint",
+		"lint:fix": "turbo run lint:fix",
+		"format": "turbo run format",
+		"format:check": "turbo run format:check",
+		"prepare": "husky"
+	},
+	"devDependencies": {
+		"@variant-lists/tsconfig": "*",
+		"husky": "^9.0.11",
+		"lint-staged": "^15.2.2",
+		"prettier": "^3.2.4",
+		"turbo": "^2.2.2"
+	},
+	"packageManager": "yarn@1.22.22",
+	"name": "variant-lists",
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx}": [
+			"eslint --fix",
+			"prettier --write"
+		],
+		"*.{json,css,md}": [
+			"prettier --write"
+		]
+	}
 }
