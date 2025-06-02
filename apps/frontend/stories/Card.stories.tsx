@@ -9,7 +9,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Um container flexível que pode ser usado para agrupar e apresentar conteúdo. Suporta diferentes cores de fundo e pode conter qualquer tipo de conteúdo como textos, botões e outros componentes.",
+          "A flexible container that can be used to group and present content. Supports different background colors and can contain any type of content such as text, buttons, and other components.",
       },
     },
   },
@@ -17,7 +17,7 @@ const meta = {
   argTypes: {
     className: {
       control: "text",
-      description: "Classes CSS adicionais",
+      description: "Additional CSS classes to be applied to the card",
     },
   },
   decorators: [
@@ -36,10 +36,9 @@ export const Default: Story = {
   args: {
     children: (
       <div className="p-6">
-        <h3 className="mb-2 font-londrina text-xl">Título do Card</h3>
+        <h3 className="mb-2 font-londrina text-xl">Card Title</h3>
         <p className="text-muted-foreground">
-          Esse é um exemplo de conteúdo dentro do card. Você pode colocar
-          qualquer componente aqui.
+          This is an example of content inside the card. You can place any component here.
         </p>
       </div>
     ),
@@ -51,10 +50,9 @@ export const WithCustomColor: Story = {
     className: "bg-accent",
     children: (
       <div className="p-6">
-        <h3 className="mb-2 font-londrina text-xl">Card Colorido</h3>
+        <h3 className="mb-2 font-londrina text-xl">Colored Card</h3>
         <p className="text-muted-foreground">
-          Este card tem uma cor de fundo personalizada aplicada através da prop
-          className.
+          This card has a custom background color applied through the className prop.
         </p>
       </div>
     ),
@@ -65,16 +63,16 @@ export const WithActions: Story = {
   args: {
     children: (
       <div className="flex flex-col gap-4 p-6">
-        <h3 className="font-londrina text-xl">Card com Ações</h3>
+        <h3 className="font-londrina text-xl">Card with Actions</h3>
         <p className="text-muted-foreground">
-          Este card contém botões de ação no rodapé.
+          This card contains action buttons in the footer.
         </p>
         <div className="border-border mt-4 flex justify-end gap-2 border-t pt-4">
           <button className="bg-muted text-muted-foreground rounded-lg px-4 py-2 font-londrina">
-            Cancelar
+            Cancel
           </button>
           <button className="bg-primary text-primary-foreground rounded-lg px-4 py-2 font-londrina">
-            Confirmar
+            Confirm
           </button>
         </div>
       </div>

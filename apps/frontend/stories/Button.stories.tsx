@@ -9,7 +9,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Um botão personalizável com diferentes variantes e tamanhos.",
+          "A customizable button component with different variants and sizes.",
       },
     },
   },
@@ -18,10 +18,16 @@ const meta = {
     variant: {
       options: ["default", "outline", "ghost"],
       control: { type: "select" },
+      description: "The visual style variant of the button",
     },
     size: {
       options: ["default", "sm", "lg"],
       control: { type: "select" },
+      description: "The size of the button",
+    },
+    children: {
+      control: "text",
+      description: "The content to be rendered inside the button",
     },
   },
 } satisfies Meta<typeof Button>;

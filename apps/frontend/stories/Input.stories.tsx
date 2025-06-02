@@ -10,7 +10,7 @@ const meta = {
     // Configuração específica para documentação
     docs: {
       description: {
-        component: 'Um campo de entrada de texto personalizável com suporte para ícones, rótulos e mensagens de erro.',
+        component: 'A customizable text input field with support for icons, labels, and error messages.',
       },
     },
   },
@@ -18,19 +18,19 @@ const meta = {
   argTypes: {
     placeholder: {
       control: "text",
-      description: "Texto de placeholder",
+      description: "Placeholder text",
     },
     disabled: {
       control: "boolean",
-      description: "Define se o input está desabilitado",
+      description: "Whether the input is disabled",
     },
     error: {
       control: "text",
-      description: "Mensagem de erro",
+      description: "Error message to display",
     },
     className: {
       control: "text",
-      description: "Classes CSS adicionais",
+      description: "Additional CSS classes",
     },
     type: {
       options: ["text", "password", "email", "number"],
@@ -52,7 +52,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    placeholder: "Digite alguma coisa...",
+    placeholder: "Type something...",
   },
 };
 
@@ -63,28 +63,28 @@ export const WithLabel: Story = {
     </Input>
   ),
   args: {
-    placeholder: "Digite seu email...",
+    placeholder: "Enter your email...",
     type: "email",
   },
 };
 
 export const WithIcon: Story = {
   args: {
-    placeholder: "Pesquisar...",
+    placeholder: "Search...",
     icon: <MagnifyingGlassIcon size={24} />,
   },
 };
 
 export const WithError: Story = {
   args: {
-    placeholder: "Digite seu email...",
-    error: "Email inválido!",
+    placeholder: "Enter your email...",
+    error: "Invalid email!",
   },
 };
 
 export const Disabled: Story = {
   args: {
-    placeholder: "Input desabilitado",
+    placeholder: "Input disabled",
     disabled: true,
   },
 };
