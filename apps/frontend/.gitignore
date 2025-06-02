@@ -7,3 +7,5 @@
 
 # Vercel
 .vercel/
+*storybook.log
+storybook-static
