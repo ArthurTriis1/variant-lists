@@ -33,8 +33,10 @@ const preview: Preview = {
     },
     layout: "centered",
     docs: {
-      theme: {
-        fontFamily: '"Londrina Solid", sans-serif',
+      toc: true, // Habilita table of contents
+      source: {
+        language: 'tsx',
+        format: true,
       },
     },
   },

@@ -6,6 +6,12 @@ const meta = {
   component: Button,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component:
+          "Um botão personalizável com diferentes variantes e tamanhos.",
+      },
+    },
   },
   tags: ["autodocs"],
   argTypes: {

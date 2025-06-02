@@ -6,6 +6,12 @@ const meta = {
   component: Card,
   parameters: {
     layout: "centered",
+    docs: {
+      description: {
+        component:
+          "Um container flexível que pode ser usado para agrupar e apresentar conteúdo. Suporta diferentes cores de fundo e pode conter qualquer tipo de conteúdo como textos, botões e outros componentes.",
+      },
+    },
   },
   tags: ["autodocs"],
   argTypes: {
@@ -30,9 +36,10 @@ export const Default: Story = {
   args: {
     children: (
       <div className="p-6">
-        <h3 className="text-xl font-londrina mb-2">Título do Card</h3>
-        <p className="text-gray-700">
-          Esse é um exemplo de conteúdo dentro do card. Você pode colocar qualquer componente aqui.
+        <h3 className="mb-2 font-londrina text-xl">Título do Card</h3>
+        <p className="text-muted-foreground">
+          Esse é um exemplo de conteúdo dentro do card. Você pode colocar
+          qualquer componente aqui.
         </p>
       </div>
     ),
@@ -41,12 +48,13 @@ export const Default: Story = {
 
 export const WithCustomColor: Story = {
   args: {
-    className: "bg-yellow-100",
+    className: "bg-accent",
     children: (
       <div className="p-6">
-        <h3 className="text-xl font-londrina mb-2">Card Colorido</h3>
-        <p className="text-gray-700">
-          Este card tem uma cor de fundo personalizada aplicada através da prop className.
+        <h3 className="mb-2 font-londrina text-xl">Card Colorido</h3>
+        <p className="text-muted-foreground">
+          Este card tem uma cor de fundo personalizada aplicada através da prop
+          className.
         </p>
       </div>
     ),
@@ -56,16 +64,16 @@ export const WithCustomColor: Story = {
 export const WithActions: Story = {
   args: {
     children: (
-      <div className="p-6 flex flex-col gap-4">
-        <h3 className="text-xl font-londrina">Card com Ações</h3>
-        <p className="text-gray-700">
+      <div className="flex flex-col gap-4 p-6">
+        <h3 className="font-londrina text-xl">Card com Ações</h3>
+        <p className="text-muted-foreground">
           Este card contém botões de ação no rodapé.
         </p>
-        <div className="flex justify-end gap-2 mt-4 pt-4 border-t border-gray-200">
-          <button className="px-4 py-2 bg-gray-200 rounded-lg text-gray-700 font-londrina">
+        <div className="border-border mt-4 flex justify-end gap-2 border-t pt-4">
+          <button className="bg-muted text-muted-foreground rounded-lg px-4 py-2 font-londrina">
             Cancelar
           </button>
-          <button className="px-4 py-2 bg-black rounded-lg text-white font-londrina">
+          <button className="bg-primary text-primary-foreground rounded-lg px-4 py-2 font-londrina">
             Confirmar
           </button>
         </div>

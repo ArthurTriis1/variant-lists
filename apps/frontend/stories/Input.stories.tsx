@@ -7,6 +7,12 @@ const meta = {
   component: Input,
   parameters: {
     layout: "centered",
+    // Configuração específica para documentação
+    docs: {
+      description: {
+        component: 'Um campo de entrada de texto personalizável com suporte para ícones, rótulos e mensagens de erro.',
+      },
+    },
   },
   tags: ["autodocs"],
   argTypes: {
