@@ -1,9 +1,9 @@
-import * as React from "react"
-import { cn } from "~/lib/utils"
+import * as React from "react";
+import { cn } from "~/lib/utils";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  icon?: React.ReactNode
-  error?: string
+  icon?: React.ReactNode;
+  error?: string;
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -15,11 +15,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <input
             type={type}
             className={cn(
-              "w-full rounded-[16px] border-[4px] border-black bg-white px-[16px] py-[8px] text-[20px] font-londrina text-gray-500 mb-[20px]",
+              "mb-[20px] w-full rounded-[16px] border-[4px] border-black bg-white px-[16px] py-[8px] font-londrina text-[20px] text-gray-500",
               error ? "drop-shadow-error" : "drop-shadow-custom",
               "placeholder:text-gray-500",
               "focus:outline-none",
-              className
+              className,
             )}
             ref={ref}
             {...props}
@@ -30,15 +30,18 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             </div>
           )}
           {error && (
-            <span title={error} className="bg-black text-[16px] font-londrina text-white absolute bottom-0 left-0 translate-x-[16px] w-[calc(100%-20px)] truncate whitespace-nowrap cursor-default">
+            <span
+              title={error}
+              className="absolute bottom-0 left-0 w-[calc(100%-20px)] translate-x-[16px] cursor-default truncate whitespace-nowrap bg-black font-londrina text-[16px] text-white"
+            >
               {error}
             </span>
           )}
         </div>
       </div>
-    )
-  }
-)
+    );
+  },
+);
 
 const Label = React.forwardRef<
   HTMLLabelElement,
@@ -47,37 +50,31 @@ const Label = React.forwardRef<
   return (
     <label
       ref={ref}
-      className={cn(
-        "text-[20px] font-londrina text-black",
-        className
-      )}
+      className={cn("font-londrina text-[20px] text-black", className)}
       {...props}
     />
-  )
-})
+  );
+});
 
 const Error = React.forwardRef<
   HTMLParagraphElement,
   React.HTMLAttributes<HTMLParagraphElement>
 >(({ className, children, ...props }, ref) => {
-  if (!children) return null
+  if (!children) return null;
 
   return (
     <p
       ref={ref}
-      className={cn(
-        "text-[16px] font-londrina text-red-500 mt-1",
-        className
-      )}
+      className={cn("mt-1 font-londrina text-[16px] text-red-500", className)}
       {...props}
     >
       {children}
     </p>
-  )
-})
+  );
+});
 
-Input.displayName = "Input"
-Label.displayName = "Input.Label"
-Error.displayName = "Input.Error"
+Input.displayName = "Input";
+Label.displayName = "Input.Label";
+Error.displayName = "Input.Error";
 
-export { Input, Label as InputLabel, Error as InputError } 
+export { Input, Label as InputLabel, Error as InputError };

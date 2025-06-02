@@ -19,7 +19,7 @@ export async function action({ request }: { request: Request }) {
   const { email, password } = submission.value;
   console.log({ email, password });
 
-  await new Promise(resolve => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
 
   return { ok: true };
 }
@@ -37,7 +37,11 @@ export default function SignIn() {
 
   return (
     <>
-      <fetcher.Form method="post" className="flex flex-col gap-4" {...getFormProps(form)}>
+      <fetcher.Form
+        method="post"
+        className="flex flex-col gap-4"
+        {...getFormProps(form)}
+      >
         <div>{form.errors}</div>
         <Input
           {...getInputProps(email, { type: "email" })}
@@ -59,13 +63,15 @@ export default function SignIn() {
           <InputLabel>Password</InputLabel>
         </Input>
 
-        <div className="flex flex-col gap-4 mt-4">
+        <div className="mt-4 flex flex-col gap-4">
           <Button type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Entrando..." : "Entrar"}
           </Button>
-          <Link to="/sign-up" className="text-center">Sign-Up</Link>
+          <Link to="/sign-up" className="text-center">
+            Sign-Up
+          </Link>
         </div>
       </fetcher.Form>
     </>
   );
-} 
+}
