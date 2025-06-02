@@ -1,18 +1,18 @@
 /* Ensure Londrina Solid is applied consistently */
 html {
-  font-family: 'Londrina Solid', sans-serif;
+  font-family: "Londrina Solid", sans-serif;
 }
 
 .sb-show-main {
-  font-family: 'Londrina Solid', sans-serif;
+  font-family: "Londrina Solid", sans-serif;
 }
 
 /* Preserve font in docs mode */
 .docs-story {
-  font-family: 'Londrina Solid', sans-serif;
+  font-family: "Londrina Solid", sans-serif;
 }
 
 /* Apply font to the preview iframe content */
 #storybook-preview-iframe {
-  font-family: 'Londrina Solid', sans-serif;
+  font-family: "Londrina Solid", sans-serif;
 }
