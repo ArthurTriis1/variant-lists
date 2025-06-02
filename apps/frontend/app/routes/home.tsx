@@ -10,9 +10,9 @@ export default function Home() {
   const isInvalid = email && !email.includes("@");
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center gap-8">
-      <Card className="p-8 w-full max-w-md">
-        <h1 className="text-4xl font-bold mb-8">Contador: {count}</h1>
+    <div className="flex min-h-screen flex-col items-center justify-center gap-8">
+      <Card className="w-full max-w-md p-8">
+        <h1 className="mb-8 text-4xl font-bold">Contador: {count}</h1>
 
         <div className="w-full">
           <Input
@@ -26,22 +26,12 @@ export default function Home() {
           </Input>
         </div>
 
-        <div className="flex gap-8 mt-8">
-          <Button
-            onClick={() => setCount(count - 1)}
-            variant="outline"
-          >
+        <div className="mt-8 flex gap-8">
+          <Button onClick={() => setCount(count - 1)} variant="outline">
             Diminuir
           </Button>
-          <Button
-            onClick={() => setCount(count + 1)}
-          >
-            Aumentar
-          </Button>
-          <Button
-            variant="ghost"
-            onClick={() => setCount(0)}
-          >
+          <Button onClick={() => setCount(count + 1)}>Aumentar</Button>
+          <Button variant="ghost" onClick={() => setCount(0)}>
             Resetar
           </Button>
         </div>
