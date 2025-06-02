@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Card } from "../app/components/ui/card";
+import { Button } from "~/components/ui/button";
 
 const meta = {
   title: "UI/Card",
@@ -38,7 +39,8 @@ export const Default: Story = {
       <div className="p-6">
         <h3 className="mb-2 font-londrina text-xl">Card Title</h3>
         <p className="text-muted-foreground">
-          This is an example of content inside the card. You can place any component here.
+          This is an example of content inside the card. You can place any
+          component here.
         </p>
       </div>
     ),
@@ -52,7 +54,8 @@ export const WithCustomColor: Story = {
       <div className="p-6">
         <h3 className="mb-2 font-londrina text-xl">Colored Card</h3>
         <p className="text-muted-foreground">
-          This card has a custom background color applied through the className prop.
+          This card has a custom background color applied through the className
+          prop.
         </p>
       </div>
     ),
@@ -67,13 +70,9 @@ export const WithActions: Story = {
         <p className="text-muted-foreground">
           This card contains action buttons in the footer.
         </p>
-        <div className="border-border mt-4 flex justify-end gap-2 border-t pt-4">
-          <button className="bg-muted text-muted-foreground rounded-lg px-4 py-2 font-londrina">
-            Cancel
-          </button>
-          <button className="bg-primary text-primary-foreground rounded-lg px-4 py-2 font-londrina">
-            Confirm
-          </button>
+        <div className=" border-muted-foreground mt-4 flex justify-end gap-2 border-t-4 pt-4">
+          <Button variant="outline">Cancel</Button>
+          <Button>Confirm</Button>
         </div>
       </div>
     ),
