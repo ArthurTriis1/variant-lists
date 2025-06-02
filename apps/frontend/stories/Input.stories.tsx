@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Input } from "../app/components/ui/input";
-import { MagnifyingGlass } from "@phosphor-icons/react";
+import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 
 const meta = {
   title: "UI/Input",
@@ -65,7 +65,7 @@ export const WithLabel: Story = {
 export const WithIcon: Story = {
   args: {
     placeholder: "Pesquisar...",
-    icon: <MagnifyingGlass size={24} />,
+    icon: <MagnifyingGlassIcon size={24} />,
   },
 };
 

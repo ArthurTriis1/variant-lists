@@ -13,8 +13,8 @@ const __dirname = dirname(__filename);
 export default defineConfig({
   root: __dirname,
   plugins: [
-    tailwindcss(),
-    tsconfigPaths()
+    tailwindcss() as any,
+    tsconfigPaths(),
     // No React Router plugin here
   ],
   resolve: {
@@ -28,6 +28,6 @@ export default defineConfig({
   },
   define: {
     // Disable React Router features
-    "__STORYBOOK_REACT_ROUTER__": JSON.stringify(false),
+    __STORYBOOK_REACT_ROUTER__: JSON.stringify(false),
   },
 });
