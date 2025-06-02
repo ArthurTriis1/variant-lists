@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { Heading } from "./heading";
 import { DatabaseIcon } from "@phosphor-icons/react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import userEvent from "@testing-library/user-event";
 
 describe("Heading", () => {
