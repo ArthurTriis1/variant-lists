@@ -1,7 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
+import type { Meta, StoryObj } from "@storybook/react-vite";
 import { Input } from "../app/components/ui/input";
 import { MagnifyingGlassIcon } from "@phosphor-icons/react";
 
+// Test comment to verify husky pre-commit hooks
 const meta = {
   title: "UI/Input",
   component: Input,
@@ -10,7 +11,8 @@ const meta = {
     // Configuração específica para documentação
     docs: {
       description: {
-        component: 'A customizable text input field with support for icons, labels, and error messages.',
+        component:
+          "A customizable text input field with support for icons, labels, and error messages.",
       },
     },
   },
