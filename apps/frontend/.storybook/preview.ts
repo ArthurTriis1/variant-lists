@@ -35,7 +35,7 @@ const preview: Preview = {
     docs: {
       toc: true, // Habilita table of contents
       source: {
-        language: 'tsx',
+        language: "tsx",
         format: true,
       },
     },
