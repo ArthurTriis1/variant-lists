@@ -1,5 +1,4 @@
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "~/lib/utils";
 import { PlusIcon } from "@phosphor-icons/react";
@@ -17,7 +16,7 @@ const headingVariants = cva(
     defaultVariants: {
       size: "lg",
     },
-  },
+  }
 );
 
 export interface HeadingProps
@@ -31,19 +30,10 @@ export interface HeadingProps
 
 const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
   (
-    {
-      className,
-      size,
-      asChild = false,
-      icon,
-      level = 2,
-      children,
-      onPlusClick,
-      ...props
-    },
-    ref,
+    { className, size, icon, level = 2, children, onPlusClick, ...props },
+    ref
   ) => {
-    const Comp = asChild ? Slot : `h${level}`;
+    const Comp = `h${level}` as unknown as React.ComponentType<any>;
 
     return (
       <Comp
@@ -64,7 +54,7 @@ const Heading = React.forwardRef<HTMLHeadingElement, HeadingProps>(
         )}
       </Comp>
     );
-  },
+  }
 );
 
 Heading.displayName = "Heading";

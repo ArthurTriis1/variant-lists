@@ -119,4 +119,20 @@ describe("Heading", () => {
     const plusButton = screen.queryByRole("button"); // queryByRole returns null if not found
     expect(plusButton).not.toBeInTheDocument();
   });
+
+  it("forwards HTML attributes through props spreading", () => {
+    render(
+      <Heading
+        data-testid="test-heading"
+        aria-label="Test Label"
+        title="Test Title"
+      >
+        Props Heading
+      </Heading>
+    );
+
+    const headingElement = screen.getByTestId("test-heading");
+    expect(headingElement).toHaveAttribute("aria-label", "Test Label");
+    expect(headingElement).toHaveAttribute("title", "Test Title");
+  });
 });

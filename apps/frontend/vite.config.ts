@@ -21,5 +21,14 @@ export default defineConfig({
     setupFiles: "./test/setup.ts",
     css: true,
     exclude: ["**/node_modules/**", "**/dist/**", "**/stories/**"], // Added exclude pattern
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "json", "html"],
+      include: ["app/components/**/*.{ts,tsx}"],
+      exclude: [
+        "app/components/**/*.stories.{ts,tsx}",
+        "app/components/**/*.test.{ts,tsx}",
+      ],
+    },
   },
 } as UserConfig);
