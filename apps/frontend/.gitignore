@@ -9,3 +9,6 @@
 .vercel/
 *storybook.log
 storybook-static
+
+# Tests
+coverage
