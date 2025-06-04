@@ -1,6 +1,5 @@
 {
   "useTabs": false,
   "tabWidth": 2,
-  "plugins": [],
-  "tailwindConfig": "./tailwind.config.ts"
+  "plugins": []
 }
