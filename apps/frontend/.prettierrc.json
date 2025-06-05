@@ -1,5 +1,4 @@
 {
-  "useTabs": false,
-  "tabWidth": 2,
-  "plugins": []
+	"useTabs": true,
+	"tabWidth": 2
 }
