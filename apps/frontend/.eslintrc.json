@@ -1,53 +1,53 @@
 {
-  "root": false,
-  "env": {
-    "browser": true,
-    "es2021": true
-  },
-  "extends": [
-    "../../.eslintrc.json",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:react/recommended",
-    "plugin:react-hooks/recommended",
-    "plugin:jsx-a11y/recommended",
-    "prettier",
-    "plugin:storybook/recommended"
-  ],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
-    "ecmaVersion": "latest",
-    "sourceType": "module",
-    "project": ["./tsconfig.json"]
-  },
-  "plugins": [
-    "react",
-    "react-hooks",
-    "jsx-a11y",
-    "@typescript-eslint",
-    "prettier"
-  ],
-  "rules": {
-    "react/react-in-jsx-scope": "off",
-    "react/prop-types": "off",
-    "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": "warn",
-    "prettier/prettier": [
-      "warn",
-      {
-        "useTabs": false,
-        "tabWidth": 2
-      }
-    ],
-    "jsx-a11y/label-has-associated-control": "off",
-    "@typescript-eslint/no-explicit-any": "off"
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
-  }
+	"root": false,
+	"env": {
+		"browser": true,
+		"es2021": true
+	},
+	"extends": [
+		"../../.eslintrc.json",
+		"eslint:recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:react/recommended",
+		"plugin:react-hooks/recommended",
+		"plugin:jsx-a11y/recommended",
+		"prettier",
+		"plugin:storybook/recommended"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": "latest",
+		"sourceType": "module",
+		"project": ["./tsconfig.json"]
+	},
+	"plugins": [
+		"react",
+		"react-hooks",
+		"jsx-a11y",
+		"@typescript-eslint",
+		"prettier"
+	],
+	"rules": {
+		"react/react-in-jsx-scope": "off",
+		"react/prop-types": "off",
+		"react-hooks/rules-of-hooks": "error",
+		"react-hooks/exhaustive-deps": "warn",
+		"prettier/prettier": [
+			"warn",
+			{
+				"useTabs": true,
+				"tabWidth": 1
+			}
+		],
+		"jsx-a11y/label-has-associated-control": "off",
+		"@typescript-eslint/no-explicit-any": "off"
+	},
+	"settings": {
+		"react": {
+			"version": "detect"
+		}
+	}
 }
