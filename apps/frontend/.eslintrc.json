@@ -39,7 +39,7 @@
 			"warn",
 			{
 				"useTabs": true,
-				"tabWidth": 2
+				"tabWidth": 1
 			}
 		],
 		"jsx-a11y/label-has-associated-control": "off",
