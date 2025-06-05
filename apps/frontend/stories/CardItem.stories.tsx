@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CardItem } from "~/components/ui/card-item";
 
 const meta = {
-	title: "Components/CardItem",
+	title: "UI/CardItem",
 	component: CardItem,
 	parameters: {
 		layout: "centered",
